@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PelotonEppSdk
+namespace PelotonEppSdk.Models
 {
-    public class Class1
+    internal class transfer_request
     {
     }
 }
