@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using PelotonEppSdk.Enums;
 using PelotonEppSdk.Properties;
 
@@ -26,7 +22,7 @@ namespace PelotonEppSdk.Classes
                 case ApiTarget.FundsTransfers:
                     return "/v1/FundsTransfers/";
                 case ApiTarget.Transfers:
-                    return "v1/Transfers/";
+                    return "/v1/Transfers/";
                 default:
                     throw new NotImplementedException();
             }

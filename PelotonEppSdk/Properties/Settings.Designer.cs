@@ -25,7 +25,7 @@ namespace PelotonEppSdk.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://testapi.peloton-technologies.com")]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://testapi.peloton-technologies.com")]
         public string PelotonUri {
             get {
                 return ((string)(this["PelotonUri"]));

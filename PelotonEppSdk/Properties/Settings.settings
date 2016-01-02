@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="PelotonUri" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">http://testapi.peloton-technologies.com</Value>
+      <Value Profile="(Default)">https://testapi.peloton-technologies.com</Value>
     </Setting>
   </Settings>
 </SettingsFile>

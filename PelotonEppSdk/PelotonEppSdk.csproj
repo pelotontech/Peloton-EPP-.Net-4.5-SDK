@@ -32,6 +32,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -41,14 +42,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\PelotonClient.cs" />
+    <Compile Include="Classes\RequestFactory.cs" />
+    <Compile Include="Classes\TestUriFactory.cs" />
+    <Compile Include="Enums\ApiTarget.cs" />
+    <Compile Include="Models\RequestBase.cs" />
+    <Compile Include="Models\TransferRequest.cs" />
+    <Compile Include="Models\Reference.cs" />
     <Compile Include="Models\Response.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="RequestsAndResponses\response.cs" />
-    <Compile Include="RequestsAndResponses\transfer_request.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -57,6 +62,9 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Interfaces\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
