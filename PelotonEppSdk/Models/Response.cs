@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using PelotonEppSdk.RequestsAndResponses;
 
 namespace PelotonEppSdk.Models
 {
@@ -39,6 +38,44 @@ namespace PelotonEppSdk.Models
         /// This field will return any validation errors that occured
         /// </summary>
         public ICollection<string> Errors { get; set; }
+    }
+
+    /// <summary>
+    /// General Response
+    /// </summary>
+    internal class response
+    {
+        /// <summary>
+        /// Common response for API transactions
+        /// </summary>
+        public response()
+        {
+        }
+
+        /// <summary>
+        /// True if an Successful, False otherwise.
+        /// </summary>
+        public bool success { get; set; }
+
+        /// <summary>
+        /// This field will return an Message regarding the operation in language specified in the request.
+        /// </summary>
+        public string message { get; set; }
+
+        /// <summary>
+        /// The code associated with this message.
+        /// </summary>
+        public int message_code { get; set; }
+
+        /// <summary>
+        /// This field will return a value for any transaction that occurs, otherwise will be empty.
+        /// </summary>
+        public string transaction_ref_code { get; set; }
+
+        /// <summary>
+        /// This field will return any validation errors that occured
+        /// </summary>
+        public ICollection<string> errors { get; set; }
 
         public static explicit operator Response(response r)
         {
