@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Web.Script.Serialization;
+using PelotonEppSdk.Enums;
 using static System.Text.Encoding;
 using Convert = System.Convert;
 
@@ -14,7 +15,7 @@ namespace PelotonEppSdk.Models
         [ScriptIgnore]
         internal AuthenticationHeaderValue AuthenticationHeader { get; private set; }
         internal string ApplicationName { get; set; }
-        internal string LanguageCode { get; set; }
+        internal LanguageCode LanguageCode { get; set; }
 
         internal void SetAuthentication(string username, string password)
         {

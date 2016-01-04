@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using PelotonEppSdk.Enums;
 
 namespace PelotonEppSdk.Models
 {
@@ -101,7 +102,7 @@ namespace PelotonEppSdk.Models
                 application_name = request.ApplicationName,
                 authentication_header = request.AuthenticationHeader,
                 bank_account_token = request.BankAccountToken,
-                language_code = request.LanguageCode,
+                language_code = Enum.GetName(typeof(LanguageCode), request.LanguageCode),
                 references = request.References?.Select(r => (reference) r),
                 transfer_date = request.TransferDate,
                 transfer_system = Enum.GetName(typeof(FundsTransferSystem), request.TransferSystem.Value),
