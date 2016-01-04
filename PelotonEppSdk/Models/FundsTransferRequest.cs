@@ -93,20 +93,20 @@ namespace PelotonEppSdk.Models
 
         public IEnumerable<reference> references { get; set; }
 
-        public static explicit operator funds_transfer_request(FundsTransferRequest request)
+        public static explicit operator funds_transfer_request(FundsTransferRequest fundsTransferRequest)
         {
             return new funds_transfer_request
             {
-                account_token = request.AccountToken,
-                amount = request.Amount,
-                application_name = request.ApplicationName,
-                authentication_header = request.AuthenticationHeader,
-                bank_account_token = request.BankAccountToken,
-                language_code = Enum.GetName(typeof(LanguageCode), request.LanguageCode),
-                references = request.References?.Select(r => (reference) r),
-                transfer_date = request.TransferDate,
-                transfer_system = Enum.GetName(typeof(FundsTransferSystem), request.TransferSystem.Value),
-                type = Enum.GetName(typeof(FundsTransferType), request.Type.Value)
+                account_token = fundsTransferRequest.AccountToken,
+                amount = fundsTransferRequest.Amount,
+                application_name = fundsTransferRequest.ApplicationName,
+                authentication_header = fundsTransferRequest.AuthenticationHeader,
+                bank_account_token = fundsTransferRequest.BankAccountToken,
+                language_code = Enum.GetName(typeof(LanguageCode), fundsTransferRequest.LanguageCode),
+                references = fundsTransferRequest.References?.Select(r => (reference) r),
+                transfer_date = fundsTransferRequest.TransferDate,
+                transfer_system = Enum.GetName(typeof(FundsTransferSystem), fundsTransferRequest.TransferSystem.Value),
+                type = Enum.GetName(typeof(FundsTransferType), fundsTransferRequest.Type.Value)
             };
         }
     }

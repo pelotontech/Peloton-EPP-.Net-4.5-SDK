@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Web.Script.Serialization;
@@ -41,6 +42,7 @@ namespace PelotonEppSdk.Models
         }
     }
 
+    [SuppressMessage("ReSharper", "InconsistentNaming")]
     internal class request_base
     {
         [ScriptIgnore]

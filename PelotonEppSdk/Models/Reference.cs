@@ -13,12 +13,12 @@
 
         public static explicit operator reference(Reference r)
         {
-            return new reference() {name = r.Name, value = r.Value};
+            return new reference {name = r.Name, value = r.Value};
         }
 
         public static explicit operator Reference(reference r)
         {
-            return new Reference() { Name = r.name, Value = r.value };
+            return new Reference { Name = r.name, Value = r.value };
         }
     }
 }

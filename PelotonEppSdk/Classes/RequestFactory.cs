@@ -1,4 +1,5 @@
-﻿using PelotonEppSdk.Models;
+﻿using PelotonEppSdk.Enums;
+using PelotonEppSdk.Models;
 
 namespace PelotonEppSdk.Classes
 {
@@ -7,9 +8,9 @@ namespace PelotonEppSdk.Classes
         private int _clientId;
         private string _clientKey;
         private string _applicationName;
-        private string _languageCode;
+        private LanguageCode _languageCode;
 
-        public RequestFactory(int clientId, string clientKey, string applicationName, string languageCode = "en")
+        public RequestFactory(int clientId, string clientKey, string applicationName, LanguageCode languageCode = LanguageCode.en)
         {
             _clientId = clientId;
             _clientKey = clientKey;

@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
 using PelotonEppSdk.Classes;
@@ -34,6 +36,7 @@ namespace PelotonEppSdk.Models
         }
     }
 
+    [SuppressMessage("ReSharper", "InconsistentNaming")]
     internal class transfer_request : request_base
     {
         public decimal? amount { get; set; }
@@ -43,18 +46,18 @@ namespace PelotonEppSdk.Models
         
         public ICollection<reference> references { get; set; }
 
-        public static explicit operator transfer_request(TransferRequest t)
+        public static explicit operator transfer_request(TransferRequest transferRequest)
         {
             return new transfer_request
             {
-                authentication_header = t.AuthenticationHeader,
-                amount = t.Amount,
-                application_name = t.ApplicationName,
-                auto_accept = t.AutoAccept,
-                language_code = t.LanguageCode,
-                references = t.References?.Select(r => (reference) r).ToList(),
-                source_account_token = t.SourceAccountToken,
-                target_account_token = t.TargetAccountToken
+                authentication_header = transferRequest.AuthenticationHeader,
+                amount = transferRequest.Amount,
+                application_name = transferRequest.ApplicationName,
+                auto_accept = transferRequest.AutoAccept,
+                language_code = Enum.GetName(typeof(LanguageCode), transferRequest.LanguageCode),
+                references = transferRequest.References?.Select(r => (reference) r).ToList(),
+                source_account_token = transferRequest.SourceAccountToken,
+                target_account_token = transferRequest.TargetAccountToken
             };
         }
     }

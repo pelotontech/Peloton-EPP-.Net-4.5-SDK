@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace PelotonEppSdk.Models
 {
@@ -33,6 +34,7 @@ namespace PelotonEppSdk.Models
         public ICollection<string> Errors { get; set; }
     }
 
+    [SuppressMessage("ReSharper", "InconsistentNaming")]
     internal class response
     {
         public bool success { get; set; }
