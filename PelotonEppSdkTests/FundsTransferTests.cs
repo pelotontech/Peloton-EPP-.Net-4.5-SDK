@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PelotonEppSdk.Classes;
 using PelotonEppSdk.Models;
@@ -20,7 +20,7 @@ namespace PelotonEppSdkTests
             transfer.BankAccountToken = "b9a6db04e0f64d2d958df098b6de1056";
             transfer.AccountToken = "0C01957EE5D8B468342E673CC010BE0A";
             transfer.Type = FundsTransferType.CREDIT;
-                new List<Reference>
+            transfer.References = new List<Reference>
                 {
                     new Reference {Name = "String 1", Value = "String2"},
                     new Reference {Name = "String 3", Value = "String4"}
@@ -63,6 +63,116 @@ namespace PelotonEppSdkTests
             Assert.IsTrue(result.Success);
             Assert.AreEqual(0, result.MessageCode);
             Assert.IsNotNull(result.TransactionRefCode);
+        }
+
+        [TestMethod]
+        public void TestFailShortAccountToken()
+        {
+            var transfer = GetBasicRequest();
+            transfer.AccountToken = "ba6db04e0f64d2d958df098b6de1056";
+            var errors = new Collection<string>();
+            if (transfer.TryValidate(errors)) Assert.Fail();
+            Assert.AreEqual(1, errors.Count);
+            Assert.AreEqual("AccountToken must be 32 characters long.", errors.FirstOrDefault());
+        }
+
+        [TestMethod]
+        public void TestFailLongAccountToken()
+        {
+            var transfer = GetBasicRequest();
+            transfer.AccountToken = "aaba6db04e0f64d2d958df098b6de1056";
+            var errors = new Collection<string>();
+            if (transfer.TryValidate(errors)) Assert.Fail();
+            Assert.AreEqual(1, errors.Count);
+            Assert.AreEqual("AccountToken must be 32 characters long.", errors.FirstOrDefault());
+        }
+
+        [TestMethod]
+        public void TestFailNoAccountToken()
+        {
+            var transfer = GetBasicRequest();
+            transfer.AccountToken = null;
+            var errors = new Collection<string>();
+            if (transfer.TryValidate(errors)) Assert.Fail();
+            Assert.AreEqual(1, errors.Count);
+            Assert.AreEqual("The AccountToken field is required.", errors.FirstOrDefault());
+        }
+
+        [TestMethod]
+        public void TestFailShortBankAccountToken()
+        {
+            var transfer = GetBasicRequest();
+            transfer.AccountToken = "C01957EE5D8B468342E673CC010BE0A";
+            var errors = new Collection<string>();
+            if (transfer.TryValidate(errors)) Assert.Fail();
+            Assert.AreEqual(1, errors.Count);
+            Assert.AreEqual("AccountToken must be 32 characters long.", errors.FirstOrDefault());
+        }
+
+        [TestMethod]
+        public void TestFailLongBankAccountToken()
+        {
+            var transfer = GetBasicRequest();
+            transfer.AccountToken = "AAC01957EE5D8B468342E673CC010BE0A";
+            var errors = new Collection<string>();
+            if (transfer.TryValidate(errors)) Assert.Fail();
+            Assert.AreEqual(1, errors.Count);
+            Assert.AreEqual("AccountToken must be 32 characters long.", errors.FirstOrDefault());
+        }
+
+        [TestMethod]
+        public void TestFailNoBankAccountToken()
+        {
+            var transfer = GetBasicRequest();
+            transfer.AccountToken = null;
+            var errors = new Collection<string>();
+            if (transfer.TryValidate(errors)) Assert.Fail();
+            Assert.AreEqual(1, errors.Count);
+            Assert.AreEqual("The AccountToken field is required.", errors.FirstOrDefault());
+        }
+
+        [TestMethod]
+        public void TestFailZeroAmount()
+        {
+            var transfer = GetBasicRequest();
+            transfer.Amount = 0;
+            var errors = new Collection<string>();
+            if (transfer.TryValidate(errors)) Assert.Fail();
+            Assert.AreEqual(1, errors.Count);
+            Assert.AreEqual("The field Amount must be between 0.01 and 2147483647.", errors.FirstOrDefault());
+        }
+
+        [TestMethod]
+        public void TestFailNegativeAmount()
+        {
+            var transfer = GetBasicRequest();
+            transfer.Amount = -1;
+            var errors = new Collection<string>();
+            if (transfer.TryValidate(errors)) Assert.Fail();
+            Assert.AreEqual(1, errors.Count);
+            Assert.AreEqual("The field Amount must be between 0.01 and 2147483647.", errors.FirstOrDefault());
+        }
+
+        [TestMethod]
+        public void TestFailBadAmount()
+        {
+            var transfer = GetBasicRequest();
+            transfer.Amount = (decimal)1.001;
+            var errors = new Collection<string>();
+            if (transfer.TryValidate(errors)) Assert.Fail();
+            Assert.AreEqual(1, errors.Count);
+            Assert.AreEqual("Amount must be a multiple of 0.01.", errors.FirstOrDefault());
+        }
+
+        [TestMethod]
+        public void TestFailNoTransferSystem()
+        {
+            var transfer = GetBasicRequest();
+            transfer.TransferSystem = null;
+            var errors = new Collection<string>();
+            if (transfer.TryValidate(errors)) Assert.Fail();
+            Assert.AreEqual(1, errors.Count);
+            Assert.AreEqual("The TransferSystem field is required.", errors.FirstOrDefault());
         }
     }
 }

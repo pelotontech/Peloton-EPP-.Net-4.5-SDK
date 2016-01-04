@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using PelotonEppSdk.Classes;
 using PelotonEppSdk.Enums;
+using PelotonEppSdk.Validations;
 
 namespace PelotonEppSdk.Models
 {
@@ -28,8 +29,9 @@ namespace PelotonEppSdk.Models
         /// <summary>
         /// Total Amount to be transferred between accounts. Must be positive.
         ///  </summary>
-        [Required]
-        public decimal? Amount { get; set; }
+        [Range(0.01, int.MaxValue)]
+        [DecimalDollarValue(ErrorMessage = "Amount must be a multiple of 0.01.")]
+        public decimal Amount { get; set; }
 
         /// <summary>
         /// The Type of transfer (EFT or ACH)
@@ -41,14 +43,14 @@ namespace PelotonEppSdk.Models
         /// The account identifier used to identify a bank account.
         /// </summary>
         [Required]
-        [StringLength(32, MinimumLength = 32)]
+        [StringLength(32, MinimumLength = 32, ErrorMessage = "BankAccountToken must be 32 characters long.")]
         public string BankAccountToken { get; set; }
 
         /// <summary>
         /// ClientToken for the target peloton account
         /// </summary>
         [Required]
-        [StringLength(32, MinimumLength = 32)]
+        [StringLength(32, MinimumLength = 32, ErrorMessage = "AccountToken must be 32 characters long.")]
         public string AccountToken { get; set; }
 
         /// <summary>

@@ -76,7 +76,7 @@ namespace PelotonEppSdkTests
             transfer.SourceAccountToken = "4849ED0C336EEE802494A46937B5122";
             var errors = new Collection<string>();
             if (transfer.TryValidate(errors)) Assert.Fail();
-            Assert.AreEqual(1, errors.Count());
+            Assert.AreEqual(1, errors.Count);
             Assert.AreEqual("SourceAccountToken must be 32 characters long.", errors.FirstOrDefault());
         }
 
@@ -87,7 +87,7 @@ namespace PelotonEppSdkTests
             transfer.TargetAccountToken = "4849ED0C336EEE802494A46937B5122";
             var errors = new Collection<string>();
             if (transfer.TryValidate(errors)) Assert.Fail();
-            Assert.AreEqual(1, errors.Count());
+            Assert.AreEqual(1, errors.Count);
             Assert.AreEqual("TargetAccountToken must be 32 characters long.", errors.FirstOrDefault());
         }
 
@@ -98,7 +98,7 @@ namespace PelotonEppSdkTests
             transfer.SourceAccountToken = "AAA4849ED0C336EEE802494A46937B5122";
             var errors = new Collection<string>();
             if (transfer.TryValidate(errors)) Assert.Fail();
-            Assert.AreEqual(1, errors.Count());
+            Assert.AreEqual(1, errors.Count);
             Assert.AreEqual("SourceAccountToken must be 32 characters long.", errors.FirstOrDefault());
         }
 
@@ -109,7 +109,7 @@ namespace PelotonEppSdkTests
             transfer.TargetAccountToken = "AAA4849ED0C336EEE802494A46937B5122";
             var errors = new Collection<string>();
             if (transfer.TryValidate(errors)) Assert.Fail();
-            Assert.AreEqual(1, errors.Count());
+            Assert.AreEqual(1, errors.Count);
             Assert.AreEqual("TargetAccountToken must be 32 characters long.", errors.FirstOrDefault());
         }
 
@@ -120,7 +120,7 @@ namespace PelotonEppSdkTests
             transfer.TargetAccountToken = null;
             var errors = new Collection<string>();
             if (transfer.TryValidate(errors)) Assert.Fail();
-            Assert.AreEqual(1, errors.Count());
+            Assert.AreEqual(1, errors.Count);
             Assert.AreEqual("The TargetAccountToken field is required.", errors.FirstOrDefault());
         }
 
@@ -131,7 +131,7 @@ namespace PelotonEppSdkTests
             transfer.SourceAccountToken = null;
             var errors = new Collection<string>();
             if (transfer.TryValidate(errors)) Assert.Fail();
-            Assert.AreEqual(1, errors.Count());
+            Assert.AreEqual(1, errors.Count);
             Assert.AreEqual("The SourceAccountToken field is required.", errors.FirstOrDefault());
         }
 
@@ -142,7 +142,7 @@ namespace PelotonEppSdkTests
             transfer.Amount = 0;
             var errors = new Collection<string>();
             if (transfer.TryValidate(errors)) Assert.Fail();
-            Assert.AreEqual(1, errors.Count());
+            Assert.AreEqual(1, errors.Count);
             Assert.AreEqual("The field Amount must be between 0.01 and 2147483647.", errors.FirstOrDefault());
         }
 
@@ -153,7 +153,7 @@ namespace PelotonEppSdkTests
             transfer.Amount = -1;
             var errors = new Collection<string>();
             if (transfer.TryValidate(errors)) Assert.Fail();
-            Assert.AreEqual(1, errors.Count());
+            Assert.AreEqual(1, errors.Count);
             Assert.AreEqual("The field Amount must be between 0.01 and 2147483647.", errors.FirstOrDefault());
         }
 
@@ -164,7 +164,7 @@ namespace PelotonEppSdkTests
             transfer.Amount = (decimal) 1.001;
             var errors = new Collection<string>();
             if (transfer.TryValidate(errors)) Assert.Fail();
-            Assert.AreEqual(1, errors.Count());
+            Assert.AreEqual(1, errors.Count);
             Assert.AreEqual("Amount must be a multiple of 0.01.", errors.FirstOrDefault());
         }
     }
