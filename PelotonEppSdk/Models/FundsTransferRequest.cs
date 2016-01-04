@@ -20,8 +20,7 @@ namespace PelotonEppSdk.Models
     [SuppressMessage("ReSharper", "InconsistentNaming")]
     public enum FundsTransferSystem
     {
-        EFT,
-        ACH
+        EFT
     }
 
     public class FundsTransferRequest : RequestBase

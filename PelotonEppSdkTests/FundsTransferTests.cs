@@ -47,6 +47,25 @@ namespace PelotonEppSdkTests
         }
 
         [TestMethod]
+        public void TestSuccessNoReferences()
+        {
+            var request = GetBasicRequest();
+            request.References = null;
+            var errors = new Collection<string>();
+            if (request.TryValidate(errors))
+            {
+                foreach (var error in errors)
+                {
+                    Debug.WriteLine(error);
+                }
+            }
+            var result = request.PostAsync().Result;
+            Assert.IsTrue(result.Success);
+            Assert.AreEqual(0, result.MessageCode);
+            Assert.IsNotNull(result.TransactionRefCode);
+        }
+
+        [TestMethod]
         public void TestSuccessDebitEft()
         {
             var request = GetBasicRequest();
@@ -173,6 +192,17 @@ namespace PelotonEppSdkTests
             if (transfer.TryValidate(errors)) Assert.Fail();
             Assert.AreEqual(1, errors.Count);
             Assert.AreEqual("The TransferSystem field is required.", errors.FirstOrDefault());
+        }
+
+        [TestMethod]
+        public void TestFailNoTypeSystem()
+        {
+            var transfer = GetBasicRequest();
+            transfer.Type = null;
+            var errors = new Collection<string>();
+            if (transfer.TryValidate(errors)) Assert.Fail();
+            Assert.AreEqual(1, errors.Count);
+            Assert.AreEqual("The Type field is required.", errors.FirstOrDefault());
         }
     }
 }
