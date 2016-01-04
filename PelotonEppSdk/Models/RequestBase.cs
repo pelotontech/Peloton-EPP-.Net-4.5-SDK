@@ -28,7 +28,7 @@ namespace PelotonEppSdk.Models
             {
                 errorList.Add(error);
             }
-            return errorList.Any();
+            return !errorList.Any();
         }
 
         public ICollection<string> Validate()

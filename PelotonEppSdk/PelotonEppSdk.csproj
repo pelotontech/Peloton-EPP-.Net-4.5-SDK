@@ -57,6 +57,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Validations\DollarValueValidationAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

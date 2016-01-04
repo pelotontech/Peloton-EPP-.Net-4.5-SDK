@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using PelotonEppSdk.Classes;
 using PelotonEppSdk.Enums;
+using PelotonEppSdk.Validations;
 
 namespace PelotonEppSdk.Models
 {
@@ -18,6 +19,7 @@ namespace PelotonEppSdk.Models
         public string TargetAccountToken { get; set; }
 
         [Range(0.01,int.MaxValue)]
+        [DecimalDollarValue(ErrorMessage = "Amount must be a multiple of 0.01.")]
         public decimal Amount { get; set; }
 
         public bool AutoAccept { get; set; }
