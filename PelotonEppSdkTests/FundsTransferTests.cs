@@ -13,7 +13,7 @@ namespace PelotonEppSdkTests
     {
         private static FundsTransferRequest GetBasicRequest()
         {
-            var factory = new RequestFactory(107, "9cf9b8f4", "PelonEppSdkTests");
+            var factory = new RequestFactory(24, "Password123", "PelonEppSdkTests");
             var transfer = factory.GetFundsTransferRequest();
             transfer.Amount = (decimal)0.01;
             transfer.TransferSystem = FundsTransferSystem.EFT;
@@ -32,6 +32,25 @@ namespace PelotonEppSdkTests
         public void TestSuccessCreditEft()
         {
             var request = GetBasicRequest();
+            var errors = new Collection<string>();
+            if (request.TryValidate(errors))
+            {
+                foreach (var error in errors)
+                {
+                    Debug.WriteLine(error);
+                }
+            }
+            var result = request.PostAsync().Result;
+            Assert.IsTrue(result.Success);
+            Assert.AreEqual(0, result.MessageCode);
+            Assert.IsNotNull(result.TransactionRefCode);
+        }
+
+        [TestMethod]
+        public void TestSuccessDebitEft()
+        {
+            var request = GetBasicRequest();
+            request.Type = FundsTransferType.DEBIT;
             var errors = new Collection<string>();
             if (request.TryValidate(errors))
             {

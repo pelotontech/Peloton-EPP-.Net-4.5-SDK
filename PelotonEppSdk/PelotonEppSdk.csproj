@@ -47,6 +47,8 @@
     <Compile Include="Classes\RequestFactory.cs" />
     <Compile Include="Classes\TestUriFactory.cs" />
     <Compile Include="Enums\ApiTarget.cs" />
+    <Compile Include="Enums\LanguageCode.cs" />
+    <Compile Include="Models\FundsTransferRequest.cs" />
     <Compile Include="Models\RequestBase.cs" />
     <Compile Include="Models\TransferRequest.cs" />
     <Compile Include="Models\Reference.cs" />
