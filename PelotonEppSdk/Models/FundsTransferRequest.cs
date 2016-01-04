@@ -1,10 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace PelotonEppSdk.Models
 {
+    [SuppressMessage("ReSharper", "InconsistentNaming")]
+    public enum FundsTransferType
+    {
+        CREDIT,
+        DEBIT
+    }
+
+    [SuppressMessage("ReSharper", "InconsistentNaming")]
+    public enum FundsTransferSystem
+    {
+        EFT,
+        ACH
+    }
+
     public class FundsTransferRequest : RequestBase
     {
         /// <summary>
@@ -17,9 +32,7 @@ namespace PelotonEppSdk.Models
         /// The Type of transfer (EFT or ACH)
         /// </summary>
         [Required]
-        [RegularExpression("EFT|ACH")]
-        [StringLength(3)]
-        public string TransferSystem { get; set; }
+        public FundsTransferSystem? TransferSystem { get; set; }
 
         /// <summary>
         /// The account identifier used to identify a bank account.
@@ -44,8 +57,8 @@ namespace PelotonEppSdk.Models
         /// <summary>
         /// Flag for credit or debit
         /// </summary>
-        [RegularExpression("CREDIT|DEBIT")]
-        public string Type { get; set; }
+        [Required]
+        public FundsTransferType? Type { get; set; }
 
         /// <summary>
         /// A list of fields used to pass additional information to record with the transfer request.
@@ -53,6 +66,7 @@ namespace PelotonEppSdk.Models
         public IEnumerable<Reference> References { get; set; }
     }
 
+    [SuppressMessage("ReSharper", "InconsistentNaming")]
     internal class funds_transfer_request :request_base
     {  
         [Required]
@@ -90,8 +104,8 @@ namespace PelotonEppSdk.Models
                 language_code = request.LanguageCode,
                 references = request.References?.Select(r => (reference) r),
                 transfer_date = request.TransferDate,
-                transfer_system = request.TransferSystem,
-                type = request.Type
+                transfer_system = Enum.GetName(typeof(FundsTransferSystem), request.TransferSystem.Value),
+                type = Enum.GetName(typeof(FundsTransferType), request.Type.Value)
             };
         }
     }
