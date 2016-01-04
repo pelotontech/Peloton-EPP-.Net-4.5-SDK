@@ -1,4 +1,6 @@
-﻿namespace PelotonEppSdk.Models
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace PelotonEppSdk.Models
 {
     public class Reference
     {
@@ -6,6 +8,7 @@
         public string Value { get; set; }
     }
 
+    [SuppressMessage("ReSharper", "InconsistentNaming")]
     internal class reference
     {
         public string name { get; set; }

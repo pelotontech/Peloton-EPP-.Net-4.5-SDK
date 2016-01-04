@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Threading.Tasks;
+using PelotonEppSdk.Classes;
 using PelotonEppSdk.Enums;
 
 namespace PelotonEppSdk.Models
@@ -65,6 +67,13 @@ namespace PelotonEppSdk.Models
         /// A list of fields used to pass additional information to record with the transfer request.
         /// </summary>
         public IEnumerable<Reference> References { get; set; }
+
+        public async Task<Response> PostAsync()
+        {
+            var client = new PelotonClient();
+            var result = await client.PostAsync<response>((funds_transfer_request)this, ApiTarget.FundsTransfers);
+            return (Response)result;
+        }
     }
 
     [SuppressMessage("ReSharper", "InconsistentNaming")]
