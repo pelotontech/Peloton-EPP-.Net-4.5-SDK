@@ -28,11 +28,17 @@ namespace PelotonEppSdk.Classes
             request.ApplicationName = _applicationName;
         }
 
-
+        public FundsTransferRequest GetFundsTransferRequest()
+        {
+            var fundsTransfer = new FundsTransferRequest();
+            SetBaseHeaders(fundsTransfer);
+            SetBaseFields(fundsTransfer);
+            return fundsTransfer;
+        }
 
         public TransferRequest GetTransferRequest()
         {
-            var transferRequest = new TransferRequest {ApplicationName = _applicationName};
+            var transferRequest = new TransferRequest();
             SetBaseHeaders(transferRequest);
             SetBaseFields(transferRequest);
             return transferRequest;
