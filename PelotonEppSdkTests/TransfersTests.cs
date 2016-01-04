@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PelotonEppSdk.Classes;
 using PelotonEppSdk.Models;
@@ -21,7 +23,7 @@ namespace PelotonEppSdkTests
             transfer.TargetAccountToken = "1D4E237930EB70FC115E6ACD95E878E6";
 
             var validationResults = transfer.Validate();
-            if (validationResults.Count != 0)
+            if (validationResults.Any())
             {
                 foreach (var validationResult in validationResults)
                 {
@@ -39,7 +41,7 @@ namespace PelotonEppSdkTests
         [TestMethod]
         public void TestSuccessfulWithReferences()
         {
-            var factory = new RequestFactory(107, "9cf9b8f4", "PelonEppSdkTests", "en");
+            var factory = new RequestFactory(107, "9cf9b8f4", "PelonEppSdkTests");
             var transfer = factory.GetTransferRequest();
             transfer.Amount = (decimal)0.11;
             transfer.AutoAccept = true;
@@ -51,6 +53,16 @@ namespace PelotonEppSdkTests
                     new Reference {Name = "String 1", Value = "String2"},
                     new Reference {Name = "String 3", Value = "String4"}
                 };
+
+
+            var errors = new Collection<string>();
+            if (!transfer.TryValidate(errors))
+            {
+                foreach (var error in errors)
+                {
+                    Debug.WriteLine(error);
+                }
+            }
             var result = transfer.PostAsync().Result;
             Assert.IsTrue(result.Success);
             Assert.AreEqual(0, result.MessageCode);

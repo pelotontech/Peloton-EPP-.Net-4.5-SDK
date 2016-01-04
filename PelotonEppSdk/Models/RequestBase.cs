@@ -21,6 +21,16 @@ namespace PelotonEppSdk.Models
             AuthenticationHeader = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(ASCII.GetBytes($"{username}:{password}")));
         }
 
+        public bool TryValidate(ICollection<string> errorList)
+        {
+            var list = Validate();
+            foreach (var error in list)
+            {
+                errorList.Add(error);
+            }
+            return errorList.Any();
+        }
+
         public ICollection<string> Validate()
         {
             var context = new ValidationContext(this, null, null);
