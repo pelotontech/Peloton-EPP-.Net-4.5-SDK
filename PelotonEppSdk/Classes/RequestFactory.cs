@@ -44,5 +44,13 @@ namespace PelotonEppSdk.Classes
             SetBaseFields(transferRequest);
             return transferRequest;
         }
+
+        public BankAccountCreateRequest GetBankAccountCreateRequest()
+        {
+            var bankAccountCreateRequest = new BankAccountCreateRequest();
+            SetBaseHeaders(bankAccountCreateRequest);
+            SetBaseFields(bankAccountCreateRequest);
+            return bankAccountCreateRequest;
+        }
     }
 }

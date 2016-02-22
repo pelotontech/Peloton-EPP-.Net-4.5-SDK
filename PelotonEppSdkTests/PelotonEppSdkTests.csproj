@@ -55,6 +55,8 @@
     <Compile Include="FundsTransferTests.cs" />
     <Compile Include="TransfersTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="BankAccountCreateTests.cs" />
+    <Compile Include="BankAccountDeleteTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PelotonEppSdk\PelotonEppSdk.csproj">

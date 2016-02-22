@@ -43,11 +43,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\BankAccount.cs" />
+    <Compile Include="Models\BankAccountCreateRequest.cs" />
     <Compile Include="Classes\PelotonClient.cs" />
     <Compile Include="Classes\RequestFactory.cs" />
-    <Compile Include="Classes\TestUriFactory.cs" />
+    <Compile Include="Classes\UriFactory.cs" />
     <Compile Include="Enums\ApiTarget.cs" />
     <Compile Include="Enums\LanguageCode.cs" />
+    <Compile Include="Models\BankAccountDeleteRequest.cs" />
+    <Compile Include="Models\Document.cs" />
     <Compile Include="Models\FundsTransferRequest.cs" />
     <Compile Include="Models\RequestBase.cs" />
     <Compile Include="Models\TransferRequest.cs" />

@@ -11,7 +11,7 @@ namespace PelotonEppSdk.Classes
     {
         public async Task<T> PostAsync<T>(request_base content, ApiTarget target)
         {
-            var factory = new TestUriFactory();
+            var factory = new UriFactory();
             var serializer = new JavaScriptSerializer();
             var serializedContent = serializer.Serialize(content);
             var stringContent = new StringContent(serializedContent,Encoding.Default, "application/json");

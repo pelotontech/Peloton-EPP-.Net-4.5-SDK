@@ -4,11 +4,12 @@ using PelotonEppSdk.Properties;
 
 namespace PelotonEppSdk.Classes
 {
-    public class TestUriFactory
+    internal class UriFactory
     {
         public Uri GetBaseUri()
         {
-            return new Uri(Settings.Default.PelotonUri);
+            //return new Uri(Settings.Default.PelotonUri);
+            return new Uri("http://localhost:2590");
         }
 
         public string GetTargetUriPart(ApiTarget apiTarget)
