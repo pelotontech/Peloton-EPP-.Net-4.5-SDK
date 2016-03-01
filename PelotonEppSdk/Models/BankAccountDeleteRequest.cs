@@ -12,6 +12,7 @@ namespace PelotonEppSdk.Models
 
         public async Task<Response> PostAsync()
         {
+            throw new NotImplementedException();
             var client = new PelotonClient();
             var result = await client.PostAsync<response>((bank_account_delete_request)this, ApiTarget.FundsTransfers);
             return (Response)result;
