@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PelotonEppSdk.Classes;
 using PelotonEppSdk.Models;
@@ -16,6 +17,9 @@ namespace PelotonEppSdkTests
         {
             var createRequest = GetBasicRequest();
 
+            // invent a new bank account token
+            createRequest.BankAccount.Token = Guid.NewGuid().ToString().Substring(0, 32);
+
             var errors = new Collection<string>();
             if (createRequest.TryValidate(errors))
             {
@@ -25,15 +29,17 @@ namespace PelotonEppSdkTests
                 }
             }
             var result = createRequest.PostAsync().Result;
+            Debug.WriteLine(result.Message);
+            Debug.WriteLineIf((result.Errors != null && result.Errors.Count >= 1), string.Join("; ", result.Errors ?? new List<string>()));
             Assert.IsTrue(result.Success);
             Assert.AreEqual(0, result.MessageCode);
-            Assert.IsNotNull(result.TransactionRefCode);
 
         }
 
         private static BankAccountCreateRequest GetBasicRequest()
         {
-            var factory = new RequestFactory(24, "Password123", "PelonEppSdkTests");
+            //var factory = new RequestFactory(106, "c57cbd1d", "PelonEppSdkTests");
+            var factory = new RequestFactory(80, "e9ab9532", "PelonEppSdkTests");
             var createRequest = factory.GetBankAccountCreateRequest();
             createRequest.BankAccount = new BankAccount
             {
@@ -43,7 +49,7 @@ namespace PelotonEppSdkTests
                 FinancialInstitution = 1,
                 Name = "Bank Banktasia",
                 Owner = "Unit test SDK",
-                Token = "bank token 1",
+                Token = "bank account token 1",
                 TypeCode = "1"
             };
             createRequest.Document = null; //new Document();

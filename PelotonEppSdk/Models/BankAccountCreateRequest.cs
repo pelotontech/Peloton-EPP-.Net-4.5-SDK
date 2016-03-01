@@ -24,8 +24,8 @@ namespace PelotonEppSdk.Models
         {
             var client = new PelotonClient();
             var request = (bank_account_request) this;
-            var result = await client.PostAsync<response>(request, ApiTarget.BankAccounts);
-            return (Response)result;
+            var result = await client.PostAsync<bank_account_response>(request, ApiTarget.BankAccounts);
+            return (BankAccountCreateResponse) result;
         }
     }
 

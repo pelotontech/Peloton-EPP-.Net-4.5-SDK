@@ -45,6 +45,7 @@ namespace PelotonEppSdk.Models
 
         public static explicit operator Response(response r)
         {
+            if (r == null) return null;
             return new Response
             {
                 Success = r.success,
@@ -57,6 +58,7 @@ namespace PelotonEppSdk.Models
 
         public static explicit operator response(Response r)
         {
+            if (r == null) return null;
             return new response
             {
                 errors = r.Errors,

@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\AdditionalDataSerializer.cs" />
     <Compile Include="Models\BankAccount.cs" />
     <Compile Include="Models\BankAccountCreateRequest.cs" />
     <Compile Include="Classes\PelotonClient.cs" />
@@ -50,6 +51,7 @@
     <Compile Include="Classes\UriFactory.cs" />
     <Compile Include="Enums\ApiTarget.cs" />
     <Compile Include="Enums\LanguageCode.cs" />
+    <Compile Include="Models\BankAccountCreateResponse.cs" />
     <Compile Include="Models\BankAccountDeleteRequest.cs" />
     <Compile Include="Models\Document.cs" />
     <Compile Include="Models\FundsTransferRequest.cs" />
