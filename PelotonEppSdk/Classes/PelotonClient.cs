@@ -13,8 +13,6 @@ namespace PelotonEppSdk.Classes
         {
             var factory = new UriFactory();
             var serializer = new JavaScriptSerializer();
-            // TODO: invent a serializer which can convert the bank account delete request into the plain string that the API expects
-            //serializer.RegisterConverters(new JavaScriptConverter[] { new AdditionalDataSerializer() });
             var serializedContent = serializer.Serialize(content);
             var stringContent = new StringContent(serializedContent,Encoding.Default, "application/json");
             string stringResult;

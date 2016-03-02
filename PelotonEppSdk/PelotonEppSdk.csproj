@@ -43,7 +43,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\AdditionalDataSerializer.cs" />
     <Compile Include="Models\BankAccount.cs" />
     <Compile Include="Models\BankAccountCreateRequest.cs" />
     <Compile Include="Classes\PelotonClient.cs" />
