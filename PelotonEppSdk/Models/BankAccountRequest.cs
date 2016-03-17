@@ -6,11 +6,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using PelotonEppSdk.Classes;
 using PelotonEppSdk.Enums;
+using PelotonEppSdk.Interfaces;
 
 namespace PelotonEppSdk.Models
 {
-    public class BankAccountCreateRequest : RequestBase
+    public class BankAccountRequest : RequestBase, IBankAccountCreateRequest, IBankAccountDeleteRequest
     {
+        // start of create fields and methods
         [Required]
         public BankAccount BankAccount { get; set; }
 
@@ -27,6 +29,19 @@ namespace PelotonEppSdk.Models
             var result = await client.PostAsync<bank_account_response>(request, ApiTarget.BankAccounts);
             return (BankAccountCreateResponse) result;
         }
+        // end of create fields and methods
+
+        // start of delete fields and methods
+        public string Token { get; set; }
+
+        public async Task<Response> DeleteAsync()
+        {
+            var client = new PelotonClient();
+            var result = await client.DeleteAsyncBankAccountsV1<response>((bank_account_delete_request)this, ApiTarget.FundsTransfers);
+            return (Response)result;
+        }
+        // end of delete fields and methods
+
     }
 
     [SuppressMessage("ReSharper", "InconsistentNaming")]
@@ -55,7 +70,7 @@ namespace PelotonEppSdk.Models
         /// </summary>
         public IEnumerable<reference> references { get; set; }
 
-        public static explicit operator bank_account_request(BankAccountCreateRequest bankAccountCreateRequest)
+        public static explicit operator bank_account_request(BankAccountRequest bankAccountCreateRequest)
         {
             return new bank_account_request
             {
@@ -66,6 +81,23 @@ namespace PelotonEppSdk.Models
                 references = bankAccountCreateRequest.References?.Select(r => (reference)r),
                 authentication_header = bankAccountCreateRequest.AuthenticationHeader,
                 language_code = Enum.GetName(typeof(LanguageCode), bankAccountCreateRequest.LanguageCode)
+            };
+        }
+    }
+
+    [SuppressMessage("ReSharper", "InconsistentNaming")]
+    internal class bank_account_delete_request : request_base
+    {
+        /// <summary>
+        /// The token for the bank account which is to be deleted
+        /// </summary>
+        public string bank_account_token { get; set; }
+
+        public static explicit operator bank_account_delete_request(BankAccountRequest bankAccountCreateRequest)
+        {
+            return new bank_account_delete_request
+            {
+                bank_account_token = bankAccountCreateRequest.Token
             };
         }
     }

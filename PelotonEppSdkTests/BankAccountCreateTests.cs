@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PelotonEppSdk.Classes;
 using PelotonEppSdk.Models;
@@ -36,7 +35,7 @@ namespace PelotonEppSdkTests
 
         }
 
-        private static BankAccountCreateRequest GetBasicRequest()
+        private static BankAccountRequest GetBasicRequest()
         {
             //var factory = new RequestFactory(106, "c57cbd1d", "PelonEppSdkTests");
             var factory = new RequestFactory(80, "e9ab9532", "PelonEppSdkTests");
@@ -61,7 +60,7 @@ namespace PelotonEppSdkTests
                     new Reference {Name = "String 1", Value = "String2"},
                     new Reference {Name = "String 3", Value = "String4"}
                 };
-            return createRequest;
+            return (BankAccountRequest)createRequest;
         }
     }
 }

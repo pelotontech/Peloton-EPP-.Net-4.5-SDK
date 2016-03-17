@@ -44,16 +44,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums\CreditCardType.cs" />
+    <Compile Include="Interfaces\IBankAccountCreateRequest.cs" />
+    <Compile Include="Interfaces\IBankAccountDeleteRequest.cs" />
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\BankAccount.cs" />
-    <Compile Include="Models\BankAccountCreateRequest.cs" />
     <Compile Include="Classes\PelotonClient.cs" />
     <Compile Include="Classes\RequestFactory.cs" />
     <Compile Include="Classes\UriFactory.cs" />
     <Compile Include="Enums\ApiTarget.cs" />
     <Compile Include="Enums\LanguageCode.cs" />
+    <Compile Include="Models\BankAccountRequest.cs" />
     <Compile Include="Models\BankAccountCreateResponse.cs" />
-    <Compile Include="Models\BankAccountDeleteRequest.cs" />
     <Compile Include="Models\CreditCardNumber.cs" />
     <Compile Include="Models\CreditCardRequest.cs" />
     <Compile Include="Models\Document.cs" />
