@@ -2,7 +2,11 @@
 {
     public class CreditCardResponse: Response
     {
+        public string CreditCardToken { get; set; }
 
+        public string AddressVerificationResult { get; set; }
+
+        public string CardSecurityCodeVerificationResult { get; set; }
     }
 
     // ReSharper disable InconsistentNaming
@@ -23,5 +27,20 @@
         /// Result of the card security code verification process
         /// </summary>
         public string card_security_code_verification_result { get; set; }
+
+        public static explicit operator CreditCardResponse(credit_card_response r)
+        {
+            if (r == null) return null;
+            return new CreditCardResponse()
+            {
+                Success = r.success,
+                Message = r.message,
+                Errors = r.errors,
+                MessageCode = r.message_code,
+                CreditCardToken = r.credit_card_token,
+                AddressVerificationResult = r.address_verification_result,
+                CardSecurityCodeVerificationResult = r.card_security_code_verification_result
+            };
+        }
     }
 }

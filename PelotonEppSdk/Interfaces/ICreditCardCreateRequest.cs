@@ -4,7 +4,7 @@ using PelotonEppSdk.Models;
 
 namespace PelotonEppSdk.Interfaces
 {
-    interface ICreditCardCreateRequest
+    public interface ICreditCardCreateRequest
     {
         string OrderNumber { get; set; }
         string CardOwner { get; set; }

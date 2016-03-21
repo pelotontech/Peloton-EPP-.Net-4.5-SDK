@@ -61,5 +61,29 @@ namespace PelotonEppSdk.Classes
             SetBaseFields(bankAccountRequest);
             return bankAccountRequest;
         }
+
+        public ICreditCardCreateRequest GetCreditCardCreateRequest()
+        {
+            var request = new CreditCardRequest();
+            SetBaseHeaders(request);
+            SetBaseFields(request);
+            return request;
+        }
+
+        public ICreditCardUpdateRequest GetCreditCardUpdateRequest()
+        {
+            var request = new CreditCardRequest();
+            SetBaseHeaders(request);
+            SetBaseFields(request);
+            return request;
+        }
+
+        public ICreditCardDeleteRequest GetCreditCardDeleteRequest()
+        {
+            var request = new CreditCardRequest();
+            SetBaseHeaders(request);
+            SetBaseFields(request);
+            return request;
+        }
     }
 }
