@@ -17,7 +17,7 @@ namespace PelotonEppSdk.Classes
             var factory = new UriFactory();
             var serializer = new JavaScriptSerializer();
             var serializedContent = serializer.Serialize(content);
-            var stringContent = new StringContent(serializedContent,Encoding.Default, "application/json");
+            var stringContent = new StringContent(serializedContent, Encoding.Default, "application/json");
             string stringResult;
             using (var client = new HttpClient())
             {
@@ -43,7 +43,7 @@ namespace PelotonEppSdk.Classes
             var factory = new UriFactory();
             var serializer = new JavaScriptSerializer();
             var serializedContent = serializer.Serialize(content);
-            var stringContent = new StringContent(serializedContent,Encoding.Default, "application/json");
+            var stringContent = new StringContent(serializedContent, Encoding.Default, "application/json");
             string stringResult;
             using (var client = new HttpClient())
             {
@@ -51,6 +51,31 @@ namespace PelotonEppSdk.Classes
                 client.BaseAddress = factory.GetBaseUri();
                 var targetUriPart = factory.GetTargetUriPart(target);
                 var httpResponseMessage = await client.PutAsync(targetUriPart, stringContent);
+
+                // handle server errors
+                if (!httpResponseMessage.IsSuccessStatusCode)
+                {
+                    throw new HttpException((int)httpResponseMessage.StatusCode, httpResponseMessage.ReasonPhrase);
+                }
+                stringResult = httpResponseMessage.Content.ReadAsStringAsync().Result;
+            }
+            return serializer.Deserialize<T>(stringResult);
+        }
+
+        /// <exception cref="HttpException">When status code is not <c>2XX Success</c>.</exception>
+        public async Task<T> DeleteAsync<T>(request_base content, ApiTarget target)
+        {
+            var factory = new UriFactory();
+            var serializer = new JavaScriptSerializer();
+            //var serializedContent = serializer.Serialize(content);
+            //var stringContent = new StringContent(serializedContent, Encoding.Default, "application/json");
+            string stringResult;
+            using (var client = new HttpClient())
+            {
+                client.DefaultRequestHeaders.Authorization = content.authentication_header;
+                client.BaseAddress = factory.GetBaseUri();
+                var targetUriPart = factory.GetTargetUriPart(target);
+                var httpResponseMessage = await client.DeleteAsync(targetUriPart);
 
                 // handle server errors
                 if (!httpResponseMessage.IsSuccessStatusCode)
