@@ -37,7 +37,7 @@ namespace PelotonEppSdk.Models
         public async Task<Response> DeleteAsync()
         {
             var client = new PelotonClient();
-            var result = await client.DeleteAsyncBankAccountsV1<response>((bank_account_delete_request)this, ApiTarget.FundsTransfers);
+            var result = await client.DeleteAsyncBankAccountsV1<response>((bank_account_delete_request)this, ApiTarget.BankAccounts);
             return (Response)result;
         }
         // end of delete fields and methods

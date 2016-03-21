@@ -6,10 +6,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using PelotonEppSdk.Classes;
 using PelotonEppSdk.Enums;
+using PelotonEppSdk.Interfaces;
 
 namespace PelotonEppSdk.Models
 {
-    public class CreditCardRequest : RequestBase
+    public class CreditCardRequest : RequestBase, ICreditCardCreateRequest, ICreditCardDeleteRequest, ICreditCardUpdateRequest
     {
         public string OrderNumber { get; set; }
         public string CardOwner { get; set; }
@@ -20,8 +21,8 @@ namespace PelotonEppSdk.Models
         public string ExpiryMonth { get; set; }
         public string ExpiryYear { get; set; }
         public string CardSecurityCode { get; set; }
-        public decimal? CardLast4Digits => CardNumber.Last4Digits;
-        public string MaskedCardDigits => CardNumber.Masked;
+        public decimal? CardLast4Digits => CardNumber?.Last4Digits;
+        public string MaskedCardDigits => CardNumber?.Masked;
 
         public IEnumerable<Reference> References { get; set; }
 
@@ -36,10 +37,25 @@ namespace PelotonEppSdk.Models
         {
             var client = new PelotonClient();
             var request = (credit_card_request) this;
-            var result = await client.PostAsync<bank_account_response>(request, ApiTarget.BankAccounts);
-            return (BankAccountCreateResponse) result;
+            var result = await client.PostAsync<credit_card_response>(request, ApiTarget.CreditCards);
+            return (CreditCardResponse) result;
         }
 
+        public async Task<Response> PutAsync()
+        {
+            var client = new PelotonClient();
+            var request = (credit_card_request) this;
+            var result = await client.PutAsync<credit_card_response>(request, ApiTarget.CreditCards);
+            return (CreditCardResponse) result;
+        }
+
+        public async Task<Response> DeleteAsync()
+        {
+            var client = new PelotonClient();
+            var request = (credit_card_request) this;
+            var result = await client.DeleteAsync<credit_card_response>(request, ApiTarget.CreditCards);
+            return (CreditCardResponse) result;
+        }
     }
 
     [SuppressMessage("ReSharper", "InconsistentNaming")]

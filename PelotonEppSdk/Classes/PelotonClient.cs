@@ -2,6 +2,7 @@
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Script.Serialization;
 using PelotonEppSdk.Enums;
 using PelotonEppSdk.Models;
@@ -10,6 +11,7 @@ namespace PelotonEppSdk.Classes
 {
     internal class PelotonClient
     {
+        /// <exception cref="HttpException">When status code is not <c>2XX Success</c>.</exception>
         public async Task<T> PostAsync<T>(request_base content, ApiTarget target)
         {
             var factory = new UriFactory();
@@ -24,15 +26,44 @@ namespace PelotonEppSdk.Classes
                 var targetUriPart = factory.GetTargetUriPart(target);
                 var httpResponseMessage = await client.PostAsync(targetUriPart, stringContent);
 
-                // TODO: handle server errors
-                
+                // handle server errors
+                if (!httpResponseMessage.IsSuccessStatusCode)
+                {
+                    throw new HttpException((int)httpResponseMessage.StatusCode, httpResponseMessage.ReasonPhrase);
+                }
                 stringResult = httpResponseMessage.Content.ReadAsStringAsync().Result;
                 
             }
             return serializer.Deserialize<T>(stringResult);
         }
 
+        /// <exception cref="HttpException">When status code is not <c>2XX Success</c>.</exception>
+        public async Task<T> PutAsync<T>(request_base content, ApiTarget target)
+        {
+            var factory = new UriFactory();
+            var serializer = new JavaScriptSerializer();
+            var serializedContent = serializer.Serialize(content);
+            var stringContent = new StringContent(serializedContent,Encoding.Default, "application/json");
+            string stringResult;
+            using (var client = new HttpClient())
+            {
+                client.DefaultRequestHeaders.Authorization = content.authentication_header;
+                client.BaseAddress = factory.GetBaseUri();
+                var targetUriPart = factory.GetTargetUriPart(target);
+                var httpResponseMessage = await client.PutAsync(targetUriPart, stringContent);
+
+                // handle server errors
+                if (!httpResponseMessage.IsSuccessStatusCode)
+                {
+                    throw new HttpException((int)httpResponseMessage.StatusCode, httpResponseMessage.ReasonPhrase);
+                }
+                stringResult = httpResponseMessage.Content.ReadAsStringAsync().Result;
+            }
+            return serializer.Deserialize<T>(stringResult);
+        }
+
         // Due to the nature of the BankAccounts Delete method, it must use this special Delete method
+        /// <exception cref="HttpException">When status code is not <c>2XX Success</c>.</exception>
         public async Task<T> DeleteAsyncBankAccountsV1<T>(bank_account_delete_request content, ApiTarget target)
         {
             var factory = new UriFactory();
@@ -53,13 +84,14 @@ namespace PelotonEppSdk.Classes
                 };
                 var httpResponseMessage = await client.SendAsync(request);
 
-                // TODO: handle server errors
-
+                // handle server errors
+                if (!httpResponseMessage.IsSuccessStatusCode)
+                {
+                    throw new HttpException((int)httpResponseMessage.StatusCode, httpResponseMessage.ReasonPhrase);
+                }
                 stringResult = httpResponseMessage.Content.ReadAsStringAsync().Result;
-
             }
             return serializer.Deserialize<T>(stringResult);
         }
-
     }
 }
