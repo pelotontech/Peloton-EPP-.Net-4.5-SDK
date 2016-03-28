@@ -136,11 +136,6 @@ namespace PelotonEppSdk.Models
         public string transaction_ref_code { get; set; }
 
         /// <summary>
-        /// Optional: Device data is sent when a transaction is processed via a hardware device
-        /// </summary>
-        public device_data device_data { get; set; }
-
-        /// <summary>
         /// Additional information to record with the transaction request
         /// </summary>
         public ICollection<reference> references { get; set; }
@@ -165,7 +160,6 @@ namespace PelotonEppSdk.Models
                 shipping_address = (address)creditCardTransactionRequest.ShippingAddress,
 
                 transaction_ref_code = creditCardTransactionRequest.TransactionRefCode,
-                device_data = (device_data)creditCardTransactionRequest.DeviceData,
 
                 references = creditCardTransactionRequest.References?.Select(r => (reference)r).ToList(),
                 application_name = creditCardTransactionRequest.ApplicationName,
