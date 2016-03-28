@@ -32,7 +32,7 @@ namespace PelotonEppSdkTests
             Assert.AreEqual(0, result.MessageCode);
         }
 
-        private static CreditCardTransactionRequest GetBasicRequest()
+        private static CreditCardTokenTransactionRequest GetBasicRequest()
         {
             var factory = new RequestFactory(106, "c57cbd1d", "PelonEppSdkTests");
             //var factory = new RequestFactory(80, "e9ab9532", "PelonEppSdkTests");

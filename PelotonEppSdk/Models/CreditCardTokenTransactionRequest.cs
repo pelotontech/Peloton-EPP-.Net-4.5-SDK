@@ -9,7 +9,7 @@ using PelotonEppSdk.Enums;
 
 namespace PelotonEppSdk.Models
 {
-  	public class CreditCardTransactionRequest : RequestBase
+  	public class CreditCardTokenTransactionRequest : RequestBase
     {
         public string OrderNumber { get; set; }
 
@@ -46,7 +46,7 @@ namespace PelotonEppSdk.Models
   	    public async Task<Response> PostAsync()
         {
             var client = new PelotonClient();
-            var request = (credit_card_transaction_request) this;
+            var request = (credit_card_token_transaction_request) this;
             // TODO: implement this method to use the EPP.API endpoint which corresponds to this request type (Fraser has details)
             //var result = await client.PostAsync<credit_card_transaction_response>(request, ApiTarget.CreditCardTransactions);
             //return (CreditCardTransactionResponse) result;
@@ -62,7 +62,7 @@ namespace PelotonEppSdk.Models
     }
 
     [SuppressMessage("ReSharper", "InconsistentNaming")]
-    internal class credit_card_transaction_request : request_base
+    internal class credit_card_token_transaction_request : request_base
     {
 		/// <summary>
         /// Recommended: Order number provided by the source system, otherwise one will be automatically generated
@@ -141,30 +141,30 @@ namespace PelotonEppSdk.Models
         public ICollection<reference> references { get; set; }
 
 
-        public static explicit operator credit_card_transaction_request(CreditCardTransactionRequest creditCardTransactionRequest)
+        public static explicit operator credit_card_token_transaction_request(CreditCardTokenTransactionRequest creditCardTokenTransactionRequest)
         {
-            return new credit_card_transaction_request
+            return new credit_card_token_transaction_request
             {
-                order_number = creditCardTransactionRequest.OrderNumber,
-                credit_card_token = creditCardTransactionRequest.CreditCardToken,
-                amount = creditCardTransactionRequest.Amount,
-                type = creditCardTransactionRequest.Type,
-                billing_name = creditCardTransactionRequest.BillingName,
-                billing_email = creditCardTransactionRequest.BillingEmail,
-                billing_phone = creditCardTransactionRequest.BillingPhone,
-                billing_address = (address)creditCardTransactionRequest.BillingAddress,
+                order_number = creditCardTokenTransactionRequest.OrderNumber,
+                credit_card_token = creditCardTokenTransactionRequest.CreditCardToken,
+                amount = creditCardTokenTransactionRequest.Amount,
+                type = creditCardTokenTransactionRequest.Type,
+                billing_name = creditCardTokenTransactionRequest.BillingName,
+                billing_email = creditCardTokenTransactionRequest.BillingEmail,
+                billing_phone = creditCardTokenTransactionRequest.BillingPhone,
+                billing_address = (address)creditCardTokenTransactionRequest.BillingAddress,
 
-                shipping_name = creditCardTransactionRequest.ShippingName,
-                shipping_email = creditCardTransactionRequest.ShippingEmail,
-                shipping_phone = creditCardTransactionRequest.ShippingPhone,
-                shipping_address = (address)creditCardTransactionRequest.ShippingAddress,
+                shipping_name = creditCardTokenTransactionRequest.ShippingName,
+                shipping_email = creditCardTokenTransactionRequest.ShippingEmail,
+                shipping_phone = creditCardTokenTransactionRequest.ShippingPhone,
+                shipping_address = (address)creditCardTokenTransactionRequest.ShippingAddress,
 
-                transaction_ref_code = creditCardTransactionRequest.TransactionRefCode,
+                transaction_ref_code = creditCardTokenTransactionRequest.TransactionRefCode,
 
-                references = creditCardTransactionRequest.References?.Select(r => (reference)r).ToList(),
-                application_name = creditCardTransactionRequest.ApplicationName,
-                authentication_header = creditCardTransactionRequest.AuthenticationHeader,
-                language_code = Enum.GetName(typeof(LanguageCode), creditCardTransactionRequest.LanguageCode)
+                references = creditCardTokenTransactionRequest.References?.Select(r => (reference)r).ToList(),
+                application_name = creditCardTokenTransactionRequest.ApplicationName,
+                authentication_header = creditCardTokenTransactionRequest.AuthenticationHeader,
+                language_code = Enum.GetName(typeof(LanguageCode), creditCardTokenTransactionRequest.LanguageCode)
             };
         }
     }

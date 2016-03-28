@@ -86,9 +86,9 @@ namespace PelotonEppSdk.Classes
             return request;
         }
 
-        public CreditCardTransactionRequest GetCreditCardTransactionRequest()
+        public CreditCardTokenTransactionRequest GetCreditCardTransactionRequest()
         {
-            var request = new CreditCardTransactionRequest();
+            var request = new CreditCardTokenTransactionRequest();
             SetBaseHeaders(request);
             SetBaseFields(request);
             return request;
