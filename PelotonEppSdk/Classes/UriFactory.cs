@@ -4,11 +4,13 @@ using PelotonEppSdk.Properties;
 
 namespace PelotonEppSdk.Classes
 {
-    public class TestUriFactory
+    internal class UriFactory
     {
         public Uri GetBaseUri()
         {
             return new Uri(Settings.Default.PelotonUri);
+            //return new Uri("https://testapi.peloton-technologies.com");
+            //return new Uri("http://localhost:2590");
         }
 
         public string GetTargetUriPart(ApiTarget apiTarget)
@@ -17,6 +19,8 @@ namespace PelotonEppSdk.Classes
             {
                 case ApiTarget.BankAccounts:
                     return "/v1/BankAccounts/";
+                case ApiTarget.CreditCards:
+                    return "/v1/CreditCards/";
                 case ApiTarget.CreditCardTransactions:
                     return "/v1/CreditCardTransactions/";
                 case ApiTarget.FundsTransfers:

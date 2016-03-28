@@ -1,4 +1,5 @@
 ﻿using PelotonEppSdk.Enums;
+using PelotonEppSdk.Interfaces;
 using PelotonEppSdk.Models;
 
 namespace PelotonEppSdk.Classes
@@ -43,6 +44,46 @@ namespace PelotonEppSdk.Classes
             SetBaseHeaders(transferRequest);
             SetBaseFields(transferRequest);
             return transferRequest;
+        }
+
+        public IBankAccountCreateRequest GetBankAccountCreateRequest()
+        {
+            var bankAccountRequest = new BankAccountRequest();
+            SetBaseHeaders(bankAccountRequest);
+            SetBaseFields(bankAccountRequest);
+            return bankAccountRequest;
+        }
+
+        public IBankAccountDeleteRequest GetBankAccountDeleteRequest()
+        {
+            var bankAccountRequest = new BankAccountRequest();
+            SetBaseHeaders(bankAccountRequest);
+            SetBaseFields(bankAccountRequest);
+            return bankAccountRequest;
+        }
+
+        public ICreditCardCreateRequest GetCreditCardCreateRequest()
+        {
+            var request = new CreditCardRequest();
+            SetBaseHeaders(request);
+            SetBaseFields(request);
+            return request;
+        }
+
+        public ICreditCardUpdateRequest GetCreditCardUpdateRequest()
+        {
+            var request = new CreditCardRequest();
+            SetBaseHeaders(request);
+            SetBaseFields(request);
+            return request;
+        }
+
+        public ICreditCardDeleteRequest GetCreditCardDeleteRequest()
+        {
+            var request = new CreditCardRequest();
+            SetBaseHeaders(request);
+            SetBaseFields(request);
+            return request;
         }
     }
 }
