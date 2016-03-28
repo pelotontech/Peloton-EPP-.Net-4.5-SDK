@@ -127,26 +127,26 @@ namespace PelotonEppSdk.Models
         public bool verify { get; set; } = true;
 
         public static explicit operator credit_card_request(CreditCardRequest creditCardRequest)
-                {
-                    return new credit_card_request
-                    {
-                        order_number = creditCardRequest.OrderNumber,
-                        name_on_card = creditCardRequest.CardOwner,
-                        card_number = creditCardRequest.CardNumber,
-                        expiry_month = creditCardRequest.ExpiryMonth,
-                        expiry_year = creditCardRequest.ExpiryYear,
-                        card_security_code = creditCardRequest.CardSecurityCode,
-                        billing_name = creditCardRequest.BillingName,
-                        billing_email = creditCardRequest.BillingEmail,
-                        billing_phone = creditCardRequest.BillingPhone,
-                        billing_address = (address)creditCardRequest.BillingAddress,
-                        verify = creditCardRequest.Verify,
+        {
+            return new credit_card_request
+            {
+                order_number = creditCardRequest.OrderNumber,
+                name_on_card = creditCardRequest.CardOwner,
+                card_number = creditCardRequest.CardNumber,
+                expiry_month = creditCardRequest.ExpiryMonth,
+                expiry_year = creditCardRequest.ExpiryYear,
+                card_security_code = creditCardRequest.CardSecurityCode,
+                billing_name = creditCardRequest.BillingName,
+                billing_email = creditCardRequest.BillingEmail,
+                billing_phone = creditCardRequest.BillingPhone,
+                billing_address = (address)creditCardRequest.BillingAddress,
+                verify = creditCardRequest.Verify,
 
-                        application_name = creditCardRequest.ApplicationName,
-                        references = creditCardRequest.References?.Select(r => (reference)r),
-                        authentication_header = creditCardRequest.AuthenticationHeader,
-                        language_code = Enum.GetName(typeof(LanguageCode), creditCardRequest.LanguageCode)
-                    };
-                }
+                application_name = creditCardRequest.ApplicationName,
+                references = creditCardRequest.References?.Select(r => (reference)r),
+                authentication_header = creditCardRequest.AuthenticationHeader,
+                language_code = Enum.GetName(typeof(LanguageCode), creditCardRequest.LanguageCode)
+            };
+        }
     }
 }

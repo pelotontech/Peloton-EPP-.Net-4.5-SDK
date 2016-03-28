@@ -45,11 +45,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums\CreditCardType.cs" />
+    <Compile Include="Enums\TransactionType.cs" />
     <Compile Include="Interfaces\IBankAccountCreateRequest.cs" />
     <Compile Include="Interfaces\IBankAccountDeleteRequest.cs" />
     <Compile Include="Interfaces\ICreditCardCreateRequest.cs" />
     <Compile Include="Interfaces\ICreditCardDeleteRequest.cs" />
     <Compile Include="Interfaces\ICreditCardUpdateRequest.cs" />
+    <Compile Include="Interfaces\IVerificationResponse.cs" />
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\BankAccount.cs" />
     <Compile Include="Classes\PelotonClient.cs" />
@@ -62,12 +64,15 @@
     <Compile Include="Models\CreditCardNumber.cs" />
     <Compile Include="Models\CreditCardRequest.cs" />
     <Compile Include="Models\CreditCardResponse.cs" />
+    <Compile Include="Models\CreditCardTransactionRequest.cs" />
+    <Compile Include="Models\CreditCardTransactionResponse.cs" />
+    <Compile Include="Models\DeviceData.cs" />
     <Compile Include="Models\Document.cs" />
     <Compile Include="Models\FundsTransferRequest.cs" />
     <Compile Include="Models\RequestBase.cs" />
+    <Compile Include="Models\Response.cs" />
     <Compile Include="Models\TransferRequest.cs" />
     <Compile Include="Models\Reference.cs" />
-    <Compile Include="Models\Response.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>

@@ -1,6 +1,6 @@
 ﻿namespace PelotonEppSdk.Models
 {
-    public class CreditCardResponse: Response
+    public class CreditCardResponse: Response, IVerificationResponse
     {
         public string CreditCardToken { get; set; }
 
@@ -10,7 +10,7 @@
     }
 
     // ReSharper disable InconsistentNaming
-    internal class credit_card_response: response
+    internal class credit_card_response: response, Iverification_response
     {
         /// <summary>
         /// The credit_card_token assigned to the newly created credit card

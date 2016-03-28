@@ -85,5 +85,13 @@ namespace PelotonEppSdk.Classes
             SetBaseFields(request);
             return request;
         }
+
+        public CreditCardTransactionRequest GetCreditCardTransactionRequest()
+        {
+            var request = new CreditCardTransactionRequest();
+            SetBaseHeaders(request);
+            SetBaseFields(request);
+            return request;
+        }
     }
 }
