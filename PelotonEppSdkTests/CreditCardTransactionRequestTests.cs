@@ -56,7 +56,7 @@ namespace PelotonEppSdkTests
         public void TestCreditCardTokenTransactionValidationError()
         {
             var request = GetBasicRequest();
-            request.CreditCardToken = "";
+            request.Amount = null;
 
             var errors = new Collection<string>();
             if (request.TryValidate(errors))
@@ -83,7 +83,7 @@ namespace PelotonEppSdkTests
             Assert.AreEqual(result.Message, "Validation Error");
             Assert.IsTrue(result.Errors != null);
             Assert.IsTrue(result.Errors.Count == 1);
-            Assert.AreEqual("card_number: required for transaction type", result.Errors.Single());
+            Assert.AreEqual("amount: required", result.Errors.Single());
         }
 
         private static CreditCardTokenTransactionRequest GetBasicRequest()
