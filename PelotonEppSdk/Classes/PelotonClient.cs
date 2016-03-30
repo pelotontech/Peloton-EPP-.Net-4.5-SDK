@@ -20,6 +20,8 @@ namespace PelotonEppSdk.Classes
 
     internal class PelotonClient
     {
+        /// <exception cref="HttpException">When status code is not <c>2XX Success</c>.</exception>
+        /// <exception cref="NotImplementedException">When RequestType is not yet supported.</exception>
         private async Task<T> MakeBasicHttpRequest<T>(RequestType type, request_base content, ApiTarget target, string parameter)
         {
             var factory = new UriFactory();
@@ -69,26 +71,26 @@ namespace PelotonEppSdk.Classes
             }
         }
 
-        // <exception cref="HttpException">When status code is not <c>2XX Success</c>.</exception>
+        /// <exception cref="HttpException">When status code is not <c>2XX Success</c>.</exception>
         public async Task<T> PostAsync<T>(request_base content, ApiTarget target, string parameter = null)
         {
             return await MakeBasicHttpRequest<T>(RequestType.Post, content, target, parameter);
         }
 
-        // <exception cref="HttpException">When status code is not <c>2XX Success</c>.</exception>
+        /// <exception cref="HttpException">When status code is not <c>2XX Success</c>.</exception>
         public async Task<T> PutAsync<T>(request_base content, ApiTarget target, string parameter = null)
         {
             return await MakeBasicHttpRequest<T>(RequestType.Put, content, target, parameter);
         }
 
-        // <exception cref="HttpException">When status code is not <c>2XX Success</c>.</exception>
+        /// <exception cref="HttpException">When status code is not <c>2XX Success</c>.</exception>
         public async Task<T> DeleteAsync<T>(request_base content, ApiTarget target, string parameter = null)
         {
             return await MakeBasicHttpRequest<T>(RequestType.Delete, content, target, parameter);
         }
 
         // Due to the nature of the BankAccounts Delete method, it must use this special Delete method
-        // <exception cref="HttpException">When status code is not <c>2XX Success</c>.</exception>
+        /// <exception cref="HttpException">When status code is not <c>2XX Success</c>.</exception>
         public async Task<T> DeleteAsyncBankAccountsV1<T>(bank_account_delete_request content, ApiTarget target)
         {
             var factory = new UriFactory();
