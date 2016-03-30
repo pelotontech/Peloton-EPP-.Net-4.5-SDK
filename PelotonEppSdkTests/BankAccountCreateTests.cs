@@ -27,7 +27,21 @@ namespace PelotonEppSdkTests
                     Debug.WriteLine(error);
                 }
             }
-            var result = createRequest.PostAsync().Result;
+            BankAccountCreateResponse result = null;
+
+            try
+            {
+                result = createRequest.PostAsync().Result;
+            }
+            catch (AggregateException e)
+            {
+                // what happened here...
+                Debug.WriteLine(e.Message);
+                Debug.WriteLine(e);
+                Assert.Fail();
+            }
+
+            Assert.IsNotNull(result);
             Debug.WriteLine(result.Message);
             Debug.WriteLineIf((result.Errors != null && result.Errors.Count >= 1), string.Join("; ", result.Errors ?? new List<string>()));
             Assert.IsTrue(result.Success);
@@ -37,8 +51,8 @@ namespace PelotonEppSdkTests
 
         private static BankAccountRequest GetBasicRequest()
         {
-            //var factory = new RequestFactory(106, "c57cbd1d", "PelonEppSdkTests");
-            var factory = new RequestFactory(80, "e9ab9532", "PelonEppSdkTests");
+            var factory = new RequestFactory(106, "c57cbd1d", "PelonEppSdkTests");
+            //var factory = new RequestFactory(80, "e9ab9532", "PelonEppSdkTests");
             var createRequest = factory.GetBankAccountCreateRequest();
             createRequest.BankAccount = new BankAccount
             {

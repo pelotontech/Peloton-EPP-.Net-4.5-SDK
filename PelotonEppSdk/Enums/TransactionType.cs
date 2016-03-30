@@ -2,10 +2,10 @@
 {
     public enum TransactionType
     {
-        Verify,
-        Purchase,
-        Return,
-        Authorize,
-        Complete
+        VERIFY,
+        PURCHASE,
+        RETURN,
+        AUTHORIZE,
+        COMPLETE
     }
 }

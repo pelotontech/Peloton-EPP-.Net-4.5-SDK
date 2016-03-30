@@ -14,7 +14,7 @@ namespace PelotonEppSdk.Interfaces
 
         IEnumerable<Reference> References { get; set; }
 
-        Task<Response> PostAsync();
+        Task<BankAccountCreateResponse> PostAsync();
 
     }
 }

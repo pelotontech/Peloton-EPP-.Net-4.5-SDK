@@ -27,6 +27,6 @@ namespace PelotonEppSdk.Interfaces
 
         bool Verify { get; set; }
 
-        Task<Response> PostAsync();
+        Task<CreditCardResponse> PostAsync();
     }
 }

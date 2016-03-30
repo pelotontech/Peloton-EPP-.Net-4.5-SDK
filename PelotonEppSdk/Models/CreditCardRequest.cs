@@ -12,6 +12,7 @@ namespace PelotonEppSdk.Models
 {
     public class CreditCardRequest : RequestBase, ICreditCardCreateRequest, ICreditCardDeleteRequest, ICreditCardUpdateRequest
     {
+        internal string CreditCardToken { get; set; }
         public string OrderNumber { get; set; }
         public string CardOwner { get; set; }
 
@@ -33,7 +34,7 @@ namespace PelotonEppSdk.Models
 
         public bool Verify { get; set; }
 
-        public async Task<Response> PostAsync()
+        public async Task<CreditCardResponse> PostAsync()
         {
             var client = new PelotonClient();
             var request = (credit_card_request) this;
@@ -41,19 +42,19 @@ namespace PelotonEppSdk.Models
             return (CreditCardResponse) result;
         }
 
-        public async Task<Response> PutAsync()
+        public async Task<CreditCardResponse> PutAsync()
         {
             var client = new PelotonClient();
             var request = (credit_card_request) this;
-            var result = await client.PutAsync<credit_card_response>(request, ApiTarget.CreditCards);
-            return (CreditCardResponse) result;
+            var result = await client.PutAsync<credit_card_response>(request, ApiTarget.CreditCards, CreditCardToken);
+            return (CreditCardResponse)result;
         }
 
-        public async Task<Response> DeleteAsync()
+        public async Task<CreditCardResponse> DeleteAsync()
         {
             var client = new PelotonClient();
             var request = (credit_card_request) this;
-            var result = await client.DeleteAsync<credit_card_response>(request, ApiTarget.CreditCards);
+            var result = await client.DeleteAsync<credit_card_response>(request, ApiTarget.CreditCards, CreditCardToken);
             return (CreditCardResponse) result;
         }
     }

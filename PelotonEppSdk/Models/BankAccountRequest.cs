@@ -22,7 +22,7 @@ namespace PelotonEppSdk.Models
 
         public IEnumerable<Reference> References { get; set; }
 
-        public async Task<Response> PostAsync()
+        public async Task<BankAccountCreateResponse> PostAsync()
         {
             var client = new PelotonClient();
             var request = (bank_account_request) this;

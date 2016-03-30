@@ -2,7 +2,7 @@
 
 namespace PelotonEppSdk.Models
 {
-    class BankAccountCreateResponse : Response
+    public class BankAccountCreateResponse : Response
     {
         public string BankAccountToken { get; set; }
     }

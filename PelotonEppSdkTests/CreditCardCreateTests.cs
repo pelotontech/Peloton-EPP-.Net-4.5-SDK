@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Runtime.Remoting.Channels;
-using System.Runtime.Serialization;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PelotonEppSdk.Classes;
 using PelotonEppSdk.Models;
@@ -39,8 +37,8 @@ namespace PelotonEppSdkTests
 
         private static CreditCardRequest GetBasicRequest()
         {
-            //var factory = new RequestFactory(106, "c57cbd1d", "PelonEppSdkTests");
-            var factory = new RequestFactory(80, "e9ab9532", "PelonEppSdkTests");
+            var factory = new RequestFactory(106, "c57cbd1d", "PelonEppSdkTests");
+            //var factory = new RequestFactory(80, "e9ab9532", "PelonEppSdkTests");
             var createRequest = factory.GetCreditCardCreateRequest();
 
             createRequest.OrderNumber = "12345678";

@@ -41,23 +41,12 @@ namespace PelotonEppSdk.Models
 
         public string TransactionRefCode { get; set; }
 
-        public DeviceData DeviceData { get; set; }
-
-  	    public async Task<Response> PostAsync()
+        public async Task<CreditCardTransactionResponse> PostAsync()
         {
             var client = new PelotonClient();
             var request = (credit_card_token_transaction_request) this;
-            // TODO: implement this method to use the EPP.API endpoint which corresponds to this request type (Fraser has details)
-            //var result = await client.PostAsync<credit_card_transaction_response>(request, ApiTarget.CreditCardTransactions);
-            //return (CreditCardTransactionResponse) result;
-
-  	        return new CreditCardTransactionResponse
-  	        {
-  	            Message = "Success",
-  	            MessageCode = 0,
-  	            Success = true,
-  	            TransactionRefCode = Guid.NewGuid().ToString().Replace("-", "")
-  	        };
+  	        var result = await client.PostAsync<credit_card_transaction_response>(request, ApiTarget.CreditCardTransactions, CreditCardToken);
+  	        return (CreditCardTransactionResponse) result;
         }
     }
 
