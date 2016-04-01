@@ -17,13 +17,27 @@ namespace PelotonEppSdk.Models
     public class BankAccountRequest : RequestBase, IBankAccountCreateRequest, IBankAccountDeleteRequest
     {
         // start of create fields and methods
+        /// <summary>
+        /// The bank account which is to be created
+        /// </summary>
         [Required]
         public BankAccount BankAccount { get; set; }
 
+        /// <summary>
+        /// Set True if you would like to initiate the verification process by issuing one or more deposits totalling less than $1.00
+        /// to this Bank Account.
+        /// </summary>
         public bool VerifyAccountByDeposit { get; set; }
 
+        /// <summary>
+        /// Data that can be used to verify the account or conditions associated with the account.
+        /// Typically a void cheque, PAD agreement or other official bank document.
+        /// </summary>
         public Document Document { get; set; }
 
+        /// <summary>
+        /// A list of fields used to pass additional information to record with the transfer request.
+        /// </summary>
         public IEnumerable<Reference> References { get; set; }
 
         public async Task<BankAccountCreateResponse> PostAsync()
@@ -82,27 +96,12 @@ namespace PelotonEppSdk.Models
     [SuppressMessage("ReSharper", "InconsistentNaming")]
     internal class bank_account_request : request_base
     {
-        /// <summary>
-        /// The bank account which is to be created
-        /// </summary>
-        [Required]
         public bank_account bank_account { get; set; }
 
-        /// <summary>
-        /// Set True if you would like to initiate the verification process by issuing one or more deposits totalling less than $1.00
-        /// to this Bank Account.
-        /// </summary>
         public bool verify_account_by_deposit { get; set; }
 
-        /// <summary>
-        /// Data that can be used to verify the account or conditions associated with the account.
-        /// Typically a void cheque, PAD agreement or other official bank document.
-        /// </summary>
         public document document { get; set; }
 
-        /// <summary>
-        /// A list of fields used to pass additional information to record with the transfer request.
-        /// </summary>
         public IEnumerable<reference> references { get; set; }
 
         public bank_account_request(RequestBase requestBase) : base(requestBase) { }
@@ -125,9 +124,6 @@ namespace PelotonEppSdk.Models
     [SuppressMessage("ReSharper", "InconsistentNaming")]
     internal class bank_account_delete_request : request_base
     {
-        /// <summary>
-        /// The token for the bank account which is to be deleted
-        /// </summary>
         public string bank_account_token { get; set; }
 
         public bank_account_delete_request(RequestBase requestBase) : base(requestBase) { }

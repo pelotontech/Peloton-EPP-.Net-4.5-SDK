@@ -13,22 +13,70 @@ namespace PelotonEppSdk.Models
     public class CreditCardRequest : RequestBase, ICreditCardCreateRequest, ICreditCardDeleteRequest, ICreditCardUpdateRequest
     {
         internal string CreditCardToken { get; set; }
+
+        /// <summary>
+        /// Recommended: Order number provided by the source system, otherwise one will be automatically generated
+        /// </summary>
+        [StringLength(50)]
         public string OrderNumber { get; set; }
+
+        /// <summary>
+        /// The name of the card owner as it appears on the credit card
+        /// </summary>
+        [StringLength(26, MinimumLength = 2)]
         public string CardOwner { get; set; }
 
+        /// <summary>
+        /// The credit card number as it appears on the card. Not applicable for updates.
+        /// </summary>
         public CreditCardNumber CardNumber { get; set; }
 
+        /// <summary>
+        /// The credit card expiration month in two-digit format (e.g. 09 for September)
+        /// </summary>
+        [StringLength(2, MinimumLength = 2)]
         public string ExpiryMonth { get; set; }
+
+        /// <summary>
+        /// The credit card expiration year in two-digit format (e.g. 08 for 2008)
+        /// </summary>
+        [StringLength(2, MinimumLength = 2)]
         public string ExpiryYear { get; set; }
+
+        /// <summary>
+        /// The 3 or 4 digit CVV2/CVC2/CID. Not applicable for updates.
+        /// </summary>
+        [StringLength(4, MinimumLength = 3)]
         public string CardSecurityCode { get; set; }
 
+        /// <summary>
+        /// Additional information to record with the credit card request
+        /// </summary>
         public IEnumerable<Reference> References { get; set; }
 
+        /// <summary>
+        /// The primary billing contact name
+        /// </summary>
         public string BillingName { get; set; }
+
+        /// <summary>
+        /// The phone number for the primary billing contact
+        /// </summary>
         public string BillingPhone { get; set; }
+
+        /// <summary>
+        /// The email address for the primary billing contact
+        /// </summary>
         public string BillingEmail { get; set; }
+
+        /// <summary>
+        /// Address for the primary billing contact
+        /// </summary>
         public Address BillingAddress { get; set; }
 
+        /// <summary>
+        /// Verify the credit card. Default is true. Not applicable for updates.
+        /// </summary>
         public bool Verify { get; set; }
 
         public async Task<CreditCardResponse> PostAsync()
@@ -59,69 +107,28 @@ namespace PelotonEppSdk.Models
     [SuppressMessage("ReSharper", "InconsistentNaming")]
     internal class credit_card_request : request_base
     {
-        /// <summary>
-        /// Recommended: Order number provided by the source system, otherwise one will be automatically generated
-        /// </summary>
-        [StringLength(50)]
         public string order_number { get; set; }
 
-        /// <summary>
-        /// The name of the card owner as it appears on the credit card
-        /// </summary>
-        [StringLength(26, MinimumLength = 2)]
         public string name_on_card { get; set; }
 
-        /// <summary>
-        /// The credit card number as it appears on the card. Not applicable for updates.
-        /// </summary>
         public long? card_number { get; set; }
 
-        /// <summary>
-        /// The credit card expiration month in two-digit format (e.g. 09 for September)
-        /// </summary>
-        [StringLength(2, MinimumLength = 2)]
         public string expiry_month { get; set; }
 
-        /// <summary>
-        /// The credit card expiration year in two-digit format (e.g. 08 for 2008)
-        /// </summary>
-        [StringLength(2, MinimumLength = 2)]
         public string expiry_year { get; set; }
 
-        /// <summary>
-        /// The 3 or 4 digit CVV2/CVC2/CID. Not applicable for updates.
-        /// </summary>
-        [StringLength(4, MinimumLength = 3)]
         public string card_security_code { get; set; }
 
-        /// <summary>
-        /// The primary billing contact name
-        /// </summary>
         public string billing_name { get; set; }
 
-        /// <summary>
-        /// The email address for the primary billing contact
-        /// </summary>
         public string billing_email { get; set; }
 
-        /// <summary>
-        /// The phone number for the primary billing contact
-        /// </summary>
         public string billing_phone { get; set; }
 
-        /// <summary>
-        /// Address for the primary billing contact
-        /// </summary>
         public address billing_address { get; set; }
 
-        /// <summary>
-        /// Additional information to record with the credit card request
-        /// </summary>
         public IEnumerable<reference> references { get; set; }
 
-        /// <summary>
-        /// Verify the credit card. Default is true. Not applicable for updates.
-        /// </summary>
         public bool verify { get; set; } = true;
 
         public credit_card_request(RequestBase requestBase) : base(requestBase) { }
