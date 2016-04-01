@@ -45,7 +45,7 @@ namespace PelotonEppSdk.Models
         {
             var client = new PelotonClient();
             var request = (credit_card_token_transaction_request) this;
-  	        var result = await client.PostAsync<credit_card_transaction_response>(request, ApiTarget.CreditCardTransactions, CreditCardToken);
+  	        var result = await client.PostAsync<credit_card_transaction_response>(request, ApiTarget.CreditCardTransactions, CreditCardToken).ConfigureAwait(false);
   	        return (CreditCardTransactionResponse) result;
         }
     }

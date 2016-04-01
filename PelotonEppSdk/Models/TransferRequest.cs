@@ -31,7 +31,7 @@ namespace PelotonEppSdk.Models
         public async Task<Response> PostAsync()
         {
             var client = new PelotonClient();
-            var result = await client.PostAsync<response>((transfer_request)this, ApiTarget.Transfers);
+            var result = await client.PostAsync<response>((transfer_request)this, ApiTarget.Transfers).ConfigureAwait(false);
             return (Response) result;
         }
     }

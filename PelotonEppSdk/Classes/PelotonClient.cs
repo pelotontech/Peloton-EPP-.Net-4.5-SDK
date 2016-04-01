@@ -41,18 +41,18 @@ namespace PelotonEppSdk.Classes
                     case RequestType.Get:
                         throw new NotImplementedException();
                     case RequestType.Post:
-                        httpResponseMessage = await client.PostAsync(targetPath, stringContent);
+                        httpResponseMessage = await client.PostAsync(targetPath, stringContent).ConfigureAwait(false);
                         break;
                     case RequestType.Put:
-                        httpResponseMessage = await client.PutAsync(targetPath, stringContent);
+                        httpResponseMessage = await client.PutAsync(targetPath, stringContent).ConfigureAwait(false);
                         break;
                     case RequestType.Delete:
-                        httpResponseMessage = await client.DeleteAsync(targetPath);
+                        httpResponseMessage = await client.DeleteAsync(targetPath).ConfigureAwait(false);
                         break;
                     default:
                         throw new NotImplementedException();
                 }
-                var stringResult = httpResponseMessage.Content.ReadAsStringAsync().Result;
+                var stringResult = await httpResponseMessage.Content.ReadAsStringAsync().ConfigureAwait(false);
                 if (stringResult != null)
                 {
                     return serializer.Deserialize<T>(stringResult);
@@ -74,51 +74,19 @@ namespace PelotonEppSdk.Classes
         /// <exception cref="HttpException">When status code is not <c>2XX Success</c>.</exception>
         public async Task<T> PostAsync<T>(request_base content, ApiTarget target, string parameter = null)
         {
-            return await MakeBasicHttpRequest<T>(RequestType.Post, content, target, parameter);
+            return await MakeBasicHttpRequest<T>(RequestType.Post, content, target, parameter).ConfigureAwait(false);
         }
 
         /// <exception cref="HttpException">When status code is not <c>2XX Success</c>.</exception>
         public async Task<T> PutAsync<T>(request_base content, ApiTarget target, string parameter = null)
         {
-            return await MakeBasicHttpRequest<T>(RequestType.Put, content, target, parameter);
+            return await MakeBasicHttpRequest<T>(RequestType.Put, content, target, parameter).ConfigureAwait(false);
         }
 
         /// <exception cref="HttpException">When status code is not <c>2XX Success</c>.</exception>
         public async Task<T> DeleteAsync<T>(request_base content, ApiTarget target, string parameter = null)
         {
-            return await MakeBasicHttpRequest<T>(RequestType.Delete, content, target, parameter);
-        }
-
-        // Due to the nature of the BankAccounts Delete method, it must use this special Delete method
-        /// <exception cref="HttpException">When status code is not <c>2XX Success</c>.</exception>
-        public async Task<T> DeleteAsyncBankAccountsV1<T>(bank_account_delete_request content, ApiTarget target)
-        {
-            var factory = new UriFactory();
-            var serializer = new JavaScriptSerializer();
-            var stringContent = new StringContent(content.bank_account_token, Encoding.Default, "application/json");
-            string stringResult;
-            using (var client = new HttpClient())
-            {
-                client.DefaultRequestHeaders.Authorization = content.authentication_header;
-                client.BaseAddress = factory.GetBaseUri();
-                var targetUriPart = factory.GetTargetUriPart(target);
-                // following snippet gleaned from: http://stackoverflow.com/questions/28054515/how-to-send-delete-with-json-to-the-rest-api-using-httpclient
-                HttpRequestMessage request = new HttpRequestMessage
-                {
-                    Content = stringContent,
-                    Method = HttpMethod.Delete,
-                    RequestUri = new Uri(targetUriPart)
-                };
-                var httpResponseMessage = await client.SendAsync(request);
-
-                // handle server errors
-                if (!httpResponseMessage.IsSuccessStatusCode)
-                {
-                    throw new HttpException((int)httpResponseMessage.StatusCode, httpResponseMessage.ReasonPhrase);
-                }
-                stringResult = httpResponseMessage.Content.ReadAsStringAsync().Result;
-            }
-            return serializer.Deserialize<T>(stringResult);
+            return await MakeBasicHttpRequest<T>(RequestType.Delete, content, target, parameter).ConfigureAwait(false);
         }
     }
 }

@@ -38,7 +38,7 @@ namespace PelotonEppSdk.Models
         {
             var client = new PelotonClient();
             var request = (credit_card_request) this;
-            var result = await client.PostAsync<credit_card_response>(request, ApiTarget.CreditCards);
+            var result = await client.PostAsync<credit_card_response>(request, ApiTarget.CreditCards).ConfigureAwait(false);
             return (CreditCardResponse) result;
         }
 
@@ -46,7 +46,7 @@ namespace PelotonEppSdk.Models
         {
             var client = new PelotonClient();
             var request = (credit_card_request) this;
-            var result = await client.PutAsync<credit_card_response>(request, ApiTarget.CreditCards, CreditCardToken);
+            var result = await client.PutAsync<credit_card_response>(request, ApiTarget.CreditCards, CreditCardToken).ConfigureAwait(false);
             return (CreditCardResponse)result;
         }
 
@@ -54,7 +54,7 @@ namespace PelotonEppSdk.Models
         {
             var client = new PelotonClient();
             var request = (credit_card_request) this;
-            var result = await client.DeleteAsync<credit_card_response>(request, ApiTarget.CreditCards, CreditCardToken);
+            var result = await client.DeleteAsync<credit_card_response>(request, ApiTarget.CreditCards, CreditCardToken).ConfigureAwait(false);
             return (CreditCardResponse) result;
         }
     }

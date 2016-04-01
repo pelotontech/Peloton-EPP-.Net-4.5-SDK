@@ -3,7 +3,11 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
+using System.Web;
+using System.Web.Script.Serialization;
 using PelotonEppSdk.Classes;
 using PelotonEppSdk.Enums;
 using PelotonEppSdk.Interfaces;
@@ -26,7 +30,7 @@ namespace PelotonEppSdk.Models
         {
             var client = new PelotonClient();
             var request = (bank_account_request) this;
-            var result = await client.PostAsync<bank_account_response>(request, ApiTarget.BankAccounts);
+            var result = await client.PostAsync<bank_account_response>(request, ApiTarget.BankAccounts).ConfigureAwait(false);
             return (BankAccountCreateResponse) result;
         }
         // end of create fields and methods
@@ -36,12 +40,43 @@ namespace PelotonEppSdk.Models
 
         public async Task<Response> DeleteAsync()
         {
-            var client = new PelotonClient();
-            var result = await client.DeleteAsyncBankAccountsV1<response>((bank_account_delete_request)this, ApiTarget.BankAccounts);
+            var result = await DeleteAsyncBankAccountsV1<response>((bank_account_delete_request)this, ApiTarget.BankAccounts).ConfigureAwait(false);
             return (Response)result;
         }
         // end of delete fields and methods
 
+
+        // Due to the nature of the BankAccounts Delete method, it must use this special Delete method
+        /// <exception cref="HttpException">When status code is not <c>2XX Success</c>.</exception>
+        private async Task<T> DeleteAsyncBankAccountsV1<T>(bank_account_delete_request content, ApiTarget target)
+        {
+            var factory = new UriFactory();
+            var serializer = new JavaScriptSerializer();
+            var stringContent = new StringContent(content.bank_account_token, Encoding.Default, "application/json");
+            string stringResult;
+            using (var client = new HttpClient())
+            {
+                client.DefaultRequestHeaders.Authorization = content.authentication_header;
+                client.BaseAddress = factory.GetBaseUri();
+                var targetUriPart = factory.GetTargetUriPart(target);
+                // following snippet gleaned from: http://stackoverflow.com/questions/28054515/how-to-send-delete-with-json-to-the-rest-api-using-httpclient
+                HttpRequestMessage request = new HttpRequestMessage
+                {
+                    Content = stringContent,
+                    Method = HttpMethod.Delete,
+                    RequestUri = new Uri(targetUriPart)
+                };
+                var httpResponseMessage = await client.SendAsync(request).ConfigureAwait(false);
+
+                // handle server errors
+                if (!httpResponseMessage.IsSuccessStatusCode)
+                {
+                    throw new HttpException((int)httpResponseMessage.StatusCode, httpResponseMessage.ReasonPhrase);
+                }
+                stringResult = httpResponseMessage.Content.ReadAsStringAsync().Result;
+            }
+            return serializer.Deserialize<T>(stringResult);
+        }
     }
 
     [SuppressMessage("ReSharper", "InconsistentNaming")]
