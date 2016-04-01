@@ -6,28 +6,23 @@ namespace PelotonEppSdk.Models
 {
     public class Address
     {
-//        [Display(ResourceType = typeof(Resources.Res), Name = "Address")]
-//        [MaxLength(256, ErrorMessageResourceType = typeof(Resources.Res), ErrorMessageResourceName = "ValidationAddressLength")]
+        [MaxLength(256)]
         public string Address1 { get; set; }
 
-//        [MaxLength(256, ErrorMessageResourceType = typeof(Resources.Res), ErrorMessageResourceName = "ValidationAddressLength")]
+        [MaxLength(256)]
         public string Address2 { get; set; }
 
-//        [MaxLength(50, ErrorMessageResourceType = typeof(Resources.Res), ErrorMessageResourceName = "ValidationCityLength")]
-//        [Display(ResourceType = typeof(Resources.Res), Name = "City")]
+        [MaxLength(50)]
         public string City { get; set; }
 
-//        [Display(ResourceType = typeof(Resources.Res), Name = "ProvinceState")]
         public string ProvinceStateCode { get; set; }
 
-//        [Display(ResourceType = typeof(Resources.Res), Name = "Country")]
         public string CountryCode { get; set; }
 
-//        [MaxLength(256, ErrorMessageResourceType = typeof(Resources.Res), ErrorMessageResourceName = "ValidationOtherCountyLength")]
+        [MaxLength(256)]
         public string OtherCountry { get; set; }
 
-//        [Display(ResourceType = typeof(Resources.Res), Name = "PostalCode")]
-//        [MaxLength(256, ErrorMessageResourceType = typeof(Resources.Res), ErrorMessageResourceName = "ValidationPostalCodeLength")]
+        [MaxLength(256)]
         public string PostalZipCode { get; set; }
 
         public override bool Equals(object obj)

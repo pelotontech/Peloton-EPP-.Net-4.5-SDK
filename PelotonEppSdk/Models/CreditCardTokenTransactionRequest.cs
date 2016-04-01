@@ -129,10 +129,11 @@ namespace PelotonEppSdk.Models
         /// </summary>
         public ICollection<reference> references { get; set; }
 
+        public credit_card_token_transaction_request(RequestBase requestBase) : base(requestBase) { }
 
         public static explicit operator credit_card_token_transaction_request(CreditCardTokenTransactionRequest creditCardTokenTransactionRequest)
         {
-            return new credit_card_token_transaction_request
+            return new credit_card_token_transaction_request(creditCardTokenTransactionRequest)
             {
                 order_number = creditCardTokenTransactionRequest.OrderNumber,
                 credit_card_token = creditCardTokenTransactionRequest.CreditCardToken,

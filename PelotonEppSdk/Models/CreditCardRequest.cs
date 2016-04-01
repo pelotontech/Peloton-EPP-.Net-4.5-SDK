@@ -18,12 +18,9 @@ namespace PelotonEppSdk.Models
 
         public CreditCardNumber CardNumber { get; set; }
 
-        public string CardType => CardNumber?.CardName;
         public string ExpiryMonth { get; set; }
         public string ExpiryYear { get; set; }
         public string CardSecurityCode { get; set; }
-        public decimal? CardLast4Digits => CardNumber?.Last4Digits;
-        public string MaskedCardDigits => CardNumber?.Masked;
 
         public IEnumerable<Reference> References { get; set; }
 
@@ -127,9 +124,11 @@ namespace PelotonEppSdk.Models
         /// </summary>
         public bool verify { get; set; } = true;
 
+        public credit_card_request(RequestBase requestBase) : base(requestBase) { }
+
         public static explicit operator credit_card_request(CreditCardRequest creditCardRequest)
         {
-            return new credit_card_request
+            return new credit_card_request(creditCardRequest)
             {
                 order_number = creditCardRequest.OrderNumber,
                 name_on_card = creditCardRequest.CardOwner,
@@ -143,10 +142,7 @@ namespace PelotonEppSdk.Models
                 billing_address = (address)creditCardRequest.BillingAddress,
                 verify = creditCardRequest.Verify,
 
-                application_name = creditCardRequest.ApplicationName,
                 references = creditCardRequest.References?.Select(r => (reference)r),
-                authentication_header = creditCardRequest.AuthenticationHeader,
-                language_code = Enum.GetName(typeof(LanguageCode), creditCardRequest.LanguageCode)
             };
         }
     }

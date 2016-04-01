@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
-using System.Web;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PelotonEppSdk.Classes;
 using PelotonEppSdk.Enums;
@@ -13,7 +11,7 @@ using PelotonEppSdk.Models;
 namespace PelotonEppSdkTests
 {
 	[TestClass]
-    public class CreditCardTransactionRequestTests
+    public class CreditCardTransactionRequestTests: TestBase
     {
 
         [TestMethod]
@@ -89,7 +87,7 @@ namespace PelotonEppSdkTests
         private static CreditCardTokenTransactionRequest GetBasicRequest()
         {
             //var factory = new RequestFactory(83, "f7117723", "PelonEppSdkTests");
-            var factory = new RequestFactory(106, "c57cbd1d", "PelonEppSdkTests");
+            var factory = new RequestFactory(106, "c57cbd1d", "PelonEppSdkTests", baseUri);
             //var factory = new RequestFactory(80, "e9ab9532", "PelonEppSdkTests");
             var request = factory.GetCreditCardTransactionRequest();
 

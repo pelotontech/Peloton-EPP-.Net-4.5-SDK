@@ -57,7 +57,7 @@ namespace PelotonEppSdk.Models
             using (var client = new HttpClient())
             {
                 client.DefaultRequestHeaders.Authorization = content.authentication_header;
-                client.BaseAddress = factory.GetBaseUri();
+                client.BaseAddress = content.base_uri;
                 var targetUriPart = factory.GetTargetUriPart(target);
                 // following snippet gleaned from: http://stackoverflow.com/questions/28054515/how-to-send-delete-with-json-to-the-rest-api-using-httpclient
                 HttpRequestMessage request = new HttpRequestMessage
@@ -105,17 +105,19 @@ namespace PelotonEppSdk.Models
         /// </summary>
         public IEnumerable<reference> references { get; set; }
 
-        public static explicit operator bank_account_request(BankAccountRequest bankAccountCreateRequest)
+        public bank_account_request(RequestBase requestBase) : base(requestBase) { }
+
+        public static explicit operator bank_account_request(BankAccountRequest bankAccountRequest)
         {
-            return new bank_account_request
+            return new bank_account_request(bankAccountRequest)
             {
-                bank_account = (bank_account) bankAccountCreateRequest.BankAccount,
-                verify_account_by_deposit = bankAccountCreateRequest.VerifyAccountByDeposit,
-                document = (document) bankAccountCreateRequest.Document,
-                application_name = bankAccountCreateRequest.ApplicationName,
-                references = bankAccountCreateRequest.References?.Select(r => (reference)r),
-                authentication_header = bankAccountCreateRequest.AuthenticationHeader,
-                language_code = Enum.GetName(typeof(LanguageCode), bankAccountCreateRequest.LanguageCode)
+                bank_account = (bank_account) bankAccountRequest.BankAccount,
+                verify_account_by_deposit = bankAccountRequest.VerifyAccountByDeposit,
+                document = (document) bankAccountRequest.Document,
+                application_name = bankAccountRequest.ApplicationName,
+                references = bankAccountRequest.References?.Select(r => (reference)r),
+                authentication_header = bankAccountRequest.AuthenticationHeader,
+                language_code = Enum.GetName(typeof(LanguageCode), bankAccountRequest.LanguageCode)
             };
         }
     }
@@ -128,11 +130,13 @@ namespace PelotonEppSdk.Models
         /// </summary>
         public string bank_account_token { get; set; }
 
-        public static explicit operator bank_account_delete_request(BankAccountRequest bankAccountCreateRequest)
+        public bank_account_delete_request(RequestBase requestBase) : base(requestBase) { }
+
+        public static explicit operator bank_account_delete_request(BankAccountRequest bankAccountRequest)
         {
-            return new bank_account_delete_request
+            return new bank_account_delete_request(bankAccountRequest)
             {
-                bank_account_token = bankAccountCreateRequest.Token
+                bank_account_token = bankAccountRequest.Token
             };
         }
     }

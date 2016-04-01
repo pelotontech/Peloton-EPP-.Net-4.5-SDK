@@ -12,7 +12,7 @@ namespace PelotonEppSdk.Classes
 {
     internal enum RequestType
     {
-		Get,
+        Get,
         Post,
         Put,
         Delete
@@ -31,7 +31,7 @@ namespace PelotonEppSdk.Classes
             using (var client = new HttpClient())
             {
                 client.DefaultRequestHeaders.Authorization = content.authentication_header;
-                client.BaseAddress = factory.GetBaseUri();
+                client.BaseAddress = content.base_uri;
                 var targetUriPart = factory.GetTargetUriPart(target);
                 var targetPath = targetUriPart + parameter;
 

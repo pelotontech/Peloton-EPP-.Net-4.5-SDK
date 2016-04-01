@@ -1,6 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.CodeDom;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Web.Profile;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PelotonEppSdk.Classes;
 using PelotonEppSdk.Models;
@@ -8,9 +11,8 @@ using PelotonEppSdk.Models;
 namespace PelotonEppSdkTests
 {
     [TestClass]
-    public class CreditCardCreateTests
+    public class CreditCardCreateTests: TestBase
     {
-
         [TestMethod]
         public void TestCreateCard()
         {
@@ -37,7 +39,7 @@ namespace PelotonEppSdkTests
 
         private static CreditCardRequest GetBasicRequest()
         {
-            var factory = new RequestFactory(106, "c57cbd1d", "PelonEppSdkTests");
+            var factory = new RequestFactory(106, "c57cbd1d", "PelonEppSdkTests", baseUri);
             //var factory = new RequestFactory(80, "e9ab9532", "PelonEppSdkTests");
             var createRequest = factory.GetCreditCardCreateRequest();
 

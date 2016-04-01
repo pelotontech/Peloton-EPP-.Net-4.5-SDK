@@ -46,9 +46,11 @@ namespace PelotonEppSdk.Models
         
         public ICollection<reference> references { get; set; }
 
+        public transfer_request(RequestBase requestBase) : base(requestBase) { }
+
         public static explicit operator transfer_request(TransferRequest transferRequest)
         {
-            return new transfer_request
+            return new transfer_request(transferRequest)
             {
                 authentication_header = transferRequest.AuthenticationHeader,
                 amount = transferRequest.Amount,

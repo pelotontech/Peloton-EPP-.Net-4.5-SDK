@@ -12,29 +12,29 @@ namespace PelotonEppSdk.Models
     {
         public string bank_account_token { get; set; }
 
-        public static explicit operator BankAccountCreateResponse(bank_account_response r)
+        public static explicit operator BankAccountCreateResponse(bank_account_response bankAccountResponse)
         {
-            if (r == null) return null;
+            if (bankAccountResponse == null) return null;
             return new BankAccountCreateResponse
             {
-                Success = r.success,
-                Message = r.message,
-                Errors = r.errors,
-                MessageCode = r.message_code,
-                BankAccountToken = r.bank_account_token
+                Success = bankAccountResponse.success,
+                Message = bankAccountResponse.message,
+                Errors = bankAccountResponse.errors,
+                MessageCode = bankAccountResponse.message_code,
+                BankAccountToken = bankAccountResponse.bank_account_token
             };
         }
 
-        public static explicit operator bank_account_response(BankAccountCreateResponse r)
+        public static explicit operator bank_account_response(BankAccountCreateResponse bankAccountCreateResponse)
         {
-            if (r == null) return null;
+            if (bankAccountCreateResponse == null) return null;
             return new bank_account_response
             {
-                errors = r.Errors,
-                message = r.Message,
-                message_code = r.MessageCode,
-                success = r.Success,
-                bank_account_token = r.BankAccountToken
+                errors = bankAccountCreateResponse.Errors,
+                message = bankAccountCreateResponse.Message,
+                message_code = bankAccountCreateResponse.MessageCode,
+                success = bankAccountCreateResponse.Success,
+                bank_account_token = bankAccountCreateResponse.BankAccountToken
             };
         }
     }

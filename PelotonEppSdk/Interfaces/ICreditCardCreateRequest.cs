@@ -11,12 +11,9 @@ namespace PelotonEppSdk.Interfaces
 
         CreditCardNumber CardNumber { get; set; }
 
-        string CardType { get; }
         string ExpiryMonth { get; set; }
         string ExpiryYear { get; set; }
         string CardSecurityCode { get; set; }
-        decimal? CardLast4Digits { get; }
-        string MaskedCardDigits { get; }
 
         IEnumerable<Reference> References { get; set; }
 

@@ -6,13 +6,6 @@ namespace PelotonEppSdk.Classes
 {
     internal class UriFactory
     {
-        public Uri GetBaseUri()
-        {
-            return new Uri(Settings.Default.PelotonUri);
-            //return new Uri("https://testapi.peloton-technologies.com");
-            //return new Uri("http://localhost:2590");
-        }
-
         public string GetTargetUriPart(ApiTarget apiTarget)
         {
             switch (apiTarget)

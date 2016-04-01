@@ -9,7 +9,7 @@ using PelotonEppSdk.Models;
 namespace PelotonEppSdkTests
 {
     [TestClass]
-    public class BankAccountCreateTests
+    public class BankAccountCreateTests: TestBase
     {
         [TestMethod]
         public void TestCreateAccount()
@@ -51,7 +51,7 @@ namespace PelotonEppSdkTests
 
         private static BankAccountRequest GetBasicRequest()
         {
-            var factory = new RequestFactory(106, "c57cbd1d", "PelonEppSdkTests");
+            var factory = new RequestFactory(106, "c57cbd1d", "PelonEppSdkTests", baseUri);
             //var factory = new RequestFactory(80, "e9ab9532", "PelonEppSdkTests");
             var createRequest = factory.GetBankAccountCreateRequest();
             createRequest.BankAccount = new BankAccount

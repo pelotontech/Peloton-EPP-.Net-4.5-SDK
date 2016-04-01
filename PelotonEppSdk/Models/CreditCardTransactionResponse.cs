@@ -22,18 +22,18 @@ namespace PelotonEppSdk.Models
         /// </summary>
         public string card_security_code_verification_result { get; set; }
 
-        public static explicit operator CreditCardTransactionResponse(credit_card_transaction_response r)
+        public static explicit operator CreditCardTransactionResponse(credit_card_transaction_response creditCardTransactionResponse)
         {
-            if (r == null) return null;
+            if (creditCardTransactionResponse == null) return null;
             return new CreditCardTransactionResponse
             {
-                Success = r.success,
-                Message = r.message,
-                Errors = r.errors,
-                MessageCode = r.message_code,
-                AddressVerificationResult = r.address_verification_result,
-                CardSecurityCodeVerificationResult = r.card_security_code_verification_result,
-                TransactionRefCode = r.transaction_ref_code
+                Success = creditCardTransactionResponse.success,
+                Message = creditCardTransactionResponse.message,
+                Errors = creditCardTransactionResponse.errors,
+                MessageCode = creditCardTransactionResponse.message_code,
+                AddressVerificationResult = creditCardTransactionResponse.address_verification_result,
+                CardSecurityCodeVerificationResult = creditCardTransactionResponse.card_security_code_verification_result,
+                TransactionRefCode = creditCardTransactionResponse.transaction_ref_code
             };
         }
     }

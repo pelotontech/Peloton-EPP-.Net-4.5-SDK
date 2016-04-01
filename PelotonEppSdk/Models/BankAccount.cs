@@ -87,18 +87,18 @@ namespace PelotonEppSdk.Models
         [Required, RegularExpression("CAD|USD")]
         public string currency_code { get; set; }
 
-        public static explicit operator bank_account(BankAccount account)
+        public static explicit operator bank_account(BankAccount bankAccount)
         {
             return new bank_account
             {
-                account_number = account.AccountNumber,
-                bank_account_token = account.Token,
-                branch_transit_number = account.BranchTransitNumber?.ToString(),
-                currency_code = account.CurrencyCode,
-                financial_institution_number = account.FinancialInstitution?.ToString(),
-                name = account.Name,
-                owner = account.Owner,
-                type_code = Convert.ToInt32(account.TypeCode)
+                account_number = bankAccount.AccountNumber,
+                bank_account_token = bankAccount.Token,
+                branch_transit_number = bankAccount.BranchTransitNumber?.ToString(),
+                currency_code = bankAccount.CurrencyCode,
+                financial_institution_number = bankAccount.FinancialInstitution?.ToString(),
+                name = bankAccount.Name,
+                owner = bankAccount.Owner,
+                type_code = Convert.ToInt32(bankAccount.TypeCode)
             };
         }
     }
