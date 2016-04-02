@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using PelotonEppSdk.Interfaces;
 
 namespace PelotonEppSdk.Models
 {

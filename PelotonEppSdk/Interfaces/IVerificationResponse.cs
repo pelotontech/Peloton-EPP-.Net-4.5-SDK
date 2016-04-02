@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 
-namespace PelotonEppSdk.Models
+namespace PelotonEppSdk.Interfaces
 {
     public interface IVerificationResponse
     {
