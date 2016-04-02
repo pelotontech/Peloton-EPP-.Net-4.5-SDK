@@ -52,8 +52,8 @@ namespace PelotonEppSdk.Classes
                     default:
                         throw new NotImplementedException();
                 }
-                var stringResult = await httpResponseMessage.Content.ReadAsStringAsync().ConfigureAwait(false);
-                if (stringResult != null)
+                string stringResult = await httpResponseMessage.Content.ReadAsStringAsync().ConfigureAwait(false);
+                if (!string.IsNullOrEmpty(stringResult))
                 {
                     return serializer.Deserialize<T>(stringResult);
                 }

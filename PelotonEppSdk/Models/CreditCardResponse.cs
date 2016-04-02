@@ -1,4 +1,6 @@
-﻿namespace PelotonEppSdk.Models
+﻿using PelotonEppSdk.Interfaces;
+
+namespace PelotonEppSdk.Models
 {
     public class CreditCardResponse: Response, IVerificationResponse
     {
