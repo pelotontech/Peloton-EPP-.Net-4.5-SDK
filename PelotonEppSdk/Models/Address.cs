@@ -6,23 +6,43 @@ namespace PelotonEppSdk.Models
 {
     public class Address
     {
-        [MaxLength(256)]
+        /// <summary>
+        /// Address line 1
+        /// </summary>
+        [StringLength(256)]
         public string Address1 { get; set; }
 
-        [MaxLength(256)]
+        /// <summary>
+        /// Address line 2
+        /// </summary>
+        [StringLength(256)]
         public string Address2 { get; set; }
 
-        [MaxLength(50)]
+        /// <summary>
+        /// Name of the city
+        /// </summary>
+        [StringLength(50)]
         public string City { get; set; }
 
+        /// <summary>
+        /// The province or state code
+        /// </summary>
+        [StringLength(2)]
         public string ProvinceStateCode { get; set; }
 
+        /// <summary>
+        /// The 2 digit country ISO code
+        /// </summary>
+        [StringLength(2)]
         public string CountryCode { get; set; }
 
         [MaxLength(256)]
         public string OtherCountry { get; set; }
 
-        [MaxLength(256)]
+        /// <summary>
+        ///The postal or zip code
+        /// </summary>
+        [StringLength(10)]
         public string PostalZipCode { get; set; }
 
         public override bool Equals(object obj)
@@ -73,55 +93,31 @@ namespace PelotonEppSdk.Models
     [SuppressMessage("ReSharper", "InconsistentNaming")]
     internal class address
     {
-        /// <summary>
-        /// Address line 1
-        /// </summary>
-        [StringLength(256)]
         public string address1 { get; set; }
 
-        /// <summary>
-        /// Address line 2
-        /// </summary>
-        [StringLength(256)]
         public string address2 { get; set; }
 
-        /// <summary>
-        /// Name of the city
-        /// </summary>
-        [StringLength(50)]
         public string city { get; set; }
 
-        /// <summary>
-        /// The province or state code
-        /// </summary>
-        [StringLength(2)]
         public string province_state { get; set; }
 
-        /// <summary>
-        /// The 2 digit country ISO code
-        /// </summary>
-        [StringLength(2)]
         public string country_code { get; set; }
 
-        /// <summary>
-        ///The postal or zip code
-        /// </summary>
-        [StringLength(10)]
         public string postal_zip_code { get; set; }
 
         public static explicit operator address(Address add)
-                {
-                    if (add == null) return null;
+        {
+            if (add == null) return null;
 
-                    return new address
-                    {
-                        address1 = add.Address1,
-                        address2 = add.Address2,
-                        city = add.City,
-                        country_code = add.CountryCode,
-                        postal_zip_code = add.PostalZipCode,
-                        province_state = add.ProvinceStateCode
-                    };
-                }
+            return new address
+            {
+                address1 = add.Address1,
+                address2 = add.Address2,
+                city = add.City,
+                country_code = add.CountryCode,
+                postal_zip_code = add.PostalZipCode,
+                province_state = add.ProvinceStateCode
+            };
+        }
     }
 }

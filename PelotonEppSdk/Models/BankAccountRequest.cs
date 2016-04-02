@@ -62,6 +62,7 @@ namespace PelotonEppSdk.Models
 
         // Due to the nature of the BankAccounts Delete method, it must use this special Delete method
         /// <exception cref="HttpException">When status code is not <c>2XX Success</c>.</exception>
+        [Obsolete]
         private async Task<T> DeleteAsyncBankAccountsV1<T>(bank_account_delete_request content, ApiTarget target)
         {
             var factory = new UriFactory();
