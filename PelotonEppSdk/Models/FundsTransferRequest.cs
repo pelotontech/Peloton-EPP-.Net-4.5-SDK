@@ -72,7 +72,7 @@ namespace PelotonEppSdk.Models
         public async Task<Response> PostAsync()
         {
             var client = new PelotonClient();
-            var result = await client.PostAsync<response>((funds_transfer_request)this, ApiTarget.FundsTransfers);
+            var result = await client.PostAsync<response>((funds_transfer_request)this, ApiTarget.FundsTransfers).ConfigureAwait(false);
             return (Response)result;
         }
     }
@@ -103,9 +103,11 @@ namespace PelotonEppSdk.Models
 
         public IEnumerable<reference> references { get; set; }
 
+        public funds_transfer_request(RequestBase requestBase) : base(requestBase) { }
+
         public static explicit operator funds_transfer_request(FundsTransferRequest fundsTransferRequest)
         {
-            return new funds_transfer_request
+            return new funds_transfer_request(fundsTransferRequest)
             {
                 account_token = fundsTransferRequest.AccountToken,
                 amount = fundsTransferRequest.Amount,

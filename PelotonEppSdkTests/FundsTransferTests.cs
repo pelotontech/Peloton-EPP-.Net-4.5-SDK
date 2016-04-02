@@ -9,11 +9,11 @@ using PelotonEppSdk.Models;
 namespace PelotonEppSdkTests
 {
     [TestClass]
-    public class FundsTransferTests
+    public class FundsTransferTests: TestBase
     {
         private static FundsTransferRequest GetBasicRequest()
         {
-            var factory = new RequestFactory(24, "Password123", "PelonEppSdkTests");
+            var factory = new RequestFactory(24, "Password123", "PelonEppSdkTests", baseUri);
             var transfer = factory.GetFundsTransferRequest();
             transfer.Amount = (decimal)0.01;
             transfer.TransferSystem = FundsTransferSystem.EFT;

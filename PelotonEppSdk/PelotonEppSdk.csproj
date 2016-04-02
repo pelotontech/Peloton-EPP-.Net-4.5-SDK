@@ -34,6 +34,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -43,16 +44,35 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums\CreditCardType.cs" />
+    <Compile Include="Enums\TransactionType.cs" />
+    <Compile Include="Interfaces\IBankAccountCreateRequest.cs" />
+    <Compile Include="Interfaces\IBankAccountDeleteRequest.cs" />
+    <Compile Include="Interfaces\ICreditCardCreateRequest.cs" />
+    <Compile Include="Interfaces\ICreditCardDeleteRequest.cs" />
+    <Compile Include="Interfaces\ICreditCardUpdateRequest.cs" />
+    <Compile Include="Interfaces\IVerificationResponse.cs" />
+    <Compile Include="Models\Address.cs" />
+    <Compile Include="Models\BankAccount.cs" />
     <Compile Include="Classes\PelotonClient.cs" />
     <Compile Include="Classes\RequestFactory.cs" />
-    <Compile Include="Classes\TestUriFactory.cs" />
+    <Compile Include="Classes\UriFactory.cs" />
     <Compile Include="Enums\ApiTarget.cs" />
     <Compile Include="Enums\LanguageCode.cs" />
+    <Compile Include="Models\BankAccountRequest.cs" />
+    <Compile Include="Models\BankAccountCreateResponse.cs" />
+    <Compile Include="Models\CreditCardNumber.cs" />
+    <Compile Include="Models\CreditCardRequest.cs" />
+    <Compile Include="Models\CreditCardResponse.cs" />
+    <Compile Include="Models\CreditCardTokenTransactionRequest.cs" />
+    <Compile Include="Models\CreditCardTransactionResponse.cs" />
+    <Compile Include="Models\DeviceData.cs" />
+    <Compile Include="Models\Document.cs" />
     <Compile Include="Models\FundsTransferRequest.cs" />
     <Compile Include="Models\RequestBase.cs" />
+    <Compile Include="Models\Response.cs" />
     <Compile Include="Models\TransferRequest.cs" />
     <Compile Include="Models\Reference.cs" />
-    <Compile Include="Models\Response.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
@@ -68,9 +88,7 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Interfaces\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

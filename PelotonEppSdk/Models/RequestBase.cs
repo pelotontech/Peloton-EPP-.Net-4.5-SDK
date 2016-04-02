@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
@@ -13,6 +14,8 @@ namespace PelotonEppSdk.Models
 {
     public class RequestBase
     {
+        [ScriptIgnore]
+        internal Uri BaseUri { get; set; }
         [ScriptIgnore]
         internal AuthenticationHeaderValue AuthenticationHeader { get; private set; }
         internal string ApplicationName { get; set; }
@@ -45,6 +48,18 @@ namespace PelotonEppSdk.Models
     [SuppressMessage("ReSharper", "InconsistentNaming")]
     internal class request_base
     {
+        public request_base(RequestBase requestBase)
+        {
+            base_uri = requestBase.BaseUri;
+            application_name = requestBase.ApplicationName;
+            authentication_header = requestBase.AuthenticationHeader;
+            language_code = Enum.GetName(typeof (LanguageCode), requestBase.LanguageCode);
+        }
+
+
+        [ScriptIgnore]
+        public Uri base_uri { get; set; }
+
         [ScriptIgnore]
         internal AuthenticationHeaderValue authentication_header { get; set; }
 

@@ -31,7 +31,7 @@ namespace PelotonEppSdk.Models
         public async Task<Response> PostAsync()
         {
             var client = new PelotonClient();
-            var result = await client.PostAsync<response>((transfer_request)this, ApiTarget.Transfers);
+            var result = await client.PostAsync<response>((transfer_request)this, ApiTarget.Transfers).ConfigureAwait(false);
             return (Response) result;
         }
     }
@@ -46,9 +46,11 @@ namespace PelotonEppSdk.Models
         
         public ICollection<reference> references { get; set; }
 
+        public transfer_request(RequestBase requestBase) : base(requestBase) { }
+
         public static explicit operator transfer_request(TransferRequest transferRequest)
         {
-            return new transfer_request
+            return new transfer_request(transferRequest)
             {
                 authentication_header = transferRequest.AuthenticationHeader,
                 amount = transferRequest.Amount,

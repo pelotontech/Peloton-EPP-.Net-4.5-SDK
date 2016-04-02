@@ -9,7 +9,7 @@ using PelotonEppSdk.Models;
 namespace PelotonEppSdkTests
 {
     [TestClass]
-    public class TransfersTests
+    public class TransfersTests: TestBase
     {
         [TestMethod]
         public void TestSuccessfulWithoutReferences()
@@ -54,7 +54,7 @@ namespace PelotonEppSdkTests
 
         private static TransferRequest GetBasicRequest()
         {
-            var factory = new RequestFactory(107, "9cf9b8f4", "PelonEppSdkTests");
+            var factory = new RequestFactory(107, "9cf9b8f4", "PelonEppSdkTests", baseUri);
             var transfer = factory.GetTransferRequest();
             transfer.Amount = (decimal) 0.11;
             transfer.AutoAccept = true;

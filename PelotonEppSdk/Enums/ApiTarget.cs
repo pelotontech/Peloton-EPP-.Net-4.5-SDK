@@ -2,9 +2,11 @@
 {
     public enum ApiTarget
     {
-        CreditCardTransactions,
         BankAccounts,
+        CreditCards,
+        CreditCardTransactions,
+        FundsTransfers,
         Transfers,
-        FundsTransfers
+
     }
 }
