@@ -14,16 +14,16 @@ namespace PelotonEppSdkTests
     public class CreditCardCreateTests: TestBase
     {
         [TestMethod]
-        public void TestCreateCard()
+        public void TestCreateCardNoVerify()
         {
-            var createRequest = GetBasicRequest();
+            var createRequest = GetBasicRequest(106, "c57cbd1d", "PelonEppSdkTests");
 
             // at this point in time, March 20th, 2016, most card verification is not implemented, so prevent the verification process
             // TODO: when card verification is implemented, then use Verify = true here
             createRequest.Verify = false;
 
             var errors = new Collection<string>();
-            if (createRequest.TryValidate(errors))
+            if (!createRequest.TryValidate(errors))
             {
                 foreach (var error in errors)
                 {
@@ -37,9 +37,33 @@ namespace PelotonEppSdkTests
             Assert.AreEqual(0, result.MessageCode);
         }
 
-        private static CreditCardRequest GetBasicRequest()
+        [TestMethod]
+        public void TestCreateCardVerify()
         {
-            var factory = new RequestFactory(106, "c57cbd1d", "PelonEppSdkTests", baseUri);
+            var createRequest = GetBasicRequest(107, "9cf9b8f4", "PelonEppSdkTests");
+
+            // at this point in time, March 20th, 2016, most card verification is not implemented, so prevent the verification process
+            // TODO: when card verification is implemented, then use Verify = true here
+            //createRequest.Verify = false;
+
+            var errors = new Collection<string>();
+            if (!createRequest.TryValidate(errors))
+            {
+                foreach (var error in errors)
+                {
+                    Debug.WriteLine(error);
+                }
+            }
+            var result = createRequest.PostAsync().Result;
+            Debug.WriteLine(result.Message);
+            Debug.WriteLineIf((result.Errors != null && result.Errors.Count >= 1), string.Join("; ", result.Errors ?? new List<string>()));
+            Assert.IsTrue(result.Success);
+            Assert.AreEqual(0, result.MessageCode);
+        }
+
+        private static CreditCardRequest GetBasicRequest(int clientid, string clientkey, string applicationName)
+        {
+            var factory = new RequestFactory(clientid, clientkey, applicationName, baseUri);
             //var factory = new RequestFactory(80, "e9ab9532", "PelonEppSdkTests");
             var createRequest = factory.GetCreditCardCreateRequest();
 
