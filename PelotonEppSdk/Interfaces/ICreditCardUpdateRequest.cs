@@ -6,6 +6,8 @@ namespace PelotonEppSdk.Interfaces
 {
     public interface ICreditCardUpdateRequest
     {
+        string CreditCardToken { get; set; }
+
         string OrderNumber { get; set; }
         string CardOwner { get; set; }
 

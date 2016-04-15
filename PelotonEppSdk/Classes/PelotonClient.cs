@@ -20,8 +20,8 @@ namespace PelotonEppSdk.Classes
 
     internal class PelotonClient
     {
-        /// <exception cref="HttpException">When status code is not <c>2XX Success</c>.</exception>
-        /// <exception cref="NotImplementedException">When RequestType is not yet supported.</exception>
+        /// <exception cref="HttpException"><see cref="HttpStatusCode"/> is not <c>2XX Success</c>.</exception>
+        /// <exception cref="NotImplementedException"><see cref="RequestType"/> GET is not yet supported.</exception>
         private async Task<T> MakeBasicHttpRequest<T>(RequestType type, request_base content, ApiTarget target, string parameter)
         {
             var factory = new UriFactory();
@@ -71,19 +71,19 @@ namespace PelotonEppSdk.Classes
             }
         }
 
-        /// <exception cref="HttpException">When status code is not <c>2XX Success</c>.</exception>
+        /// <exception cref="HttpException"><see cref="HttpStatusCode"/> is not <c>2XX Success</c>.</exception>
         public async Task<T> PostAsync<T>(request_base content, ApiTarget target, string parameter = null)
         {
             return await MakeBasicHttpRequest<T>(RequestType.Post, content, target, parameter).ConfigureAwait(false);
         }
 
-        /// <exception cref="HttpException">When status code is not <c>2XX Success</c>.</exception>
+        /// <exception cref="HttpException"><see cref="HttpStatusCode"/> is not <c>2XX Success</c>.</exception>
         public async Task<T> PutAsync<T>(request_base content, ApiTarget target, string parameter = null)
         {
             return await MakeBasicHttpRequest<T>(RequestType.Put, content, target, parameter).ConfigureAwait(false);
         }
 
-        /// <exception cref="HttpException">When status code is not <c>2XX Success</c>.</exception>
+        /// <exception cref="HttpException"><see cref="HttpStatusCode"/> is not <c>2XX Success</c>.</exception>
         public async Task<T> DeleteAsync<T>(request_base content, ApiTarget target, string parameter = null)
         {
             return await MakeBasicHttpRequest<T>(RequestType.Delete, content, target, parameter).ConfigureAwait(false);

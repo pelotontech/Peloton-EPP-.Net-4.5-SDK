@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
+using System.Web;
 using PelotonEppSdk.Classes;
 using PelotonEppSdk.Enums;
 using PelotonEppSdk.Validations;
@@ -28,6 +30,7 @@ namespace PelotonEppSdk.Models
         
         public ICollection<Reference> References { get; set; }
 
+        /// <exception cref="HttpException"><see cref="HttpStatusCode"/> is not <c>2XX Success</c>.</exception>
         public async Task<Response> PostAsync()
         {
             var client = new PelotonClient();
@@ -37,6 +40,7 @@ namespace PelotonEppSdk.Models
     }
 
     [SuppressMessage("ReSharper", "InconsistentNaming")]
+    [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
     internal class transfer_request : request_base
     {
         public decimal? amount { get; set; }

@@ -18,6 +18,7 @@ namespace PelotonEppSdk.Models
         internal Uri BaseUri { get; set; }
         [ScriptIgnore]
         internal AuthenticationHeaderValue AuthenticationHeader { get; private set; }
+        [Required]
         internal string ApplicationName { get; set; }
         internal LanguageCode LanguageCode { get; set; }
 
@@ -48,7 +49,7 @@ namespace PelotonEppSdk.Models
     [SuppressMessage("ReSharper", "InconsistentNaming")]
     internal class request_base
     {
-        public request_base(RequestBase requestBase)
+        protected request_base(RequestBase requestBase)
         {
             base_uri = requestBase.BaseUri;
             application_name = requestBase.ApplicationName;
@@ -63,7 +64,9 @@ namespace PelotonEppSdk.Models
         [ScriptIgnore]
         internal AuthenticationHeaderValue authentication_header { get; set; }
 
+        // ReSharper disable once MemberCanBeProtected.Global
         public string application_name { get; set; }
+        // ReSharper disable once MemberCanBeProtected.Global
         public string language_code { get; set; }
     }
 

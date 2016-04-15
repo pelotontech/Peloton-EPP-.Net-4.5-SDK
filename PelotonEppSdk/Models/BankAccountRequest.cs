@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -40,6 +41,7 @@ namespace PelotonEppSdk.Models
         /// </summary>
         public IEnumerable<Reference> References { get; set; }
 
+        /// <exception cref="HttpException"><see cref="HttpStatusCode"/> is not <c>2XX Success</c>.</exception>
         public async Task<BankAccountCreateResponse> PostAsync()
         {
             var client = new PelotonClient();
@@ -52,6 +54,8 @@ namespace PelotonEppSdk.Models
         // start of delete fields and methods
         public string Token { get; set; }
 
+        /// <exception cref="HttpException">When status code is not <c>2XX Success</c>.</exception>
+        [Obsolete]
         public async Task<Response> DeleteAsync()
         {
             var result = await DeleteAsyncBankAccountsV1<response>((bank_account_delete_request)this, ApiTarget.BankAccounts).ConfigureAwait(false);
@@ -95,6 +99,7 @@ namespace PelotonEppSdk.Models
     }
 
     [SuppressMessage("ReSharper", "InconsistentNaming")]
+    [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
     internal class bank_account_request : request_base
     {
         public bank_account bank_account { get; set; }
@@ -127,7 +132,7 @@ namespace PelotonEppSdk.Models
     {
         public string bank_account_token { get; set; }
 
-        public bank_account_delete_request(RequestBase requestBase) : base(requestBase) { }
+        private bank_account_delete_request(RequestBase requestBase) : base(requestBase) { }
 
         public static explicit operator bank_account_delete_request(BankAccountRequest bankAccountRequest)
         {

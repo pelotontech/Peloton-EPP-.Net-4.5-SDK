@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
+using System.Web;
 using PelotonEppSdk.Classes;
 using PelotonEppSdk.Enums;
 using PelotonEppSdk.Interfaces;
@@ -12,7 +14,7 @@ namespace PelotonEppSdk.Models
 {
     public class CreditCardRequest : RequestBase, ICreditCardCreateRequest, ICreditCardDeleteRequest, ICreditCardUpdateRequest
     {
-        internal string CreditCardToken { get; set; }
+        public string CreditCardToken { get; set; }
 
         /// <summary>
         /// Recommended: Order number provided by the source system, otherwise one will be automatically generated
@@ -79,6 +81,7 @@ namespace PelotonEppSdk.Models
         /// </summary>
         public bool Verify { get; set; }
 
+        /// <exception cref="HttpException"><see cref="HttpStatusCode"/> is not <c>2XX Success</c>.</exception>
         public async Task<CreditCardResponse> PostAsync()
         {
             var client = new PelotonClient();
@@ -87,6 +90,7 @@ namespace PelotonEppSdk.Models
             return (CreditCardResponse) result;
         }
 
+        /// <exception cref="HttpException"><see cref="HttpStatusCode"/> is not <c>2XX Success</c>.</exception>
         public async Task<CreditCardResponse> PutAsync()
         {
             var client = new PelotonClient();
@@ -95,6 +99,7 @@ namespace PelotonEppSdk.Models
             return (CreditCardResponse)result;
         }
 
+        /// <exception cref="HttpException"><see cref="HttpStatusCode"/> is not <c>2XX Success</c>.</exception>
         public async Task<CreditCardResponse> DeleteAsync()
         {
             var client = new PelotonClient();
@@ -105,6 +110,7 @@ namespace PelotonEppSdk.Models
     }
 
     [SuppressMessage("ReSharper", "InconsistentNaming")]
+    [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
     internal class credit_card_request : request_base
     {
         public string order_number { get; set; }
