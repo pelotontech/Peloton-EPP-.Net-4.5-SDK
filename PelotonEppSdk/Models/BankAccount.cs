@@ -63,6 +63,7 @@ namespace PelotonEppSdk.Models
  }
 
     [SuppressMessage("ReSharper", "InconsistentNaming")]
+    [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
     internal class bank_account
     {
         public string bank_account_token { get; set; }

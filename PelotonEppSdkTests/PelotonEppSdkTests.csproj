@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="CreditCardCreateTests.cs" />
     <Compile Include="CreditCardTransactionRequestTests.cs" />
+    <Compile Include="CreditCardUpdateTests.cs" />
     <Compile Include="FundsTransferTests.cs" />
     <Compile Include="TestBase.cs" />
     <Compile Include="TransfersTests.cs" />

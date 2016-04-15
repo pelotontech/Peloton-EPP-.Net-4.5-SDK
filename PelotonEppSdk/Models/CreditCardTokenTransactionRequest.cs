@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
+using System.Web;
 using PelotonEppSdk.Classes;
 using PelotonEppSdk.Enums;
 
@@ -89,7 +91,8 @@ namespace PelotonEppSdk.Models
         [StringLength(36, MinimumLength = 36)]
         public string TransactionRefCode { get; set; }
 
-        public async Task<CreditCardTransactionResponse> PostAsync()
+  	    /// <exception cref="HttpException"><see cref="HttpStatusCode"/> is not <c>2XX Success</c>.</exception>
+  	    public async Task<CreditCardTransactionResponse> PostAsync()
         {
             var client = new PelotonClient();
             var request = (credit_card_token_transaction_request) this;
@@ -99,6 +102,8 @@ namespace PelotonEppSdk.Models
     }
 
     [SuppressMessage("ReSharper", "InconsistentNaming")]
+    [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
+    [SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Global")]
     internal class credit_card_token_transaction_request : request_base
     {
         public string order_number { get; set; }
