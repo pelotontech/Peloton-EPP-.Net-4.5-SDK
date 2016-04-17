@@ -1,9 +1,7 @@
 ﻿using System;
-using System.CodeDom;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Web.Profile;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PelotonEppSdk.Classes;
 using PelotonEppSdk.Models;
@@ -16,10 +14,7 @@ namespace PelotonEppSdkTests
         [TestMethod]
         public void TestCreateCardNoVerify()
         {
-            var createRequest = GetBasicRequest(106, "c57cbd1d", "PelonEppSdkTests");
-
-            // at this point in time, March 20th, 2016, most card verification is not implemented, so prevent the verification process
-            // TODO: when card verification is implemented, then use Verify = true here
+            var createRequest = GetBasicRequest(107, "9cf9b8f4", "PelonEppSdkTests");
             createRequest.Verify = false;
 
             var errors = new Collection<string>();
@@ -41,10 +36,8 @@ namespace PelotonEppSdkTests
         public void TestCreateCardVerify()
         {
             var createRequest = GetBasicRequest(107, "9cf9b8f4", "PelonEppSdkTests");
-
-            // at this point in time, March 20th, 2016, most card verification is not implemented, so prevent the verification process
-            // TODO: when card verification is implemented, then use Verify = true here
-            //createRequest.Verify = false;
+            createRequest.CardNumber = 5499990123456781;
+            createRequest.Verify = true;
 
             var errors = new Collection<string>();
             if (!createRequest.TryValidate(errors))
@@ -67,7 +60,7 @@ namespace PelotonEppSdkTests
             //var factory = new RequestFactory(80, "e9ab9532", "PelonEppSdkTests");
             var createRequest = factory.GetCreditCardCreateRequest();
 
-            createRequest.OrderNumber = "12345678";
+            createRequest.OrderNumber = Guid.NewGuid().ToString().Replace("-","").Substring(0,9);
             createRequest.BillingName = "P. Tech.";
             createRequest.BillingEmail = "p.tech@peloton-technologies.com";
             createRequest.BillingPhone = "250-555-1212";
@@ -81,9 +74,9 @@ namespace PelotonEppSdkTests
                 ProvinceStateCode = "BC"
             };
             createRequest.CardOwner = "P. Tech.";
-            createRequest.CardNumber = 123412341234;
-            createRequest.ExpiryMonth = "09";
-            createRequest.ExpiryYear = "17";
+            createRequest.CardNumber = 5499990123456781;
+            createRequest.ExpiryMonth = "12";
+            createRequest.ExpiryYear = "16";
             createRequest.CardSecurityCode = "123";
             createRequest.Verify = true;
 
