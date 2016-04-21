@@ -17,7 +17,7 @@ namespace PelotonEppSdkTests
             var createRequest = GetBasicRequest();
 
             // invent a new bank account token
-            createRequest.BankAccount.Token = Guid.NewGuid().ToString().Substring(0, 32);
+            createRequest.BankAccount.Token = Guid.NewGuid().ToString().Replace("-", "").Substring(0, 32);
 
             var errors = new Collection<string>();
             if (!createRequest.TryValidate(errors))
