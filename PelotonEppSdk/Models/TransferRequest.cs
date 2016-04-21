@@ -31,16 +31,17 @@ namespace PelotonEppSdk.Models
         public ICollection<Reference> References { get; set; }
 
         /// <exception cref="HttpException"><see cref="HttpStatusCode"/> is not <c>2XX Success</c>.</exception>
-        public async Task<Response> PostAsync()
+        public async Task<TransactionResponse> PostAsync()
         {
             var client = new PelotonClient();
-            var result = await client.PostAsync<response>((transfer_request)this, ApiTarget.Transfers).ConfigureAwait(false);
-            return (Response) result;
+            var result = await client.PostAsync<transaction_response>((transfer_request)this, ApiTarget.Transfers).ConfigureAwait(false);
+            return (TransactionResponse) result;
         }
     }
 
     [SuppressMessage("ReSharper", "InconsistentNaming")]
     [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
+    [SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Global")]
     internal class transfer_request : request_base
     {
         public decimal? amount { get; set; }

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using PelotonEppSdk.Interfaces;
+using System.Linq;
 
 namespace PelotonEppSdk.Models
 {
@@ -18,22 +18,30 @@ namespace PelotonEppSdk.Models
     }
 
     [SuppressMessage("ReSharper", "InconsistentNaming")]
+    [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
+    [SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Global")]
     internal class funds_transfer_notifications_response : response
     {
-        public ICollection<StateChangeNotification> notifications { get; set; }
+        public ICollection<state_change_notification> notifications { get; set; }
 
         public string token { get; set; }
 
         public static explicit operator FundsTransferNotificationsResponse(funds_transfer_notifications_response fundsTransferNotificationsResponse)
         {
             if (fundsTransferNotificationsResponse == null) return null;
+
+            ICollection<StateChangeNotification> notifications = null;
+            if (fundsTransferNotificationsResponse.notifications != null)
+                notifications = fundsTransferNotificationsResponse.notifications.Select(ftn => (StateChangeNotification) ftn).ToList();
+
             return new FundsTransferNotificationsResponse
             {
                 Success = fundsTransferNotificationsResponse.success,
                 Message = fundsTransferNotificationsResponse.message,
                 Errors = fundsTransferNotificationsResponse.errors,
                 MessageCode = fundsTransferNotificationsResponse.message_code,
-                TransactionRefCode = fundsTransferNotificationsResponse.transaction_ref_code
+                Notifications = notifications,
+                Token = fundsTransferNotificationsResponse.token
             };
         }
     }

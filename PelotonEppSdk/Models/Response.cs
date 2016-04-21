@@ -26,7 +26,7 @@ namespace PelotonEppSdk.Models
         /// <summary>
         /// This field will return a value for any transaction that occurs, otherwise will be empty.
         /// </summary>
-        public string TransactionRefCode { get; set; }
+        //public string TransactionRefCode { get; set; }
 
         /// <summary>
         /// This field will return any validation errors that occured
@@ -35,12 +35,12 @@ namespace PelotonEppSdk.Models
     }
 
     [SuppressMessage("ReSharper", "InconsistentNaming")]
+    [SuppressMessage("ReSharper", "MemberCanBeProtected.Global")]
     internal class response
     {
         public bool success { get; set; }
         public string message { get; set; }
         public int message_code { get; set; }
-        public string transaction_ref_code { get; set; }
         public ICollection<string> errors { get; set; }
 
         public static explicit operator Response(response r)
@@ -52,7 +52,6 @@ namespace PelotonEppSdk.Models
                 Message = r.message,
                 Errors = r.errors,
                 MessageCode = r.message_code,
-                TransactionRefCode = r.transaction_ref_code
             };
         }
 
@@ -65,7 +64,6 @@ namespace PelotonEppSdk.Models
                 message = r.Message,
                 message_code = r.MessageCode,
                 success = r.Success,
-                transaction_ref_code = r.TransactionRefCode
             };
         }
     }

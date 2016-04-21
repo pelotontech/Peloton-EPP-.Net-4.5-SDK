@@ -72,6 +72,7 @@
     <Compile Include="Models\FundsTransferNotificationsTokenRequest.cs" />
     <Compile Include="Models\FundsTransferNotificationsRequest.cs" />
     <Compile Include="Models\FundsTransferRequest.cs" />
+    <Compile Include="Models\TransactionResponse.cs" />
     <Compile Include="Models\State.cs" />
     <Compile Include="Models\StateChangeNotification.cs" />
     <Compile Include="Models\RequestBase.cs" />

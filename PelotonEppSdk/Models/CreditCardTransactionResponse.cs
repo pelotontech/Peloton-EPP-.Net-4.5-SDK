@@ -3,7 +3,7 @@ using PelotonEppSdk.Interfaces;
 
 namespace PelotonEppSdk.Models
 {
-    public class CreditCardTransactionResponse: Response, IVerificationResponse
+    public class CreditCardTransactionResponse: TransactionResponse, IVerificationResponse
     {
         /// <summary>
         /// Result of the address verification process
@@ -17,7 +17,7 @@ namespace PelotonEppSdk.Models
     }
 
     [SuppressMessage("ReSharper", "InconsistentNaming")]
-    internal class credit_card_transaction_response : response, Iverification_response
+    internal class credit_card_transaction_response : transaction_response, Iverification_response
     {
         public string address_verification_result { get; set; }
 
