@@ -6,6 +6,7 @@
         CreditCards,
         CreditCardTransactions,
         FundsTransfers,
+        FundsTransferNotifications,
         Transfers,
 
     }

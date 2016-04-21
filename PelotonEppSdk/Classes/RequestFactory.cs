@@ -2,7 +2,6 @@
 using PelotonEppSdk.Enums;
 using PelotonEppSdk.Interfaces;
 using PelotonEppSdk.Models;
-using PelotonEppSdk.Properties;
 
 namespace PelotonEppSdk.Classes
 {
@@ -13,8 +12,6 @@ namespace PelotonEppSdk.Classes
         private readonly string _applicationName;
         private readonly LanguageCode _languageCode;
         private readonly Uri _uri;
-
-        public RequestFactory(int clientId, string clientKey, string applicationName, LanguageCode languageCode = LanguageCode.en) : this(clientId, clientKey, applicationName, new Uri(Settings.Default.PelotonUri), languageCode) { }
 
         public RequestFactory(int clientId, string clientKey, string applicationName, Uri uri, LanguageCode languageCode = LanguageCode.en)
         {
@@ -48,6 +45,24 @@ namespace PelotonEppSdk.Classes
             SetBaseFields(fundsTransfer);
             SetBaseUri(fundsTransfer);
             return fundsTransfer;
+        }
+
+        public FundsTransferNotificationsTokenRequest GetFundsTransferNotificationsTokenRequest()
+        {
+            var fundsTransferNotificationsToken = new FundsTransferNotificationsTokenRequest();
+            SetBaseHeaders(fundsTransferNotificationsToken);
+            SetBaseFields(fundsTransferNotificationsToken);
+            SetBaseUri(fundsTransferNotificationsToken);
+            return fundsTransferNotificationsToken;
+        }
+
+        public FundsTransferNotificationsRequest GetFundsTransferNotificationsRequest()
+        {
+            var fundsTransferNotifications = new FundsTransferNotificationsRequest();
+            SetBaseHeaders(fundsTransferNotifications);
+            SetBaseFields(fundsTransferNotifications);
+            SetBaseUri(fundsTransferNotifications);
+            return fundsTransferNotifications;
         }
 
         public TransferRequest GetTransferRequest()
