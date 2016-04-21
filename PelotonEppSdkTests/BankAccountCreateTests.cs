@@ -20,7 +20,7 @@ namespace PelotonEppSdkTests
             createRequest.BankAccount.Token = Guid.NewGuid().ToString().Substring(0, 32);
 
             var errors = new Collection<string>();
-            if (createRequest.TryValidate(errors))
+            if (!createRequest.TryValidate(errors))
             {
                 foreach (var error in errors)
                 {

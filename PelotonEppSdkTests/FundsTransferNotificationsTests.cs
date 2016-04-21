@@ -63,7 +63,7 @@ namespace PelotonEppSdkTests
         {
             var request = GetBasicTokenRequest();
             var errors = new Collection<string>();
-            if (request.TryValidate(errors))
+            if (!request.TryValidate(errors))
             {
                 foreach (var error in errors)
                 {
@@ -81,7 +81,7 @@ namespace PelotonEppSdkTests
         {
             var tokenRequest = GetBasicTokenRequest();
             var errors = new Collection<string>();
-            if (tokenRequest.TryValidate(errors))
+            if (!tokenRequest.TryValidate(errors))
             {
                 foreach (var error in errors)
                 {
@@ -95,7 +95,7 @@ namespace PelotonEppSdkTests
             // Get the notifications to obtain a new token
             // We don't care if we get results or not as that is not the point of the test
             var notificationsRequest = GetBasicNotificationRequest(result.Token);
-            if (notificationsRequest.TryValidate(errors))
+            if (!notificationsRequest.TryValidate(errors))
             {
                 foreach (var error in errors)
                 {
@@ -110,7 +110,7 @@ namespace PelotonEppSdkTests
 
             // Get the notifications again and ensure there are none
             var notificationsRequest2 = GetBasicNotificationRequest(result2.Token);
-            if (notificationsRequest2.TryValidate(errors))
+            if (!notificationsRequest2.TryValidate(errors))
             {
                 foreach (var error in errors)
                 {
@@ -130,7 +130,7 @@ namespace PelotonEppSdkTests
         {
             var tokenRequest = GetBasicTokenRequest();
             var errors = new Collection<string>();
-            if (tokenRequest.TryValidate(errors))
+            if (!tokenRequest.TryValidate(errors))
             {
                 foreach (var error in errors)
                 {
@@ -144,7 +144,7 @@ namespace PelotonEppSdkTests
             // Get the notifications to obtain a new token
             // We don't care if we get results or not as that is not the point of the test
             var notificationsRequest = GetBasicNotificationRequest(result.Token);
-            if (notificationsRequest.TryValidate(errors))
+            if (!notificationsRequest.TryValidate(errors))
             {
                 foreach (var error in errors)
                 {
@@ -178,7 +178,7 @@ namespace PelotonEppSdkTests
 
             // Get the notifications again and ensure there is one
             var notificationsRequest2 = GetBasicNotificationRequest(result2.Token);
-            if (notificationsRequest2.TryValidate(errors))
+            if (!notificationsRequest2.TryValidate(errors))
             {
                 foreach (var error in errors)
                 {
