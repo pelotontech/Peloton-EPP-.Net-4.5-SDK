@@ -9,6 +9,8 @@ namespace PelotonEppSdk.Models
     }
 
     [SuppressMessage("ReSharper", "InconsistentNaming")]
+    [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
+    [SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Global")]
     internal class reference
     {
         public string name { get; set; }

@@ -35,11 +35,12 @@ namespace PelotonEppSdk.Classes
                 var targetUriPart = factory.GetTargetUriPart(target);
                 var targetPath = targetUriPart + parameter;
 
-                HttpResponseMessage httpResponseMessage = null;
+                HttpResponseMessage httpResponseMessage;
                 switch (type)
                 {
                     case RequestType.Get:
-                        throw new NotImplementedException();
+                        httpResponseMessage = await client.GetAsync(targetPath).ConfigureAwait(false);
+                        break;
                     case RequestType.Post:
                         httpResponseMessage = await client.PostAsync(targetPath, stringContent).ConfigureAwait(false);
                         break;
@@ -69,6 +70,12 @@ namespace PelotonEppSdk.Classes
                         throw new HttpException((int)httpResponseMessage.StatusCode, httpResponseMessage.ReasonPhrase);
                 }
             }
+        }
+
+        /// <exception cref="HttpException"><see cref="HttpStatusCode"/> is not <c>2XX Success</c>.</exception>
+        public async Task<T> GetAsync<T>(request_base content, ApiTarget target, string parameter = null)
+        {
+            return await MakeBasicHttpRequest<T>(RequestType.Get, content, target, parameter).ConfigureAwait(false);
         }
 
         /// <exception cref="HttpException"><see cref="HttpStatusCode"/> is not <c>2XX Success</c>.</exception>

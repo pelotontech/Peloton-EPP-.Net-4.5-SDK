@@ -65,10 +65,16 @@
     <Compile Include="Models\CreditCardRequest.cs" />
     <Compile Include="Models\CreditCardResponse.cs" />
     <Compile Include="Models\CreditCardTokenTransactionRequest.cs" />
+    <Compile Include="Models\FundsTransferNotificationsResponse.cs" />
     <Compile Include="Models\CreditCardTransactionResponse.cs" />
     <Compile Include="Models\DeviceData.cs" />
     <Compile Include="Models\Document.cs" />
+    <Compile Include="Models\FundsTransferNotificationsTokenRequest.cs" />
+    <Compile Include="Models\FundsTransferNotificationsRequest.cs" />
     <Compile Include="Models\FundsTransferRequest.cs" />
+    <Compile Include="Models\TransactionResponse.cs" />
+    <Compile Include="Models\State.cs" />
+    <Compile Include="Models\StateChangeNotification.cs" />
     <Compile Include="Models\RequestBase.cs" />
     <Compile Include="Models\Response.cs" />
     <Compile Include="Models\TransferRequest.cs" />

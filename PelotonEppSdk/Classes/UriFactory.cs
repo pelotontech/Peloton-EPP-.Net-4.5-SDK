@@ -1,6 +1,5 @@
 ﻿using System;
 using PelotonEppSdk.Enums;
-using PelotonEppSdk.Properties;
 
 namespace PelotonEppSdk.Classes
 {
@@ -18,6 +17,8 @@ namespace PelotonEppSdk.Classes
                     return "/v1/CreditCardTransactions/";
                 case ApiTarget.FundsTransfers:
                     return "/v1/FundsTransfers/";
+                case ApiTarget.FundsTransferNotifications:
+                    return "/v1/FundsTransferNotifications/";
                 case ApiTarget.Transfers:
                     return "/v1/Transfers/";
                 default:

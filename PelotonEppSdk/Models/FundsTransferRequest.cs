@@ -69,15 +69,17 @@ namespace PelotonEppSdk.Models
         /// </summary>
         public IEnumerable<Reference> References { get; set; }
 
-        public async Task<Response> PostAsync()
+        public async Task<TransactionResponse> PostAsync()
         {
             var client = new PelotonClient();
-            var result = await client.PostAsync<response>((funds_transfer_request)this, ApiTarget.FundsTransfers).ConfigureAwait(false);
-            return (Response)result;
+            var result = await client.PostAsync<transaction_response>((funds_transfer_request)this, ApiTarget.FundsTransfers).ConfigureAwait(false);
+            return (TransactionResponse)result;
         }
     }
 
     [SuppressMessage("ReSharper", "InconsistentNaming")]
+    [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
+    [SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Global")]
     internal class funds_transfer_request :request_base
     {  
         [Required]
