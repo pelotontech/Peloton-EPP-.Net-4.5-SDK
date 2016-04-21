@@ -11,7 +11,7 @@ namespace PelotonEppSdk.Models
     public class FundsTransferNotificationsRequest : RequestBase
     {
         /// <summary>
-        /// The token representing the data and time for which notifications will be provided 
+        /// The token representing the date and time for which notifications will be provided
         /// </summary>
         [Required]
         public string Token { get; set; }

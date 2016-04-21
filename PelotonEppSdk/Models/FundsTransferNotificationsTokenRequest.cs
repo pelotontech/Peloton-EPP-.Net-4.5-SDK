@@ -10,7 +10,7 @@ namespace PelotonEppSdk.Models
     public class FundsTransferNotificationsTokenRequest : RequestBase
     {
         /// <summary>
-        /// Sets the date associated with the token, from which, the Funds Transfers Notifications will be returned
+        /// Sets the date associated with the token, from which the Funds Transfers Notifications will be returned
         /// </summary>
         [Required]
         public string FromDateUtc { get; set; }
