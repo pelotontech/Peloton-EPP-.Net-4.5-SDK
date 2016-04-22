@@ -33,7 +33,7 @@ namespace PelotonEppSdkTests
         {
             var request = GetBasicRequest();
             var errors = new Collection<string>();
-            if (request.TryValidate(errors))
+            if (!request.TryValidate(errors))
             {
                 foreach (var error in errors)
                 {
@@ -52,7 +52,7 @@ namespace PelotonEppSdkTests
             var request = GetBasicRequest();
             request.References = null;
             var errors = new Collection<string>();
-            if (request.TryValidate(errors))
+            if (!request.TryValidate(errors))
             {
                 foreach (var error in errors)
                 {
@@ -71,7 +71,7 @@ namespace PelotonEppSdkTests
             var request = GetBasicRequest();
             request.Type = FundsTransferType.DEBIT;
             var errors = new Collection<string>();
-            if (request.TryValidate(errors))
+            if (!request.TryValidate(errors))
             {
                 foreach (var error in errors)
                 {

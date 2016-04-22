@@ -56,7 +56,7 @@ namespace PelotonEppSdkTests
             var transfer = GetBasicRequest();
 
             var errors = new Collection<string>();
-            if (transfer.TryValidate(errors))
+            if (!transfer.TryValidate(errors))
             {
                 foreach (var error in errors)
                 {

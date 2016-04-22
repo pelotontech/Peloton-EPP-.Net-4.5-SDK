@@ -24,11 +24,6 @@ namespace PelotonEppSdk.Models
         public int MessageCode { get; set; }
 
         /// <summary>
-        /// This field will return a value for any transaction that occurs, otherwise will be empty.
-        /// </summary>
-        //public string TransactionRefCode { get; set; }
-
-        /// <summary>
         /// This field will return any validation errors that occured
         /// </summary>
         public ICollection<string> Errors { get; set; }

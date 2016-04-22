@@ -20,7 +20,7 @@ namespace PelotonEppSdkTests
             var request = GetBasicRequest();
 
             var errors = new Collection<string>();
-            if (request.TryValidate(errors))
+            if (!request.TryValidate(errors))
             {
                 foreach (var error in errors)
                 {
@@ -57,7 +57,7 @@ namespace PelotonEppSdkTests
             request.Amount = null;
 
             var errors = new Collection<string>();
-            if (request.TryValidate(errors))
+            if (!request.TryValidate(errors))
             {
                 foreach (var error in errors)
                 {
@@ -95,7 +95,7 @@ namespace PelotonEppSdkTests
             request.Type = TransactionType.PURCHASE.ToString();
 
             var errors = new Collection<string>();
-            if (request.TryValidate(errors))
+            if (!request.TryValidate(errors))
             {
                 foreach (var error in errors)
                 {

@@ -27,8 +27,16 @@ namespace PelotonEppSdk.Models
             AuthenticationHeader = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(ASCII.GetBytes($"{username}:{password}")));
         }
 
+        /// <summary>
+        /// Validates the request. A return value indicates whether the validation succeeded.
+        /// </summary>
+        /// <param name="errorList">When this method returns, contains a list of any errors which were found during validation.
+        /// The list must be instantiated before calling TryValidate</param>
+        /// <returns><c>True</c> if no validation errors were found, <c>false</c> if errors were found</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="errorList"/> is <see langword="null" />.</exception>
         public bool TryValidate(ICollection<string> errorList)
         {
+            if(errorList == null) throw new ArgumentNullException(nameof(errorList));
             var list = Validate();
             foreach (var error in list)
             {
@@ -37,6 +45,10 @@ namespace PelotonEppSdk.Models
             return !errorList.Any();
         }
 
+        /// <summary>
+        /// Validates the request. Return contains a collection of errors found during validation.
+        /// </summary>
+        /// <returns>A list of errors found during validation. List will be empty if no errors are found.</returns>
         public ICollection<string> Validate()
         {
             var context = new ValidationContext(this, null, null);
