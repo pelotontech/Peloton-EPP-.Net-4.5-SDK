@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 
 namespace PelotonEppSdk.Models
 {
@@ -32,6 +33,17 @@ namespace PelotonEppSdk.Models
         /// This field will return any validation errors that occured
         /// </summary>
         public ICollection<string> Errors { get; set; }
+
+        public Response() { }
+
+        internal Response(response r)
+        {
+            Success = r.success;
+            Message = r.message;
+            MessageCode = r.message_code;
+            TransactionRefCode = r.transaction_ref_code;
+            Errors = r.errors.ToList(); // copy the errors into a new object
+        }
     }
 
     [SuppressMessage("ReSharper", "InconsistentNaming")]
