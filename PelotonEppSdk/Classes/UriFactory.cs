@@ -20,6 +20,8 @@ namespace PelotonEppSdk.Classes
                     return "/v1/FundsTransfers/";
                 case ApiTarget.Transfers:
                     return "/v1/Transfers/";
+                case ApiTarget.Statements:
+                    return "/v1/Statements/";
                 default:
                     throw new NotImplementedException();
             }

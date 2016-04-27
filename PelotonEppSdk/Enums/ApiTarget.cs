@@ -7,6 +7,6 @@
         CreditCardTransactions,
         FundsTransfers,
         Transfers,
-
+        Statements,
     }
 }
