@@ -71,6 +71,8 @@
     <Compile Include="Models\FundsTransferRequest.cs" />
     <Compile Include="Models\RequestBase.cs" />
     <Compile Include="Models\Response.cs" />
+    <Compile Include="Models\StatementsRequest.cs" />
+    <Compile Include="Models\StatementsResponse.cs" />
     <Compile Include="Models\TransferRequest.cs" />
     <Compile Include="Models\Reference.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
