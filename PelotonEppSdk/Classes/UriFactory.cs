@@ -1,6 +1,5 @@
 ﻿using System;
 using PelotonEppSdk.Enums;
-using PelotonEppSdk.Properties;
 
 namespace PelotonEppSdk.Classes
 {
