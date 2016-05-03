@@ -44,6 +44,8 @@ namespace PelotonEppSdk.Models
     [SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Global")]
     public class StatementDetail
     {
+        public string LedgerType { get; set; }
+
         public decimal Amount { get; set; }
 
         public TransactionDescription TransactionDescription { get; set; }
@@ -67,14 +69,12 @@ namespace PelotonEppSdk.Models
 
         internal StatementDetail(statement_detail sd)
         {
+            LedgerType = sd.ledger_type;
             Amount = sd.amount;
             TransactionDatetime = sd.transaction_datetime_utc;
             TransactionReferenceCode = sd.transaction_reference_code;
             TransactionDescription = (TransactionDescription)sd.transaction_description;
             TransactionType = (StatementTransactionType)sd.transaction_type;
-            // ReSharper disable once ExceptionNotDocumented
-            // ReSharper disable once ExceptionNotDocumentedOptional
-            // ReSharper disable once SuspiciousTypeConversion.Global
             References = sd.references.Select(r=>(Reference) r).ToList();
         }
     }
@@ -152,6 +152,8 @@ namespace PelotonEppSdk.Models
     [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
     internal class statement_detail
     {
+        public string ledger_type { get; set; }
+
         public decimal amount { get; set; }
 
         public transaction_description transaction_description { get; set; }
