@@ -8,6 +8,6 @@
         FundsTransfers,
         FundsTransferNotifications,
         Transfers,
-
+        Statements,
     }
 }

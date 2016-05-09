@@ -8,6 +8,10 @@ namespace PelotonEppSdkTests
 {
     public class TestBase
     {
-        protected static Uri baseUri = new Uri("https://testapi.peloton-technologies.com");
+        protected TestBase()
+        {
+            baseUri = new Uri("https://testapi.peloton-technologies.com");
+        }
+        protected static Uri baseUri;
     }
 }

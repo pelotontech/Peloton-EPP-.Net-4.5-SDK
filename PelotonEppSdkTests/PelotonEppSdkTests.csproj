@@ -57,6 +57,7 @@
     <Compile Include="CreditCardTransactionRequestTests.cs" />
     <Compile Include="FundsTransferNotificationsTests.cs" />
     <Compile Include="FundsTransferTests.cs" />
+    <Compile Include="StatementsTests.cs" />
     <Compile Include="TestBase.cs" />
     <Compile Include="TransfersTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

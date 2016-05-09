@@ -127,5 +127,14 @@ namespace PelotonEppSdk.Classes
             SetBaseUri(request);
             return request;
         }
+
+        public StatementsRequest GetStatementsRequest()
+        {
+            var request = new StatementsRequest();
+            SetBaseHeaders(request);
+            SetBaseFields(request);
+            SetBaseUri(request);
+            return request;
+        }
     }
 }

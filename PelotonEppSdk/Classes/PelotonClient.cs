@@ -24,12 +24,12 @@ namespace PelotonEppSdk.Classes
         /// <exception cref="NotImplementedException"><see cref="RequestType"/> GET is not yet supported.</exception>
         private async Task<T> MakeBasicHttpRequest<T>(RequestType type, request_base content, ApiTarget target, string parameter)
         {
-            var factory = new UriFactory();
             var serializer = new JavaScriptSerializer();
             var serializedContent = serializer.Serialize(content);
             var stringContent = new StringContent(serializedContent, Encoding.Default, "application/json");
             using (var client = new HttpClient())
             {
+                var factory = new UriFactory();
                 client.DefaultRequestHeaders.Authorization = content.authentication_header;
                 client.BaseAddress = content.base_uri;
                 var targetUriPart = factory.GetTargetUriPart(target);
