@@ -36,7 +36,6 @@ namespace PelotonEppSdk.Models
             Success = r.success;
             Message = r.message;
             MessageCode = r.message_code;
-            TransactionRefCode = r.transaction_ref_code;
             Errors = r.errors?.ToList(); // copy the errors into a new object
         }
     }
