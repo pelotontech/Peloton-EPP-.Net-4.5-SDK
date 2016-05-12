@@ -13,6 +13,14 @@ namespace PelotonEppSdk.Classes
         private readonly LanguageCode _languageCode;
         private readonly Uri _uri;
 
+        /// <summary>
+        /// Creates a RequestFactory with your provided authentication credentials and target URI
+        /// </summary>
+        /// <param name="clientId">Your peloton ClientId - this can be found on MyAccount.</param>
+        /// <param name="clientKey">The password or key used for authentication - this can also be found on MyAccount</param>
+        /// <param name="applicationName">The name of your application. This is used by Peloton for providing support.</param>
+        /// <param name="uri">The target URI for performing transactions - e.g. sbapi.peloton-technologies.com, or api.peloton-technologies.com</param>
+        /// <param name="languageCode">The language you would like responses in.</param>
         public RequestFactory(int clientId, string clientKey, string applicationName, Uri uri, LanguageCode languageCode = LanguageCode.en)
         {
             _clientId = clientId;
