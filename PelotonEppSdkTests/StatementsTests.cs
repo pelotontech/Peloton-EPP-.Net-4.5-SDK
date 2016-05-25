@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PelotonEppSdk.Classes;
 
@@ -18,6 +19,26 @@ namespace PelotonEppSdkTests
             request.ToDate = DateTime.UtcNow;
             var result = request.PostAsync().Result;
             Assert.IsTrue(result.Success);
+        }
+
+        [TestMethod]
+        public void DarrylTest()
+        {
+            try
+            {
+                var requestFactory = new RequestFactory(119, "45bd9dfd", "mychildcarepro™", new Uri("https://testapi.peloton-technologies.com/"));
+                var request = requestFactory.GetStatementsRequest();
+
+                request.AccountToken = "E52A4CF90506099E75C727855812B5A9";
+                request.FromDate = new DateTime(2016, 3, 01);
+                request.ToDate = new DateTime(2016, 4, 1);
+                var result = request.PostAsync().Result;
+            }
+            catch (Exception e)
+            {
+                Debug.Print(e.Message);
+                Assert.Fail();
+            }
         }
     }
 }
