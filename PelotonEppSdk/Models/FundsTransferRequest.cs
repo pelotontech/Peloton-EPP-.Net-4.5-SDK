@@ -25,6 +25,11 @@ namespace PelotonEppSdk.Models
 
     public class FundsTransferRequest : RequestBase
     {
+        public FundsTransferRequest()
+        {
+            References = new List<Reference>();
+        }
+
         /// <summary>
         /// Total Amount to be transferred between accounts. Must be positive.
         ///  </summary>
@@ -67,7 +72,7 @@ namespace PelotonEppSdk.Models
         /// <summary>
         /// A list of fields used to pass additional information to record with the transfer request.
         /// </summary>
-        public IEnumerable<Reference> References { get; set; }
+        public ICollection<Reference> References { get; set; }
 
         public async Task<TransactionResponse> PostAsync()
         {

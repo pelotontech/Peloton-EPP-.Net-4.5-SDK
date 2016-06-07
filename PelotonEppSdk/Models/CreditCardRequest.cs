@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
-using System.Web;
 using PelotonEppSdk.Classes;
 using PelotonEppSdk.Enums;
 using PelotonEppSdk.Interfaces;
@@ -14,6 +11,11 @@ namespace PelotonEppSdk.Models
 {
     public class CreditCardRequest : RequestBase, ICreditCardCreateRequest, ICreditCardDeleteRequest, ICreditCardUpdateRequest
     {
+        public CreditCardRequest()
+        {
+            References = new List<Reference>();
+        }
+
         public string CreditCardToken { get; set; }
 
         /// <summary>
@@ -54,7 +56,7 @@ namespace PelotonEppSdk.Models
         /// <summary>
         /// Additional information to record with the credit card request
         /// </summary>
-        public IEnumerable<Reference> References { get; set; }
+        public ICollection<Reference> References { get; set; }
 
         /// <summary>
         /// The primary billing contact name

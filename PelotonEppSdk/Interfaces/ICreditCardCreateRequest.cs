@@ -15,7 +15,7 @@ namespace PelotonEppSdk.Interfaces
         string ExpiryYear { get; set; }
         string CardSecurityCode { get; set; }
 
-        IEnumerable<Reference> References { get; set; }
+        ICollection<Reference> References { get; set; }
 
         string BillingName { get; set; }
         string BillingPhone { get; set; }
