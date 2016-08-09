@@ -11,7 +11,7 @@ using PelotonEppSdk.Models;
 namespace PelotonEppSdkTests
 {
 	[TestClass]
-    public class CreditCardTransactionRequestTests: TestBase
+    public class CreditCardTransactionTokenRequestTests: TestBase
     {
 
         [TestMethod]

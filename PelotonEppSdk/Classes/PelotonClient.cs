@@ -26,7 +26,7 @@ namespace PelotonEppSdk.Classes
         {
             var serializer = new JavaScriptSerializer();
             var serializedContent = serializer.Serialize(content);
-            var stringContent = new StringContent(serializedContent, Encoding.Default, "application/json");
+            var stringContent = new StringContent(serializedContent, Encoding.UTF8, "application/json");
             using (var client = new HttpClient())
             {
                 var factory = new UriFactory();

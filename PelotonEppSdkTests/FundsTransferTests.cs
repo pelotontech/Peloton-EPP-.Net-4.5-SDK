@@ -46,6 +46,26 @@ namespace PelotonEppSdkTests
             Assert.IsNotNull(result.TransactionRefCode);
         }
 
+
+        [TestMethod]
+        public void TestSuccessCreditEftAccentInReferences()
+        {
+            var request = GetBasicRequest();
+            request.References.First().Value = "Joëlle";
+            var errors = new Collection<string>();
+            if (!request.TryValidate(errors))
+            {
+                foreach (var error in errors)
+                {
+                    Debug.WriteLine(error);
+                }
+            }
+            var result = request.PostAsync().Result;
+            Assert.IsTrue(result.Success);
+            Assert.AreEqual(0, result.MessageCode);
+            Assert.IsNotNull(result.TransactionRefCode);
+        }
+
         [TestMethod]
         public void TestSuccessNoReferences()
         {
