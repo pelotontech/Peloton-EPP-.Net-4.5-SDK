@@ -97,6 +97,171 @@ namespace PelotonEppSdkTests
             Assert.AreEqual(0, returnResult.MessageCode);
             Assert.IsTrue(returnResult.Errors == null);
 
+            // clean up the token
+            var successfulDelete = DeleteCreditCardToken(cardtoken, clientid, clientkey, applicationName);
+            Assert.IsTrue(successfulDelete, "Failed to delete credit card token");
+        }
+
+        [TestMethod]
+        public void TestCreditCardTokenTransactionWithNullOrderNumber()
+        {
+            var cardtoken = GetCreditCardToken(clientid, clientkey, applicationName);
+            Assert.IsNotNull(cardtoken, "Failed to create credit card token");
+
+            // make a transaction
+            var transactionRequest = GetBasicCreditCardTokenTransactionRequest(clientid, clientkey, applicationName);
+
+            transactionRequest.CreditCardToken = cardtoken; // using just-created token
+            transactionRequest.Amount = 10;
+            transactionRequest.Type = TransactionType.PURCHASE.ToString();
+
+            transactionRequest.OrderNumber = null;
+
+            var errors = new Collection<string>();
+            if (!transactionRequest.TryValidate(errors))
+            {
+                foreach (var error in errors)
+                {
+                    Debug.WriteLine(error);
+                }
+            }
+
+            CreditCardTransactionResponse transactionResult = null;
+            try
+            {
+                transactionResult = transactionRequest.PostAsync().Result;
+            }
+            catch (Exception e)
+            {
+                // what happened here...
+                Debug.WriteLine(e.Message);
+                Debug.WriteLine(e);
+                Assert.Fail();
+            }
+            Debug.WriteLine(transactionResult.Message);
+            Debug.WriteLineIf((transactionResult.Errors != null && transactionResult.Errors.Count >= 1), string.Join("; ", transactionResult.Errors ?? new List<string>()));
+            Assert.IsTrue(transactionResult.Success);
+            Assert.AreEqual(0, transactionResult.MessageCode);
+            Assert.IsTrue(transactionResult.Errors == null);
+
+            // make a return
+            var returnRequest = GetBasicCreditCardTokenTransactionRequest(clientid, clientkey, applicationName);
+
+            returnRequest.TransactionRefCode = transactionResult.TransactionRefCode;
+            returnRequest.CreditCardToken = cardtoken; // using just-created token
+            returnRequest.Amount = 10;
+            returnRequest.Type = TransactionType.RETURN.ToString();
+
+            errors = new Collection<string>();
+            if (!returnRequest.TryValidate(errors))
+            {
+                foreach (var error in errors)
+                {
+                    Debug.WriteLine(error);
+                }
+            }
+
+            CreditCardTransactionResponse returnResult = null;
+            try
+            {
+                returnResult = returnRequest.PostAsync().Result;
+            }
+            catch (Exception e)
+            {
+                // what happened here...
+                Debug.WriteLine(e.Message);
+                Debug.WriteLine(e);
+                Assert.Fail();
+            }
+            Debug.WriteLine(returnResult.Message);
+            Debug.WriteLineIf((returnResult.Errors != null && returnResult.Errors.Count >= 1), string.Join("; ", returnResult.Errors ?? new List<string>()));
+            Assert.IsTrue(returnResult.Success);
+            Assert.AreEqual(0, returnResult.MessageCode);
+            Assert.IsTrue(returnResult.Errors == null);
+
+            // clean up the token
+            var successfulDelete = DeleteCreditCardToken(cardtoken, clientid, clientkey, applicationName);
+            Assert.IsTrue(successfulDelete, "Failed to delete credit card token");
+        }
+
+        [TestMethod]
+        public void TestCreditCardTokenTransactionAndReturnWithNullReturnOrderNumber()
+        {
+            var cardtoken = GetCreditCardToken(clientid, clientkey, applicationName);
+            Assert.IsNotNull(cardtoken, "Failed to create credit card token");
+
+            // make a transaction
+            var transactionRequest = GetBasicCreditCardTokenTransactionRequest(clientid, clientkey, applicationName);
+
+            transactionRequest.CreditCardToken = cardtoken; // using just-created token
+            transactionRequest.Amount = 10;
+            transactionRequest.Type = TransactionType.PURCHASE.ToString();
+
+            var errors = new Collection<string>();
+            if (!transactionRequest.TryValidate(errors))
+            {
+                foreach (var error in errors)
+                {
+                    Debug.WriteLine(error);
+                }
+            }
+
+            CreditCardTransactionResponse transactionResult = null;
+            try
+            {
+                transactionResult = transactionRequest.PostAsync().Result;
+            }
+            catch (Exception e)
+            {
+                // what happened here...
+                Debug.WriteLine(e.Message);
+                Debug.WriteLine(e);
+                Assert.Fail();
+            }
+            Debug.WriteLine(transactionResult.Message);
+            Debug.WriteLineIf((transactionResult.Errors != null && transactionResult.Errors.Count >= 1), string.Join("; ", transactionResult.Errors ?? new List<string>()));
+            Assert.IsTrue(transactionResult.Success);
+            Assert.AreEqual(0, transactionResult.MessageCode);
+            Assert.IsTrue(transactionResult.Errors == null);
+
+            // make a return
+            var returnRequest = GetBasicCreditCardTokenTransactionRequest(clientid, clientkey, applicationName);
+
+            returnRequest.TransactionRefCode = transactionResult.TransactionRefCode;
+            returnRequest.CreditCardToken = cardtoken; // using just-created token
+            returnRequest.Amount = 10;
+            returnRequest.Type = TransactionType.RETURN.ToString();
+
+            returnRequest.OrderNumber = null;
+
+            errors = new Collection<string>();
+            if (!returnRequest.TryValidate(errors))
+            {
+                foreach (var error in errors)
+                {
+                    Debug.WriteLine(error);
+                }
+            }
+
+            CreditCardTransactionResponse returnResult = null;
+            try
+            {
+                returnResult = returnRequest.PostAsync().Result;
+            }
+            catch (Exception e)
+            {
+                // what happened here...
+                Debug.WriteLine(e.Message);
+                Debug.WriteLine(e);
+                Assert.Fail();
+            }
+            Debug.WriteLine(returnResult.Message);
+            Debug.WriteLineIf((returnResult.Errors != null && returnResult.Errors.Count >= 1), string.Join("; ", returnResult.Errors ?? new List<string>()));
+            Assert.IsTrue(returnResult.Success);
+            Assert.AreEqual(0, returnResult.MessageCode);
+            Assert.IsTrue(returnResult.Errors == null);
+
+            // clean up the token
             var successfulDelete = DeleteCreditCardToken(cardtoken, clientid, clientkey, applicationName);
             Assert.IsTrue(successfulDelete, "Failed to delete credit card token");
         }
