@@ -32,9 +32,8 @@ namespace PelotonEppSdk.Models
         internal StatementsResponse(statements_response sr) : base(sr)
         {
             OpeningBalance = sr.opening_balance;
-            // ReSharper disable once ExceptionNotDocumented
-            // ReSharper disable once SuspiciousTypeConversion.Global
-            StatementDetails = sr.statement_details.Select(sd => (StatementDetail) sd).ToList();
+            // In some error cases the statement_details will be null, so use the null propagation operator here
+            StatementDetails = sr.statement_details?.Select(sd => (StatementDetail) sd).ToList();
             FromDate = sr.from_date_utc;
             ToDate = sr.to_date_utc;
         }
