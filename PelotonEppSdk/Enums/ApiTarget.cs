@@ -5,6 +5,7 @@
         BankAccounts,
         CreditCards,
         CreditCardTransactions,
+        Events,
         FundsTransfers,
         FundsTransferNotifications,
         Transfers,
