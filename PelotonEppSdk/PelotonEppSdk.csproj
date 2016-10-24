@@ -65,6 +65,10 @@
     <Compile Include="Models\CreditCardRequest.cs" />
     <Compile Include="Models\CreditCardResponse.cs" />
     <Compile Include="Models\CreditCardTokenTransactionRequest.cs" />
+    <Compile Include="Models\EventCustomField.cs" />
+    <Compile Include="Models\EventItem.cs" />
+    <Compile Include="Models\EventRequest.cs" />
+    <Compile Include="Models\EventResponse.cs" />
     <Compile Include="Models\FundsTransferNotificationsResponse.cs" />
     <Compile Include="Models\CreditCardTransactionResponse.cs" />
     <Compile Include="Models\DeviceData.cs" />
@@ -81,6 +85,7 @@
     <Compile Include="Models\StatementsResponse.cs" />
     <Compile Include="Models\TransferRequest.cs" />
     <Compile Include="Models\Reference.cs" />
+    <Compile Include="Enums\VariableType.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>

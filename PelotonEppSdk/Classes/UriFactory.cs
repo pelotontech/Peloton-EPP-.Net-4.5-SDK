@@ -15,6 +15,8 @@ namespace PelotonEppSdk.Classes
                     return "/v1/CreditCards/";
                 case ApiTarget.CreditCardTransactions:
                     return "/v1/CreditCardTransactions/";
+                case ApiTarget.Events:
+                    return "/v1/Events";
                 case ApiTarget.FundsTransfers:
                     return "/v1/FundsTransfers/";
                 case ApiTarget.FundsTransferNotifications:
