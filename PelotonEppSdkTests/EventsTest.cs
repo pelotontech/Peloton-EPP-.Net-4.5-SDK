@@ -20,7 +20,7 @@ namespace PelotonEppSdkTests
         [TestMethod]
         public void TestSuccessGetEvent()
         {
-            var eventRequest = GetBasicEventRequest("709a51a13b694e4aa5b7d1c620cbe9c1");
+            var eventRequest = GetBasicEventRequest("NSODONATION");
             var errors = new Collection<string>();
             if (!eventRequest.TryValidate(errors))
             {
