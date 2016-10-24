@@ -7,7 +7,7 @@ using PelotonEppSdk.Models;
 namespace PelotonEppSdkTests
 {
     [TestClass]
-    public class EventsTest : TestBase
+    public class EventsTests : TestBase
     {
         private static EventRequest GetBasicEventRequest(string token)
         {

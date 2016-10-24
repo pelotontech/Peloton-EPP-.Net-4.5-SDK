@@ -85,7 +85,7 @@
     <Compile Include="Models\StatementsResponse.cs" />
     <Compile Include="Models\TransferRequest.cs" />
     <Compile Include="Models\Reference.cs" />
-    <Compile Include="Models\VariableType.cs" />
+    <Compile Include="Enums\VariableType.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>

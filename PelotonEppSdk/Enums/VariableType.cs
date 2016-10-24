@@ -1,4 +1,4 @@
-﻿namespace PelotonEppSdk.Models
+﻿namespace PelotonEppSdk.Enums
 {
     public enum VariableType
     {
