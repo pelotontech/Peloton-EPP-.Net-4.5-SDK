@@ -12,7 +12,7 @@ namespace PelotonEppSdkTests
     {
         private static EventRequest GetBasicEventRequest(string token)
         {
-            var factory = new RequestFactory(24, "Password123", "PelonEppSdkTests", baseUri);
+            var factory = new RequestFactory(32, "Peloton123", "PelonEppSdkTests", baseUri);
             var request = factory.GetEventRequest();
             request.Token = token;
             return request;
@@ -21,7 +21,7 @@ namespace PelotonEppSdkTests
         [TestMethod]
         public void TestSuccessGetEvent()
         {
-            var eventRequest = GetBasicEventRequest("NSODONATION"); // TODO: This needs to change to use the token and not the friendly name
+            var eventRequest = GetBasicEventRequest("709a51a13b694e4aa5b7d1c620cbe9c1");
             var errors = new Collection<string>();
             if (!eventRequest.TryValidate(errors))
             {

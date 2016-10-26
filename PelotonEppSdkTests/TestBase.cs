@@ -11,7 +11,7 @@ namespace PelotonEppSdkTests
         protected TestBase()
         {
             baseUri = new Uri("https://testapi.peloton-technologies.com");
-            //baseUri = new Uri("http://localhost:2590/api");
+            //baseUri = new Uri("http://localhost:2590/");
         }
         protected static Uri baseUri;
     }
