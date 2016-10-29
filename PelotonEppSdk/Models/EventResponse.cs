@@ -8,6 +8,10 @@ namespace PelotonEppSdk.Models
     public class EventResponse : Response
     {
         /// <summary>
+        /// The token for the event.
+        /// </summary>
+        public string Token { get; set; }
+        /// <summary>
         /// The name for the event.
         /// </summary>
         public string Name { get; set; }
@@ -46,6 +50,7 @@ namespace PelotonEppSdk.Models
     [SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Global")]
     internal class event_response : response
     {
+        public string token { get; set; }
         public string name { get; set; }
         public string description { get; set; }
         public DateTime start_datetime { get; set; }
@@ -65,15 +70,16 @@ namespace PelotonEppSdk.Models
 
             return new EventResponse
             {
+                MessageCode = eventResponse.message_code,
+                Success = eventResponse.success,
                 Name = eventResponse.name,
                 Description = eventResponse.description,
                 StartDatetime = eventResponse.start_datetime,
                 EndDatetime = eventResponse.end_datetime,
-                State = (State)eventResponse.state,
                 Items = items,
                 TermsAndConditionsContent = eventResponse.terms_and_conditions_content,
                 RefundPolicyContent = eventResponse.refund_policy_content,
-                Success = eventResponse.success
+                Token = eventResponse.token,
             };
         }
     }

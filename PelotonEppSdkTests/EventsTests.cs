@@ -36,6 +36,23 @@ namespace PelotonEppSdkTests
         }
 
         [TestMethod]
+        public void TestFailureGetEvent()
+        {
+            var eventRequest = GetBasicEventRequest("invalidtoken");
+            var errors = new Collection<string>();
+            if (!eventRequest.TryValidate(errors))
+            {
+                foreach (var error in errors)
+                {
+                    Debug.WriteLine(error);
+                }
+            }
+            var result = eventRequest.GetAsync().Result;
+            Assert.IsFalse(result.Success);
+            Assert.AreEqual(109, result.MessageCode);
+        }
+
+        [TestMethod]
         public void TestSuccessTokenNull()
         {
             var eventRequest = GetBasicEventRequest(null);
