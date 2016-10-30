@@ -24,6 +24,7 @@ namespace PelotonEppSdk.Models
         public ICollection<EventItem> Items { get; set; }
         public string TermsAndConditionsContent { private get; set; }
         public string RefundPolicyContent { private get; set; }
+        public string LanguageCode { get; set; }
 
         public async Task<EventResponse> GetAsync()
         {
@@ -79,7 +80,7 @@ namespace PelotonEppSdk.Models
             /// <summary>
             /// The state of the event.
             /// </summary>
-            public state state { get; set; }
+            // public state state { get; set; }
             /// <summary>
             /// The list of items associated with an event.
             /// </summary>

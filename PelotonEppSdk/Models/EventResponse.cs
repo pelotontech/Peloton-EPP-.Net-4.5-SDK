@@ -55,7 +55,7 @@ namespace PelotonEppSdk.Models
         public string description { get; set; }
         public DateTime start_datetime { get; set; }
         public DateTime end_datetime { get; set; }
-        public state state { get; set; }
+        // public state state { get; set; }
         public ICollection<EventItem.event_item> items { get; set; }
         public string terms_and_conditions_content { get; set; }
         public string refund_policy_content { get; set; }
