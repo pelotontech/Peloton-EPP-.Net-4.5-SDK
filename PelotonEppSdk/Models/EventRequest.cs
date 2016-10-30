@@ -58,7 +58,6 @@ namespace PelotonEppSdk.Models
         [SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Global")]
         internal class event_request : request_base
         {
-
             [Required]
             [StringLength(32, MinimumLength = 32)]
             public string event_token { get; set; }
@@ -97,7 +96,8 @@ namespace PelotonEppSdk.Models
                     end_datetime = eventsRequest.EndDatetime,
                     //state = eventsRequest.State,
                     terms_and_conditions_content = eventsRequest.TermsAndConditionsContent,
-                    refund_policy_content = eventsRequest.RefundPolicyContent
+                    refund_policy_content = eventsRequest.RefundPolicyContent,
+                    language_code = Enum.GetName(typeof(LanguageCode), eventsRequest.LanguageCode)
                 };
             }
         }

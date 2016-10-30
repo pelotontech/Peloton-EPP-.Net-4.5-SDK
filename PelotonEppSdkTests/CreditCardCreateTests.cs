@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PelotonEppSdk.Classes;
+using PelotonEppSdk.Enums;
 using PelotonEppSdk.Models;
 
 namespace PelotonEppSdkTests
@@ -30,6 +31,29 @@ namespace PelotonEppSdkTests
             Debug.WriteLineIf((result.Errors != null && result.Errors.Count >= 1), string.Join("; ", result.Errors ?? new List<string>()));
             Assert.IsTrue(result.Success);
             Assert.AreEqual(0, result.MessageCode);
+            Assert.AreEqual("Success", result.Message);
+        }
+
+        [TestMethod]
+        public void TestCreateCardNoVerifyFr()
+        {
+            var createRequest = GetBasicRequest(107, "9cf9b8f4", "PelonEppSdkTests", LanguageCode.fr);
+            createRequest.Verify = false;
+
+            var errors = new Collection<string>();
+            if (!createRequest.TryValidate(errors))
+            {
+                foreach (var error in errors)
+                {
+                    Debug.WriteLine(error);
+                }
+            }
+            var result = createRequest.PostAsync().Result;
+            Debug.WriteLine(result.Message);
+            Debug.WriteLineIf((result.Errors != null && result.Errors.Count >= 1), string.Join("; ", result.Errors ?? new List<string>()));
+            Assert.IsTrue(result.Success);
+            Assert.AreEqual(0, result.MessageCode);
+            Assert.AreEqual("Réussi", result.Message);
         }
 
         [TestMethod]
@@ -54,9 +78,9 @@ namespace PelotonEppSdkTests
             Assert.AreEqual(0, result.MessageCode);
         }
 
-        private static CreditCardRequest GetBasicRequest(int clientid, string clientkey, string applicationName)
+        private static CreditCardRequest GetBasicRequest(int clientid, string clientkey, string applicationName, LanguageCode languageCode = LanguageCode.en)
         {
-            var factory = new RequestFactory(clientid, clientkey, applicationName, baseUri);
+            var factory = new RequestFactory(clientid, clientkey, applicationName, baseUri, languageCode);
             //var factory = new RequestFactory(80, "e9ab9532", "PelonEppSdkTests");
             var createRequest = factory.GetCreditCardCreateRequest();
 
