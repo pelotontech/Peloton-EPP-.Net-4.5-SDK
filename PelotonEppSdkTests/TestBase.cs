@@ -10,8 +10,7 @@ namespace PelotonEppSdkTests
     {
         protected TestBase()
         {
-            //baseUri = new Uri("https://testapi.peloton-technologies.com");
-            baseUri = new Uri("http://localhost:2590/");
+            baseUri = new Uri("https://testapi.peloton-technologies.com");
         }
         protected static Uri baseUri;
     }
