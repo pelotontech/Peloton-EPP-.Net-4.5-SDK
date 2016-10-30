@@ -5,12 +5,13 @@ using System.Linq;
 
 namespace PelotonEppSdk.Models
 {
+    [SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Global")]
     public class EventResponse : Response
     {
         /// <summary>
         /// The token for the event.
         /// </summary>
-        public string Token { get; set; }
+        public string EventToken { get; set; }
         /// <summary>
         /// The name for the event.
         /// </summary>
@@ -46,11 +47,12 @@ namespace PelotonEppSdk.Models
     }
 
     [SuppressMessage("ReSharper", "InconsistentNaming")]
-    [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
+    [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
     [SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Global")]
+    [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
     internal class event_response : response
     {
-        public string token { get; set; }
+        public string event_token { get; set; }
         public string name { get; set; }
         public string description { get; set; }
         public DateTime start_datetime { get; set; }
@@ -79,7 +81,7 @@ namespace PelotonEppSdk.Models
                 Items = items,
                 TermsAndConditionsContent = eventResponse.terms_and_conditions_content,
                 RefundPolicyContent = eventResponse.refund_policy_content,
-                Token = eventResponse.token,
+                EventToken = eventResponse.event_token,
             };
         }
     }

@@ -3,7 +3,6 @@ using System.Diagnostics;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PelotonEppSdk.Classes;
-using PelotonEppSdk.Enums;
 using PelotonEppSdk.Models;
 
 namespace PelotonEppSdkTests
@@ -11,18 +10,18 @@ namespace PelotonEppSdkTests
     [TestClass]
     public class EventsTests : TestBase
     {
-        private static EventRequest GetBasicEventRequest(string token, LanguageCode languageCode)
+        private static EventRequest GetBasicEventRequest(string token)
         {
-            var factory = new RequestFactory(32, "Peloton123", "PelonEppSdkTests", baseUri, languageCode);
+            var factory = new RequestFactory(24, "Password123", "PelonEppSdkTests", baseUri);
             var request = factory.GetEventRequest();
-            request.Token = token;
+            request.EventToken = token;
             return request;
         }
 
         [TestMethod]
         public void TestSuccessGetEvent()
         {
-            var eventRequest = GetBasicEventRequest("709a51a13b694e4aa5b7d1c620cbe9c1", LanguageCode.fr);
+            var eventRequest = GetBasicEventRequest("667fbd353e8d4e9d9e0611d489d5efb6");
             var errors = new Collection<string>();
             if (!eventRequest.TryValidate(errors))
             {
@@ -39,7 +38,7 @@ namespace PelotonEppSdkTests
         [TestMethod]
         public void TestFailureGetEvent()
         {
-            var eventRequest = GetBasicEventRequest("invalidtoken", LanguageCode.en);
+            var eventRequest = GetBasicEventRequest("invalidtoken");
             var errors = new Collection<string>();
             if (!eventRequest.TryValidate(errors))
             {
@@ -54,9 +53,9 @@ namespace PelotonEppSdkTests
         }
 
         [TestMethod]
-        public void TestSuccessTokenNull()
+        public void TestEventTokenNull()
         {
-            var eventRequest = GetBasicEventRequest(null, LanguageCode.fr);
+            var eventRequest = GetBasicEventRequest(null);
             var errors = new Collection<string>();
             if (!eventRequest.TryValidate(errors))
             {
@@ -64,7 +63,26 @@ namespace PelotonEppSdkTests
                 {
                     Debug.WriteLine(error);
                 }
-                Assert.AreEqual("The Token field is required.", errors.Single());
+                Assert.AreEqual("The EventToken field is required.", errors.Single());
+            }
+            else
+            {
+                Assert.Fail("no validation errors when errors should be seen");
+            }
+        }
+
+        [TestMethod]
+        public void TestEventTokenEmpty()
+        {
+            var eventRequest = GetBasicEventRequest(string.Empty);
+            var errors = new Collection<string>();
+            if (!eventRequest.TryValidate(errors))
+            {
+                foreach (var error in errors)
+                {
+                    Debug.WriteLine(error);
+                }
+                Assert.AreEqual("The EventToken field is required.", errors.Single());
             }
             else
             {

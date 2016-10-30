@@ -55,15 +55,6 @@ namespace PelotonEppSdk.Classes
             return eventRequest;
         }
 
-        public EventRequest GetEventCreateRequest()
-        {
-            var eventRequest = new EventRequest();
-            SetBaseHeaders(eventRequest);
-            SetBaseFields(eventRequest);
-            SetBaseUri(eventRequest);
-            return eventRequest;
-        }
-
         public FundsTransferRequest GetFundsTransferRequest()
         {
             var fundsTransfer = new FundsTransferRequest();

@@ -138,6 +138,17 @@ namespace PelotonEppSdkTests
         }
 
         [TestMethod]
+        public void TestFailNoBankAccountToken()
+        {
+            var transfer = GetBasicRequest();
+            transfer.BankAccountToken = null;
+            var errors = new Collection<string>();
+            if (transfer.TryValidate(errors)) Assert.Fail();
+            Assert.AreEqual(1, errors.Count);
+            Assert.AreEqual("The BankAccountToken field is required.", errors.FirstOrDefault());
+        }
+
+        [TestMethod]
         public void TestFailShortBankAccountToken()
         {
             var transfer = GetBasicRequest();
@@ -157,17 +168,6 @@ namespace PelotonEppSdkTests
             if (transfer.TryValidate(errors)) Assert.Fail();
             Assert.AreEqual(1, errors.Count);
             Assert.AreEqual("AccountToken must be 32 characters long.", errors.FirstOrDefault());
-        }
-
-        [TestMethod]
-        public void TestFailNoBankAccountToken()
-        {
-            var transfer = GetBasicRequest();
-            transfer.AccountToken = null;
-            var errors = new Collection<string>();
-            if (transfer.TryValidate(errors)) Assert.Fail();
-            Assert.AreEqual(1, errors.Count);
-            Assert.AreEqual("The AccountToken field is required.", errors.FirstOrDefault());
         }
 
         [TestMethod]
