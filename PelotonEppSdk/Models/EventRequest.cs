@@ -97,7 +97,7 @@ namespace PelotonEppSdk.Models
                     end_datetime = eventsRequest.EndDatetime,
                     //state = eventsRequest.State,
                     terms_and_conditions_content = eventsRequest.TermsAndConditionsContent,
-                    refund_policy_content = eventsRequest.TermsAndConditionsContent
+                    refund_policy_content = eventsRequest.RefundPolicyContent
                 };
             }
         }
