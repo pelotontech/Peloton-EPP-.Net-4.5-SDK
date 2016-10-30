@@ -14,14 +14,14 @@ namespace PelotonEppSdkTests
         {
             var factory = new RequestFactory(24, "Password123", "PelonEppSdkTests", baseUri);
             var request = factory.GetEventRequest();
-            request.Token = token;
+            request.EventToken = token;
             return request;
         }
 
         [TestMethod]
         public void TestSuccessGetEvent()
         {
-            var eventRequest = GetBasicEventRequest("NSODONATION"); // TODO: This needs to change to use the token and not the friendly name
+            var eventRequest = GetBasicEventRequest("667fbd353e8d4e9d9e0611d489d5efb6");
             var errors = new Collection<string>();
             if (!eventRequest.TryValidate(errors))
             {
@@ -36,7 +36,24 @@ namespace PelotonEppSdkTests
         }
 
         [TestMethod]
-        public void TestSuccessTokenNull()
+        public void TestFailureGetEvent()
+        {
+            var eventRequest = GetBasicEventRequest("invalidtoken");
+            var errors = new Collection<string>();
+            if (!eventRequest.TryValidate(errors))
+            {
+                foreach (var error in errors)
+                {
+                    Debug.WriteLine(error);
+                }
+            }
+            var result = eventRequest.GetAsync().Result;
+            Assert.IsFalse(result.Success);
+            Assert.AreEqual(109, result.MessageCode);
+        }
+
+        [TestMethod]
+        public void TestEventTokenNull()
         {
             var eventRequest = GetBasicEventRequest(null);
             var errors = new Collection<string>();
@@ -46,7 +63,26 @@ namespace PelotonEppSdkTests
                 {
                     Debug.WriteLine(error);
                 }
-                Assert.AreEqual("The Token field is required.", errors.Single());
+                Assert.AreEqual("The EventToken field is required.", errors.Single());
+            }
+            else
+            {
+                Assert.Fail("no validation errors when errors should be seen");
+            }
+        }
+
+        [TestMethod]
+        public void TestEventTokenEmpty()
+        {
+            var eventRequest = GetBasicEventRequest(string.Empty);
+            var errors = new Collection<string>();
+            if (!eventRequest.TryValidate(errors))
+            {
+                foreach (var error in errors)
+                {
+                    Debug.WriteLine(error);
+                }
+                Assert.AreEqual("The EventToken field is required.", errors.Single());
             }
             else
             {
