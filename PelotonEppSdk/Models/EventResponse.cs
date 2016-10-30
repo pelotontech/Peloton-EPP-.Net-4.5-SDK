@@ -31,7 +31,7 @@ namespace PelotonEppSdk.Models
         /// <summary>
         /// The state of the event.
         /// </summary>
-        public State State { get; set; }
+        // public State State { get; set; }
         /// <summary>
         /// The list of items associated with an event.
         /// </summary>
