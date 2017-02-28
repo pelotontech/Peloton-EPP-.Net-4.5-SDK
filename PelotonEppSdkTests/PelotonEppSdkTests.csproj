@@ -53,6 +53,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="ClientAuthTokenTests.cs" />
     <Compile Include="CreditCardCreateAndTransactionAndDeleteTests.cs" />
     <Compile Include="CreditCardCreateTests.cs" />
     <Compile Include="CreditCardTransactionTokenRequestTests.cs" />

@@ -11,6 +11,8 @@ namespace PelotonEppSdk.Classes
             {
                 case ApiTarget.BankAccounts:
                     return "/v1/BankAccounts/";
+                case ApiTarget.ClientAuthTokens:
+                    return "/v1/ClientAuthToken/";
                 case ApiTarget.CreditCards:
                     return "/v1/CreditCards/";
                 case ApiTarget.CreditCardTransactions:
