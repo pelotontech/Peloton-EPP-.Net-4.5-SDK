@@ -59,6 +59,10 @@ namespace PelotonEppSdk.Models
     }
 
     [SuppressMessage("ReSharper", "InconsistentNaming")]
+    [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
+    [SuppressMessage("ReSharper", "MemberCanBeProtected.Global")]
+    [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
+    [SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Global")]
     internal class request_base
     {
         protected request_base(RequestBase requestBase)
@@ -76,9 +80,8 @@ namespace PelotonEppSdk.Models
         [ScriptIgnore]
         internal AuthenticationHeaderValue authentication_header { get; set; }
 
-        // ReSharper disable once MemberCanBeProtected.Global
         public string application_name { get; set; }
-        // ReSharper disable once MemberCanBeProtected.Global
+
         public string language_code { get; set; }
     }
 

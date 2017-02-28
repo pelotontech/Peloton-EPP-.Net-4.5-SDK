@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using PelotonEppSdk.Enums;
+// ReSharper disable MemberCanBePrivate.Global
 
 namespace PelotonEppSdk.Models
 {
@@ -13,6 +14,7 @@ namespace PelotonEppSdk.Models
 
         public int Length => ((string) this).Length;
 
+        // ReSharper disable once InconsistentNaming
         public static readonly Dictionary<CreditCardType, string> DISPLAYNAME = new Dictionary<CreditCardType, string>
         {
             {CreditCardType.Amex, "Amex"},

@@ -60,10 +60,12 @@ namespace PelotonEppSdk.Models
         /// </summary>
         [Required, RegularExpression("CAD|USD")]
         public string CurrencyCode { get; set; }
- }
+    }
 
     [SuppressMessage("ReSharper", "InconsistentNaming")]
     [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
+    [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
+    [SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Global")]
     internal class bank_account
     {
         public string bank_account_token { get; set; }
