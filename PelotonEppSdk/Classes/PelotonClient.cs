@@ -25,6 +25,7 @@ namespace PelotonEppSdk.Classes
         private async Task<T> MakeBasicHttpRequest<T>(RequestType type, request_base content, ApiTarget target, string parameter)
         {
             var serializer = new JavaScriptSerializer();
+            serializer.MaxJsonLength = int.MaxValue;
             var serializedContent = serializer.Serialize(content);
             var stringContent = new StringContent(serializedContent, Encoding.UTF8, "application/json");
             using (var client = new HttpClient())
