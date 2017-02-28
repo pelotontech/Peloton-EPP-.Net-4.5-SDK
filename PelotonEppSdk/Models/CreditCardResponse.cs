@@ -1,4 +1,5 @@
-﻿using PelotonEppSdk.Interfaces;
+﻿using System.Diagnostics.CodeAnalysis;
+using PelotonEppSdk.Interfaces;
 
 namespace PelotonEppSdk.Models
 {
@@ -20,7 +21,10 @@ namespace PelotonEppSdk.Models
         public string CardSecurityCodeVerificationResult { get; set; }
     }
 
-    // ReSharper disable InconsistentNaming
+    [SuppressMessage("ReSharper", "InconsistentNaming")]
+    [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
+    [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
+    [SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Global")]
     internal class credit_card_response: response, Iverification_response
     {
         public string credit_card_token { get; set; }

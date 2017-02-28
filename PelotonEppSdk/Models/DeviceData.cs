@@ -1,4 +1,6 @@
-﻿namespace PelotonEppSdk.Models
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace PelotonEppSdk.Models
 {
     public class DeviceData
     {
@@ -8,7 +10,10 @@
         public string EncryptedCardData { get; set; }
     }
 
-    // ReSharper disable InconsistentNaming
+    [SuppressMessage("ReSharper", "InconsistentNaming")]
+    [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
+    [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
+    [SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Global")]
     internal class device_data
     {
         /// <summary>
