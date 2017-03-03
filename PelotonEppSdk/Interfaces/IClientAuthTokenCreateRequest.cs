@@ -14,7 +14,7 @@ namespace PelotonEppSdk.Interfaces
         /// <summary>
         /// The URL used for redirection, when provided.
         /// </summary>
-        [StringLength(256)]
+        [StringLength(2048)]
         string ReturnUrl { get; set; }
     }
 }
