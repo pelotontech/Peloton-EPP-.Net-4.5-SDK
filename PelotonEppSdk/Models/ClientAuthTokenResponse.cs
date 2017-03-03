@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using PelotonEppSdk.Enums;
 
-
 namespace PelotonEppSdk.Models
 {
     public class ClientAuthTokenResponse: Response
