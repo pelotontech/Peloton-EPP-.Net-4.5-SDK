@@ -27,7 +27,7 @@ namespace PelotonEppSdk.Models
         /// <summary>
         /// The URL used for redirection, when provided.
         /// </summary>
-        [StringLength(256)]
+        [StringLength(2048)]
         public string ReturnUrl { get; set; }
 
         /// <exception cref="HttpException"><see cref="HttpStatusCode"/> is not <c>2XX Success</c>.</exception>
