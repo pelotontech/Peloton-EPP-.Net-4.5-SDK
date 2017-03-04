@@ -194,7 +194,7 @@ namespace PelotonEppSdkTests
             Assert.IsTrue(getResult.Errors == null || !getResult.Errors.Any());
             Assert.AreEqual("", getResult.ReturnUrl);
             Assert.IsFalse(getResult.Active);
-            Assert.AreEqual(ClientAuthTokenAuthorizationType.CreditCard, getResult.Type);
+            Assert.AreEqual(ClientAuthTokenAuthorizationType.Card, getResult.Type);
             Assert.AreEqual("2017-02-27 21:30:58", getResult.AuthorizedDatetime.ToString());
             Assert.AreEqual("06D4396995A3463891152B0087B87CAA", getResult.CreditCardToken);
             Assert.AreEqual(null, getResult.BankAccountToken);
