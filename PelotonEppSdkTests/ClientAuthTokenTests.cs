@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
@@ -14,14 +13,15 @@ namespace PelotonEppSdkTests
     public class ClientAuthTokenTests: TestBase
     {
         // For testapi, use id 107 and key "9cf9b8f4",
-        private int _clientId = 5;
-        private string _clientKey = "Password123";
+        private int _clientId = 107;
+        private string _clientKey = "9cf9b8f4";
+        private string _accountToken = "1D4E237930EB70FC115E6ACD95E878E6";
 
 
         [TestMethod]
         public void TestCreateClientAuthToken()
         {
-            var createRequest = GetBasicRequest(_clientId, _clientKey, "PelonEppSdkTests");
+            var createRequest = GetBasicRequest(_clientId, _clientKey, _accountToken, "PelonEppSdkTests");
 
             var errors = new Collection<string>();
             if (!createRequest.TryValidate(errors))
@@ -43,7 +43,7 @@ namespace PelotonEppSdkTests
         [TestMethod]
         public void TestCreateClientAuthTokenAccountTokenInvalid()
         {
-            var createRequest = GetBasicRequest(_clientId, _clientKey, "PelonEppSdkTests");
+            var createRequest = GetBasicRequest(_clientId, _clientKey, _accountToken, "PelonEppSdkTests");
 
             createRequest.AccountToken = "a garbage valued account token";
 
@@ -62,7 +62,7 @@ namespace PelotonEppSdkTests
         [TestMethod]
         public void TestCreateClientAuthTokenAccountTokenInvalid2()
         {
-            var createRequest = GetBasicRequest(_clientId, _clientKey, "PelonEppSdkTests");
+            var createRequest = GetBasicRequest(_clientId, _clientKey, _accountToken, "PelonEppSdkTests");
 
             createRequest.AccountToken = new string('t', 32);
 
@@ -89,7 +89,7 @@ namespace PelotonEppSdkTests
         [TestMethod]
         public void TestCreateClientAuthTokenAccountTokenNull()
         {
-            var createRequest = GetBasicRequest(_clientId, _clientKey, "PelonEppSdkTests");
+            var createRequest = GetBasicRequest(_clientId, _clientKey, _accountToken, "PelonEppSdkTests");
 
             createRequest.AccountToken = null;
 
@@ -108,7 +108,7 @@ namespace PelotonEppSdkTests
         [TestMethod]
         public void TestGetClientAuthToken()
         {
-            var createRequest = GetBasicRequest(_clientId, _clientKey, "PelonEppSdkTests");
+            var createRequest = GetBasicRequest(_clientId, _clientKey, _accountToken, "PelonEppSdkTests");
 
             var errors = new Collection<string>();
             if (!createRequest.TryValidate(errors))
@@ -127,7 +127,7 @@ namespace PelotonEppSdkTests
             Assert.AreEqual(32, result.ClientAuthToken.Length);
 
             var cat = result.ClientAuthToken;
-            var getRequest = GetBasicRequest(_clientId, _clientKey, "PelonEppSdkTests");
+            var getRequest = GetBasicRequest(_clientId, _clientKey, _accountToken, "PelonEppSdkTests");
 
             getRequest.ReturnUrl = null;
             getRequest.ClientAuthToken = cat;
@@ -142,7 +142,7 @@ namespace PelotonEppSdkTests
             Assert.AreEqual(createRequest.ReturnUrl, getResult.ReturnUrl);
             Assert.IsTrue(getResult.Active);
             Assert.AreEqual(null, getResult.AuthorizedDatetime);
-            Assert.AreEqual(null, getResult.CreditCardToken);
+            Assert.AreEqual(null, getResult.CardToken);
             Assert.AreEqual(null, getResult.BankAccountToken);
             Assert.AreEqual(null, getResult.TransactionRefCode);
             Assert.AreEqual(null, getResult.EventToken);
@@ -152,8 +152,8 @@ namespace PelotonEppSdkTests
         public void TestGetClientAuthTokenExpired()
         {
             // expired: 5a1c7be3998a4205a2b1c8c49a0e4599
-            var cat = "5a1c7be3998a4205a2b1c8c49a0e4599";
-            var getRequest = GetBasicRequest(_clientId, _clientKey, "PelonEppSdkTests");
+            var cat = "ef273d91c8214d6ea463517aaf61e514";
+            var getRequest = GetBasicRequest(_clientId, _clientKey, _accountToken, "PelonEppSdkTests");
 
             getRequest.ReturnUrl = null;
             getRequest.ClientAuthToken = cat;
@@ -165,10 +165,10 @@ namespace PelotonEppSdkTests
             Assert.AreEqual("Success", getResult.Message);
             Assert.AreEqual(32, getResult.ClientAuthToken.Length);
             Assert.IsTrue(getResult.Errors == null || !getResult.Errors.Any());
-            Assert.AreEqual("", getResult.ReturnUrl);
+            Assert.AreEqual("Keep for Testing", getResult.ReturnUrl);
             Assert.IsFalse(getResult.Active);
             Assert.AreEqual(null, getResult.AuthorizedDatetime);
-            Assert.AreEqual(null, getResult.CreditCardToken);
+            Assert.AreEqual(null, getResult.CardToken);
             Assert.AreEqual(null, getResult.BankAccountToken);
             Assert.AreEqual(null, getResult.TransactionRefCode);
             Assert.AreEqual(null, getResult.EventToken);
@@ -179,8 +179,8 @@ namespace PelotonEppSdkTests
         public void TestGetClientAuthTokenAuthorizedCreditCardToken()
         {
             // authorized: 8c0a15527850422ea505b9bbda076eb4
-            var cat = "8c0a15527850422ea505b9bbda076eb4";
-            var getRequest = GetBasicRequest(_clientId, _clientKey, "PelonEppSdkTests");
+            var cat = "21701fbd4b2044f2aee48d554dd52008";
+            var getRequest = GetBasicRequest(_clientId, _clientKey, _accountToken, "PelonEppSdkTests");
 
             getRequest.ReturnUrl = null;
             getRequest.ClientAuthToken = cat;
@@ -192,26 +192,26 @@ namespace PelotonEppSdkTests
             Assert.AreEqual("Success", getResult.Message);
             Assert.AreEqual(32, getResult.ClientAuthToken.Length);
             Assert.IsTrue(getResult.Errors == null || !getResult.Errors.Any());
-            Assert.AreEqual("", getResult.ReturnUrl);
+            Assert.AreEqual("Keep for Testing", getResult.ReturnUrl);
             Assert.IsFalse(getResult.Active);
             Assert.AreEqual(ClientAuthTokenAuthorizationType.Card, getResult.Type);
-            Assert.AreEqual("2017-02-27 21:30:58", getResult.AuthorizedDatetime.ToString());
-            Assert.AreEqual("06D4396995A3463891152B0087B87CAA", getResult.CreditCardToken);
+            Assert.AreEqual("2017-03-07 02:04:14", getResult.AuthorizedDatetime.ToString());
+            Assert.AreEqual("0d1d2933c4104796815bf2ab98f3e6d9", getResult.CardToken);
             Assert.AreEqual(null, getResult.BankAccountToken);
             Assert.AreEqual(null, getResult.TransactionRefCode);
             Assert.AreEqual(null, getResult.EventToken);
         }
         
 
-        private static ClientAuthTokenRequest GetBasicRequest(int clientid, string clientkey, string applicationName, LanguageCode languageCode = LanguageCode.en)
+        private static ClientAuthTokenRequest GetBasicRequest(int clientid, string clientkey, string accountToken, string applicationName, LanguageCode languageCode = LanguageCode.en)
         {
             var factory = new RequestFactory(clientid, clientkey, applicationName, baseUri, languageCode);
             var createRequest = factory.GetClientAuthTokenCreateRequest();
 
-            createRequest.AccountToken = "0DF814498AC6D94D21B0B501F8F17CE6";
+            createRequest.AccountToken = accountToken;
             createRequest.ReturnUrl = "https://peloton-technologies.com/";
 
-            return (ClientAuthTokenRequest)createRequest;
+            return createRequest;
         }
     }
 }

@@ -25,10 +25,10 @@ namespace PelotonEppSdk.Models
         public ClientAuthTokenAuthorizationType Type { get; set; }
 
         /// <summary>
-        /// The credit_card_token assigned to the created credit card.
+        /// The card_token assigned to the created credit card.
         /// </summary>
         [StringLength(32)]
-        public string CreditCardToken { get; set; }
+        public string CardToken { get; set; }
 
         /// <summary>
         /// The bank_account_token assigned to the created bank account.
@@ -94,7 +94,7 @@ namespace PelotonEppSdk.Models
 
         public type type { get; set; }
 
-        public string credit_card_token { get; set; }
+        public string card_token { get; set; }
 
         public string bank_account_token { get; set; }
 
@@ -131,7 +131,7 @@ namespace PelotonEppSdk.Models
                 AuthorizedDatetime = clientAuthTokenResponse.authorized_datetime,
 
                 Type = type,
-                CreditCardToken = clientAuthTokenResponse.credit_card_token,
+                CardToken = clientAuthTokenResponse.card_token,
                 BankAccountToken = clientAuthTokenResponse.bank_account_token,
                 TransactionRefCode = clientAuthTokenResponse.transaction_ref_code,
                 EventToken = clientAuthTokenResponse.event_token
