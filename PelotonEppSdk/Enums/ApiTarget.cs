@@ -3,6 +3,7 @@
     public enum ApiTarget
     {
         BankAccounts,
+        ClientAuthTokens,
         CreditCards,
         CreditCardTransactions,
         Events,

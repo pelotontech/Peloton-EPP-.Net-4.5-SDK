@@ -44,10 +44,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums\ClientAuthTokenAuthorizationType.cs" />
     <Compile Include="Enums\CreditCardType.cs" />
     <Compile Include="Enums\TransactionType.cs" />
     <Compile Include="Interfaces\IBankAccountCreateRequest.cs" />
     <Compile Include="Interfaces\IBankAccountDeleteRequest.cs" />
+    <Compile Include="Interfaces\IClientAuthTokenCreateRequest.cs" />
+    <Compile Include="Interfaces\IClientAuthTokenStatusRequest.cs" />
     <Compile Include="Interfaces\ICreditCardCreateRequest.cs" />
     <Compile Include="Interfaces\ICreditCardDeleteRequest.cs" />
     <Compile Include="Interfaces\ICreditCardUpdateRequest.cs" />
@@ -61,6 +64,8 @@
     <Compile Include="Enums\LanguageCode.cs" />
     <Compile Include="Models\BankAccountRequest.cs" />
     <Compile Include="Models\BankAccountCreateResponse.cs" />
+    <Compile Include="Models\ClientAuthTokenRequest.cs" />
+    <Compile Include="Models\ClientAuthTokenResponse.cs" />
     <Compile Include="Models\CreditCardNumber.cs" />
     <Compile Include="Models\CreditCardRequest.cs" />
     <Compile Include="Models\CreditCardResponse.cs" />
@@ -76,6 +81,7 @@
     <Compile Include="Models\FundsTransferNotificationsTokenRequest.cs" />
     <Compile Include="Models\FundsTransferNotificationsRequest.cs" />
     <Compile Include="Models\FundsTransferRequest.cs" />
+    <Compile Include="Models\GenericType.cs" />
     <Compile Include="Models\TransactionResponse.cs" />
     <Compile Include="Models\State.cs" />
     <Compile Include="Models\StateChangeNotification.cs" />

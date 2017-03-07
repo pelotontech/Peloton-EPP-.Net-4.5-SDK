@@ -153,5 +153,14 @@ namespace PelotonEppSdk.Classes
             SetBaseUri(request);
             return request;
         }
+
+        public ClientAuthTokenRequest GetClientAuthTokenCreateRequest()
+        {
+            var request = new ClientAuthTokenRequest();
+            SetBaseHeaders(request);
+            SetBaseFields(request);
+            SetBaseUri(request);
+            return request;
+        }
     }
 }
