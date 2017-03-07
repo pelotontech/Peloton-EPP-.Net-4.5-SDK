@@ -5,6 +5,10 @@ namespace PelotonEppSdk.Models
     public class BankAccountCreateResponse : Response
     {
         public string BankAccountToken { get; set; }
+
+        internal BankAccountCreateResponse(response r) : base(r)
+        {
+        }
     }
 
     [SuppressMessage("ReSharper", "InconsistentNaming")]
@@ -18,7 +22,7 @@ namespace PelotonEppSdk.Models
         public static explicit operator BankAccountCreateResponse(bank_account_response bankAccountResponse)
         {
             if (bankAccountResponse == null) return null;
-            return new BankAccountCreateResponse
+            return new BankAccountCreateResponse(bankAccountResponse)
             {
                 Success = bankAccountResponse.success,
                 Message = bankAccountResponse.message,

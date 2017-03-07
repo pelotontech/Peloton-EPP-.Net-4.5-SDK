@@ -24,11 +24,13 @@ namespace PelotonEppSdk.Models
 
         public static explicit operator state(State s)
         {
+            if (s == null) return null;
             return new state { name = s.Name, code = s.Code };
         }
 
         public static explicit operator State(state s)
         {
+            if (s == null) return null;
             return new State { Name = s.name, Code = s.code };
         }
     }

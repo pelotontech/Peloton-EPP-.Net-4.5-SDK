@@ -371,7 +371,7 @@ namespace PelotonEppSdkTests
             createRequest.CardOwner = "P. Tech.";
             createRequest.CardNumber = 5499990123456781;
             createRequest.ExpiryMonth = "12";
-            createRequest.ExpiryYear = "16";
+            createRequest.ExpiryYear = DateTime.UtcNow.AddYears(1).ToString("yy");
             createRequest.CardSecurityCode = "123";
             createRequest.Verify = true;
 

@@ -50,7 +50,26 @@ namespace PelotonEppSdkTests
             }
             var result = eventRequest.GetAsync().Result;
             Assert.IsFalse(result.Success);
-            Assert.AreEqual(109, result.MessageCode);
+            Assert.AreEqual(1800, result.MessageCode);
+            Assert.AreEqual("EventToken must be 32 characters long.", errors.Single());
+        }
+
+        [TestMethod]
+        public void TestFailureGetEvent2()
+        {
+            var eventRequest = GetBasicEventRequest("invalidtokenoflength32+tenmorech");
+            var errors = new Collection<string>();
+            if (!eventRequest.TryValidate(errors))
+            {
+                foreach (var error in errors)
+                {
+                    Debug.WriteLine(error);
+                }
+            }
+            var result = eventRequest.GetAsync().Result;
+            Assert.IsFalse(result.Success);
+            Assert.AreEqual(1800, result.MessageCode);
+            Assert.AreEqual("Event Token Cannot Be Found", result.Message);
         }
 
         [TestMethod]

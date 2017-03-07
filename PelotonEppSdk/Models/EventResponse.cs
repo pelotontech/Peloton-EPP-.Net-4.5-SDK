@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
@@ -31,7 +32,7 @@ namespace PelotonEppSdk.Models
         /// <summary>
         /// The state of the event.
         /// </summary>
-        // public State State { get; set; }
+        public State State { get; set; }
         /// <summary>
         /// The list of items associated with an event.
         /// </summary>
@@ -44,6 +45,10 @@ namespace PelotonEppSdk.Models
         /// The refund policy associated with the event.
         /// </summary>
         public string RefundPolicyContent { get; set; }
+
+        internal EventResponse(response r) : base(r)
+        {
+        }
     }
 
     [SuppressMessage("ReSharper", "InconsistentNaming")]
@@ -57,7 +62,7 @@ namespace PelotonEppSdk.Models
         public string description { get; set; }
         public DateTime start_datetime { get; set; }
         public DateTime end_datetime { get; set; }
-        // public state state { get; set; }
+        public state state { get; set; }
         public ICollection<EventItem.event_item> items { get; set; }
         public string terms_and_conditions_content { get; set; }
         public string refund_policy_content { get; set; }
@@ -70,14 +75,13 @@ namespace PelotonEppSdk.Models
             if (eventResponse.items != null)
                 items = eventResponse.items.Select(ei => (EventItem)ei).ToList();
 
-            return new EventResponse
+            return new EventResponse(eventResponse)
             {
-                MessageCode = eventResponse.message_code,
-                Success = eventResponse.success,
                 Name = eventResponse.name,
                 Description = eventResponse.description,
                 StartDatetime = eventResponse.start_datetime,
                 EndDatetime = eventResponse.end_datetime,
+                State = (State)eventResponse.state,
                 Items = items,
                 TermsAndConditionsContent = eventResponse.terms_and_conditions_content,
                 RefundPolicyContent = eventResponse.refund_policy_content,

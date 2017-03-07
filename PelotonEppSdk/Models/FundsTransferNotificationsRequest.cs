@@ -26,6 +26,7 @@ namespace PelotonEppSdk.Models
             var parameter = Token;
             if (Items.HasValue)
                 parameter = parameter + "?items=" + Items;
+            parameter = parameter + "&application_name=" + ApplicationName;
             var result = await client.GetAsync<funds_transfer_notifications_response>((funds_transfer_notifications_request)this, ApiTarget.FundsTransferNotifications, parameter).ConfigureAwait(false);
             return (FundsTransferNotificationsResponse)result;
         }

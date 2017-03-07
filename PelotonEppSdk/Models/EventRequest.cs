@@ -11,7 +11,7 @@ namespace PelotonEppSdk.Models
     public class EventRequest : RequestBase
     {
         [Required]
-        [StringLength(32, MinimumLength = 32, ErrorMessage = nameof(EventToken) + "must be 32 characters long.")]
+        [StringLength(32, MinimumLength = 32, ErrorMessage = nameof(EventToken) + " must be 32 characters long.")]
         public string EventToken { get; set; }
 
         public string Name { get; set; }

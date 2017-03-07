@@ -126,7 +126,7 @@ namespace PelotonEppSdkTests
 	        var factory = new RequestFactory(106, "wrong password", "PelonEppSdkTests", baseUri);
 	        var request = factory.GetCreditCardTransactionRequest();
 			request.OrderNumber = Guid.NewGuid().ToString("N").Substring(0,25);
-	        request.CreditCardToken = "2fb92b4fb43a453288b388fcce6659d3"; //  "93610b81fd4749f69b81d7f12286bf61"; //"3aa58fecce92433fbcc17ea9a3e6d923"; // "ae7b55027a6a439ea29a1e2b718e0f8a";// "6fefd54fa8854710a8331797bfd14e3a";
+	        request.CreditCardToken = "2fb92b4fb43a453288b388fcce6659d3";
             request.Amount = (decimal?) 1.00;
             request.Type = TransactionType.PURCHASE.ToString();
 
@@ -159,13 +159,12 @@ namespace PelotonEppSdkTests
 
         private static CreditCardTokenTransactionRequest GetBasicRequest()
         {
-            //var factory = new RequestFactory(83, "f7117723", "PelonEppSdkTests");
-            var factory = new RequestFactory(106, "c57cbd1d", "PelonEppSdkTests", baseUri);
-            //var factory = new RequestFactory(80, "e9ab9532", "PelonEppSdkTests");
+            //var factory = new RequestFactory(106, "c57cbd1d", "PelonEppSdkTests", baseUri);
+            var factory = new RequestFactory(107, "9cf9b8f4", "PelonEppSdkTests", baseUri);
             var request = factory.GetCreditCardTransactionRequest();
 
             request.OrderNumber = "12345678";
-            request.CreditCardToken = "2fb92b4fb43a453288b388fcce6659d3"; //  "93610b81fd4749f69b81d7f12286bf61"; //"3aa58fecce92433fbcc17ea9a3e6d923"; // "ae7b55027a6a439ea29a1e2b718e0f8a";// "6fefd54fa8854710a8331797bfd14e3a";
+            request.CreditCardToken = "70401f6f4f684ab4a24728181f368d7c"; //"2fb92b4fb43a453288b388fcce6659d3"; //  "93610b81fd4749f69b81d7f12286bf61"; //"3aa58fecce92433fbcc17ea9a3e6d923"; // "ae7b55027a6a439ea29a1e2b718e0f8a";// "6fefd54fa8854710a8331797bfd14e3a";
             request.Amount = (decimal?) 1.00;
             request.Type = TransactionType.PURCHASE.ToString();
             request.BillingName = "P. Tech.";

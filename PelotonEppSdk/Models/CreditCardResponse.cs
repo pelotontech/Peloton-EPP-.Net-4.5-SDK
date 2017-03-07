@@ -19,6 +19,10 @@ namespace PelotonEppSdk.Models
         /// Result of the card security code verification process
         /// </summary>
         public string CardSecurityCodeVerificationResult { get; set; }
+
+        internal CreditCardResponse(response r) : base(r)
+        {
+        }
     }
 
     [SuppressMessage("ReSharper", "InconsistentNaming")]
@@ -36,12 +40,8 @@ namespace PelotonEppSdk.Models
         public static explicit operator CreditCardResponse(credit_card_response creditCardResponse)
         {
             if (creditCardResponse == null) return null;
-            return new CreditCardResponse()
+            return new CreditCardResponse(creditCardResponse)
             {
-                Success = creditCardResponse.success,
-                Message = creditCardResponse.message,
-                Errors = creditCardResponse.errors,
-                MessageCode = creditCardResponse.message_code,
                 CreditCardToken = creditCardResponse.credit_card_token,
                 AddressVerificationResult = creditCardResponse.address_verification_result,
                 CardSecurityCodeVerificationResult = creditCardResponse.card_security_code_verification_result

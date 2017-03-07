@@ -15,6 +15,10 @@ namespace PelotonEppSdk.Models
         /// The new token to be submitted for the next Funds Transfer Notification Request
         /// </summary>
         public string Token { get; set; }
+
+        internal FundsTransferNotificationsResponse(response r) : base(r)
+        {
+        }
     }
 
     [SuppressMessage("ReSharper", "InconsistentNaming")]
@@ -34,12 +38,8 @@ namespace PelotonEppSdk.Models
             if (fundsTransferNotificationsResponse.notifications != null)
                 notifications = fundsTransferNotificationsResponse.notifications.Select(ftn => (StateChangeNotification) ftn).ToList();
 
-            return new FundsTransferNotificationsResponse
+            return new FundsTransferNotificationsResponse(fundsTransferNotificationsResponse)
             {
-                Success = fundsTransferNotificationsResponse.success,
-                Message = fundsTransferNotificationsResponse.message,
-                Errors = fundsTransferNotificationsResponse.errors,
-                MessageCode = fundsTransferNotificationsResponse.message_code,
                 Notifications = notifications,
                 Token = fundsTransferNotificationsResponse.token
             };

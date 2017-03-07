@@ -13,6 +13,14 @@ namespace PelotonEppSdk.Models
         /// </summary>
         [StringLength(36)]
         public string TransactionRefCode { get; set; }
+
+        public TransactionResponse() : base()
+        {
+        }
+
+        internal TransactionResponse(response r) : base(r)
+        {
+        }
     }
 
     [SuppressMessage("ReSharper", "InconsistentNaming")]
@@ -25,12 +33,8 @@ namespace PelotonEppSdk.Models
         public static explicit operator TransactionResponse(transaction_response tr)
         {
             if (tr == null) return null;
-            return new TransactionResponse
+            return new TransactionResponse(tr)
             {
-                Success = tr.success,
-                Message = tr.message,
-                Errors = tr.errors,
-                MessageCode = tr.message_code,
                 TransactionRefCode = tr.transaction_ref_code
             };
         }

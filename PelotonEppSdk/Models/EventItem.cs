@@ -35,6 +35,10 @@ namespace PelotonEppSdk.Models
         /// </summary>
         public decimal? Amount { get; set; }
         /// <summary>
+        /// Is the amount associated with an event item adjustable? Default: false
+        /// </summary>
+        public bool? AmountAdjustable { get; set; }
+        /// <summary>
         /// A list of custom fields associated with an event.
         /// </summary>
         public ICollection<EventCustomField> CustomFields { get; set; }
@@ -51,6 +55,7 @@ namespace PelotonEppSdk.Models
             public string unit_quantity_description { get; set; }
             public decimal? unit_amount { get; set; }
             public decimal? amount { get; set; }
+            public bool? amount_adjustable { get; set; }
             public ICollection<event_custom_field> custom_fields { get; set; }
             public static explicit operator EventItem(event_item ei)
             {
@@ -69,6 +74,7 @@ namespace PelotonEppSdk.Models
                     UnitQuantityDescription = ei.unit_quantity_description,
                     UnitAmount = ei.unit_amount,
                     Amount = ei.amount,
+                    AmountAdjustable = ei.amount_adjustable,
                     CustomFields = customFields
                 };
             }

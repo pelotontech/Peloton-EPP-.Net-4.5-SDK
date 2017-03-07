@@ -29,13 +29,8 @@ namespace PelotonEppSdk.Models
         /// </summary>
         public DateTime ToDate { get; set; }
 
-        internal StatementsResponse(statements_response sr) : base(sr)
+        internal StatementsResponse(response sr) : base(sr)
         {
-            OpeningBalance = sr.opening_balance;
-            // In some error cases the statement_details will be null, so use the null propagation operator here
-            StatementDetails = sr.statement_details?.Select(sd => (StatementDetail) sd).ToList();
-            FromDate = sr.from_date_utc;
-            ToDate = sr.to_date_utc;
         }
     }
 
@@ -65,17 +60,6 @@ namespace PelotonEppSdk.Models
         /// a nullable transaction_reference_code
         /// </summary>
         public string TransactionReferenceCode { get; set; }
-
-        internal StatementDetail(statement_detail sd)
-        {
-            LedgerType = sd.ledger_type;
-            Amount = sd.amount;
-            TransactionDatetime = sd.transaction_datetime_utc;
-            TransactionReferenceCode = sd.transaction_reference_code;
-            TransactionDescription = (TransactionDescription)sd.transaction_description;
-            TransactionType = (StatementTransactionType)sd.transaction_type;
-            References = sd.references.Select(r=>(Reference) r).ToList();
-        }
     }
 
     [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
@@ -140,7 +124,14 @@ namespace PelotonEppSdk.Models
 
         public static explicit operator StatementsResponse(statements_response sr)
         {
-            return new StatementsResponse(sr);
+            return new StatementsResponse(sr)
+            {
+                OpeningBalance = sr.opening_balance,
+                // In some error cases the statement_details will be null, so use the null propagation operator here
+                StatementDetails = sr.statement_details?.Select(sd => (StatementDetail)sd).ToList(),
+                FromDate = sr.from_date_utc,
+                ToDate = sr.to_date_utc
+            };
         }
     }
 
@@ -176,7 +167,16 @@ namespace PelotonEppSdk.Models
 
         public static explicit operator StatementDetail(statement_detail sd)
         {
-            return new StatementDetail(sd);
+            return new StatementDetail
+            {
+                LedgerType = sd.ledger_type,
+                Amount = sd.amount,
+                TransactionDatetime = sd.transaction_datetime_utc,
+                TransactionReferenceCode = sd.transaction_reference_code,
+                TransactionDescription = (TransactionDescription)sd.transaction_description,
+                TransactionType = (StatementTransactionType)sd.transaction_type,
+                References = sd.references.Select(r => (Reference)r).ToList()
+            };
         }
     }
 

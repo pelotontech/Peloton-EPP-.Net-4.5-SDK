@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="Enums\ClientAuthTokenAuthorizationType.cs" />
     <Compile Include="Enums\CreditCardType.cs" />
+    <Compile Include="Enums\EventCustomFieldTypeEnum.cs" />
     <Compile Include="Enums\TransactionType.cs" />
     <Compile Include="Interfaces\IBankAccountCreateRequest.cs" />
     <Compile Include="Interfaces\IBankAccountDeleteRequest.cs" />

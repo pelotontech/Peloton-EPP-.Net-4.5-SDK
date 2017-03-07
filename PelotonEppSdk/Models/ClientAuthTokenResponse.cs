@@ -57,6 +57,10 @@ namespace PelotonEppSdk.Models
         /// The datetime when the CAT was used, or null if the CAT is active
         /// </summary>
         public DateTime? AuthorizedDatetime { get; set; }
+
+        internal ClientAuthTokenResponse(response r) : base(r)
+        {
+        }
     }
 
     [SuppressMessage("ReSharper", "InconsistentNaming")]
@@ -70,13 +74,8 @@ namespace PelotonEppSdk.Models
         public static explicit operator ClientAuthTokenResponse(client_auth_token_response clientAuthTokenResponse)
         {
             if (clientAuthTokenResponse == null) return null;
-            return new ClientAuthTokenResponse
+            return new ClientAuthTokenResponse(clientAuthTokenResponse)
             {
-                Success = clientAuthTokenResponse.success,
-                Message = clientAuthTokenResponse.message,
-                Errors = clientAuthTokenResponse.errors,
-                MessageCode = clientAuthTokenResponse.message_code,
-
                 ClientAuthToken = clientAuthTokenResponse.client_auth_token
             };
         }
@@ -118,13 +117,8 @@ namespace PelotonEppSdk.Models
                 if (!parseResult) Debug.WriteLine("Failed to parse Client Auth Token response type code.");
             }
 
-            return new ClientAuthTokenResponse
+            return new ClientAuthTokenResponse(clientAuthTokenResponse)
             {
-                Success = clientAuthTokenResponse.success,
-                Message = clientAuthTokenResponse.message,
-                Errors = clientAuthTokenResponse.errors,
-                MessageCode = clientAuthTokenResponse.message_code,
-
                 ClientAuthToken = clientAuthTokenResponse.client_auth_token,
                 ReturnUrl = clientAuthTokenResponse.return_url,
                 Active = clientAuthTokenResponse.active,
