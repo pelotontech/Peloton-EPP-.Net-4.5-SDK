@@ -8,6 +8,7 @@ using System.Net.Http.Headers;
 using System.Runtime.CompilerServices;
 using Newtonsoft.Json;
 using PelotonEppSdk.Enums;
+using PelotonEppSdk.Validations;
 using static System.Text.Encoding;
 using Convert = System.Convert;
 [assembly: InternalsVisibleTo("PelotonEppSdkTests")]
@@ -20,8 +21,13 @@ namespace PelotonEppSdk.Models
         internal Uri BaseUri { get; set; }
         [JsonIgnore]
         internal AuthenticationHeaderValue AuthenticationHeader { get; private set; }
+
+        [JsonIgnore]
+        internal List<string> ValidationErrors { get; set; }
+
         [Required]
         internal string ApplicationName { get; set; }
+
         internal LanguageCode LanguageCode { get; set; }
 
         internal void SetAuthentication(string username, string password)
@@ -32,13 +38,13 @@ namespace PelotonEppSdk.Models
         /// <summary>
         /// Validates the request. A return value indicates whether the validation succeeded.
         /// </summary>
-        /// <param name="errorList">When this method returns, contains a list of any errors which were found during validation.
+        /// <param name="errorList">When this subsetEnum returns, contains a list of any errors which were found during validation.
         /// The list must be instantiated before calling TryValidate</param>
         /// <returns><c>True</c> if no validation errors were found, <c>false</c> if errors were found</returns>
         /// <exception cref="ArgumentNullException"><paramref name="errorList"/> is <see langword="null" />.</exception>
         public bool TryValidate(ICollection<string> errorList)
         {
-            if(errorList == null) throw new ArgumentNullException(nameof(errorList));
+            if (errorList == null) throw new ArgumentNullException(nameof(errorList));
             var list = Validate();
             foreach (var error in list)
             {
@@ -58,6 +64,48 @@ namespace PelotonEppSdk.Models
             Validator.TryValidateObject(this, context, results, true);
             return results.Select(r => r.ErrorMessage).ToList();
         }
+
+        /// <summary>
+        /// Validates the subset of the properties of the model which have been annotated with an instance of <see cref="IValidationSubsetAttribute"/>
+        /// </summary>
+        /// <param name="errorList">When this method returns, contains a list of any errors which were found during validation.</param>
+        /// <param name="subsetEnum">An instance of an enum used for annotating a subset of the model properties</param>
+        /// <returns><c>True</c> if no validation errors were found, <c>false</c> if errors were found</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="errorList"/> is <see langword="null" />.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="subsetEnum"/> is <see langword="null" />.</exception>
+        public bool TryValidatePropertySubset(ICollection<string> errorList, Enum subsetEnum)
+        {
+            if (errorList == null) throw new ArgumentNullException(nameof(errorList));
+            if (subsetEnum == null) throw new ArgumentNullException(nameof(subsetEnum));
+
+            var objectForValidation = this;
+            var propertiesForMethod = objectForValidation
+                .GetType()
+                .GetProperties()
+                .Where(prop => prop
+                    .GetCustomAttributes(false)
+                    .OfType<IValidationSubsetAttribute>()
+                    .Any(ca => ca.ValidationSubsetEnum.Contains(subsetEnum))
+                );
+
+            var results = new Collection<ValidationResult>();
+
+            var isValid = propertiesForMethod
+                .All(p =>
+                    Validator.TryValidateProperty(
+                        p.GetValue(objectForValidation),
+                        new ValidationContext(objectForValidation, null, null) {MemberName = p.Name},
+                        results)
+                );
+
+            var errorMessages = results.Select(r => r.ErrorMessage).ToList();
+
+            foreach (var error in errorMessages)
+            {
+                errorList.Add(error);
+            }
+            return isValid;
+        }
     }
 
     [SuppressMessage("ReSharper", "InconsistentNaming")]
@@ -72,7 +120,7 @@ namespace PelotonEppSdk.Models
             base_uri = requestBase.BaseUri;
             application_name = requestBase.ApplicationName;
             authentication_header = requestBase.AuthenticationHeader;
-            language_code = Enum.GetName(typeof (LanguageCode), requestBase.LanguageCode);
+            language_code = Enum.GetName(typeof(LanguageCode), requestBase.LanguageCode);
         }
 
 
@@ -86,5 +134,4 @@ namespace PelotonEppSdk.Models
 
         public string language_code { get; set; }
     }
-
 }

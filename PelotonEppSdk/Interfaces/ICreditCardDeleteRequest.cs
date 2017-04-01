@@ -5,6 +5,8 @@ namespace PelotonEppSdk.Interfaces
 {
     public interface ICreditCardDeleteRequest
     {
+        string CreditCardToken { get; set; }
+
         Task<CreditCardResponse> DeleteAsync();
     }
 }
