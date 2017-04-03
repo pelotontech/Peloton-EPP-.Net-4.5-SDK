@@ -59,7 +59,7 @@ namespace PelotonEppSdk.Validations
         }
     }
 
-    public class RequestMethodPartitionAttribute: ValidationSubsetAttribute
+    public class RequestMethodAttribute: ValidationSubsetAttribute
     {
         public enum RequestMethodEnum
         {
@@ -69,12 +69,12 @@ namespace PelotonEppSdk.Validations
             DELETE
         }
 
-        public RequestMethodPartitionAttribute(RequestMethodEnum[] method)
+        public RequestMethodAttribute(RequestMethodEnum[] method)
         {
             ValidationSubsetEnum = ConvertToEnumArray(method);
         }
 
-        public RequestMethodPartitionAttribute(RequestMethodEnum method)
+        public RequestMethodAttribute(RequestMethodEnum method)
         {
             ValidationSubsetEnum = ConvertToEnumArray(method);
         }
