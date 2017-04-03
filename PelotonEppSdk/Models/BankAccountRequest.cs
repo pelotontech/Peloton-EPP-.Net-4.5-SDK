@@ -44,12 +44,12 @@ namespace PelotonEppSdk.Models
         public IEnumerable<Reference> References { get; set; }
 
         /// <exception cref="HttpException"><see cref="HttpStatusCode"/> is not <c>2XX Success</c>.</exception>
-        public async Task<BankAccountCreateResponse> PostAsync()
+        public async Task<BankAccountResponse> PostAsync()
         {
             var client = new PelotonClient();
             var request = (bank_account_request) this;
             var result = await client.PostAsync<bank_account_response>(request, ApiTarget.BankAccounts).ConfigureAwait(false);
-            return (BankAccountCreateResponse) result;
+            return (BankAccountResponse) result;
         }
         // end of create fields and methods
 

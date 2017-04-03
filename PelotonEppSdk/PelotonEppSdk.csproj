@@ -65,7 +65,7 @@
     <Compile Include="Enums\ApiTarget.cs" />
     <Compile Include="Enums\LanguageCode.cs" />
     <Compile Include="Models\BankAccountRequest.cs" />
-    <Compile Include="Models\BankAccountCreateResponse.cs" />
+    <Compile Include="Models\BankAccountResponse.cs" />
     <Compile Include="Models\ClientAuthTokenRequest.cs" />
     <Compile Include="Models\ClientAuthTokenResponse.cs" />
     <Compile Include="Models\CreditCardNumber.cs" />

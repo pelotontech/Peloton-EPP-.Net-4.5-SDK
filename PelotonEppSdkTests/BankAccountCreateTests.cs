@@ -27,7 +27,7 @@ namespace PelotonEppSdkTests
                     Debug.WriteLine(error);
                 }
             }
-            BankAccountCreateResponse result = null;
+            BankAccountResponse result = null;
 
             try
             {
