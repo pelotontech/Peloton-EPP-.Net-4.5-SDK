@@ -11,16 +11,18 @@ using System.Web;
 using System.Web.Script.Serialization;
 using PelotonEppSdk.Classes;
 using PelotonEppSdk.Enums;
-using PelotonEppSdk.Interfaces;
+using PelotonEppSdk.Validations;
+using static PelotonEppSdk.Validations.RequestMethodAttribute;
 
 namespace PelotonEppSdk.Models
 {
-    public class BankAccountRequest : RequestBase, IBankAccountCreateRequest, IBankAccountDeleteRequest
+    public class BankAccountRequest : RequestBase
     {
         // start of create fields and methods
         /// <summary>
         /// The bank account which is to be created
         /// </summary>
+        [RequestMethod(RequestMethodEnum.POST)]
         [Required]
         public BankAccount BankAccount { get; set; }
 
@@ -52,6 +54,12 @@ namespace PelotonEppSdk.Models
         // end of create fields and methods
 
         // start of delete fields and methods
+        /// <summary>
+        /// The identifier used to identify a bank account.
+        /// </summary>
+        [RequestMethod(RequestMethodEnum.DELETE)]
+        [Required]
+        [StringLength(32)]
         public string Token { get; set; }
 
         /// <exception cref="HttpException">When status code is not <c>2XX Success</c>.</exception>

@@ -53,7 +53,7 @@ namespace PelotonEppSdkTests
         {
             var factory = new RequestFactory(106, "c57cbd1d", "PelonEppSdkTests", baseUri);
             //var factory = new RequestFactory(80, "e9ab9532", "PelonEppSdkTests");
-            var createRequest = factory.GetBankAccountCreateRequest();
+            var createRequest = factory.GetBankAccountRequest();
             createRequest.BankAccount = new BankAccount
             {
                 AccountNumber = "1",

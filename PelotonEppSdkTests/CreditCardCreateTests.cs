@@ -82,7 +82,7 @@ namespace PelotonEppSdkTests
         {
             var factory = new RequestFactory(clientid, clientkey, applicationName, baseUri, languageCode);
             //var factory = new RequestFactory(80, "e9ab9532", "PelonEppSdkTests");
-            var createRequest = factory.GetCreditCardCreateRequest();
+            var createRequest = factory.GetCreditCardRequest();
 
             createRequest.OrderNumber = Guid.NewGuid().ToString().Replace("-","").Substring(0,9);
             createRequest.BillingName = "P. Tech.";
