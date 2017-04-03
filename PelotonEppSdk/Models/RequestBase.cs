@@ -8,6 +8,7 @@ using System.Net.Http.Headers;
 using System.Runtime.CompilerServices;
 using Newtonsoft.Json;
 using PelotonEppSdk.Enums;
+using PelotonEppSdk.Interfaces;
 using PelotonEppSdk.Validations;
 using static System.Text.Encoding;
 using Convert = System.Convert;
