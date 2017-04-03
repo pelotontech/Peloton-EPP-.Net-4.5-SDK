@@ -4,23 +4,28 @@ using NUnit.Framework;
 using PelotonEppSdk.Models;
 using PelotonEppSdk.Validations;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
 using System.Linq;
+using System.Net;
+using System.Threading.Tasks;
+using System.Web;
 using static PelotonEppSdk.Validations.RequestMethodAttribute;
-using static PelotonEppSdk.Validations.ValidationSubsetAttribute.GeneralEnum;
+using static PelotonEppSdk.Validations.ValidationSubsetAttribute;
+
 
 namespace PelotonEppSdkTests
 {
     public class TestModel: RequestBase
     {
-        [ValidationSubset(new [] { One, Two, Three })]
+        [ValidationSubset(new [] { GeneralEnum.One, GeneralEnum.Two, GeneralEnum.Three })]
         [Required]
         public string TestStringInSubsetsOneTwoThree { get; set; }
 
-        [ValidationSubset(Two)]
+        [ValidationSubset(GeneralEnum.Two)]
         [StringLength(50)]
         public string TestStringInSubsetTwo { get; set; }
 
-        [ValidationSubset(new[] { Three })]
+        [ValidationSubset(new[] { GeneralEnum.Three })]
         [Required]
         [StringLength(20)]
         public string TestStringInSubsetThree { get; set; }
@@ -31,6 +36,54 @@ namespace PelotonEppSdkTests
 
         [System.ComponentModel.DataAnnotations.Range(0, 10)]
         public int TestInteger { get; set; }
+
+        /// <exception cref="HttpException"><see cref="HttpStatusCode"/> is not <c>2XX Success</c>.</exception>
+        /// <exception cref="ValidationException">Model is not valid.</exception>
+        public async Task<Response> OneAsync(bool validate = true)
+        {
+            if (validate)
+            {
+                // validate the request before sending it
+                ValidationErrors = new List<string>();
+                var isValid = TryValidatePropertySubset(ValidationErrors, GeneralEnum.One);
+                if(!isValid) throw new ValidationException("Validation Error", null, ValidationErrors);
+            }
+
+            var result = new Response();
+            return await Task.FromResult(result).ConfigureAwait(false);
+        }
+
+        /// <exception cref="HttpException"><see cref="HttpStatusCode"/> is not <c>2XX Success</c>.</exception>
+        /// <exception cref="ValidationException">Model is not valid.</exception>
+        public async Task<Response> TwoAsync(bool validate = true)
+        {
+            if (validate)
+            {
+                // validate the request before sending it
+                ValidationErrors = new List<string>();
+                var isValid = TryValidatePropertySubset(ValidationErrors, GeneralEnum.Two);
+                if(!isValid) throw new ValidationException("Validation Error", null, ValidationErrors);
+            }
+
+            var result = new Response();
+            return await Task.FromResult(result).ConfigureAwait(false);
+        }
+
+        /// <exception cref="HttpException"><see cref="HttpStatusCode"/> is not <c>2XX Success</c>.</exception>
+        /// <exception cref="ValidationException">Model is not valid.</exception>
+        public async Task<Response> ThreeAsync(bool validate = true)
+        {
+            if (validate)
+            {
+                // validate the request before sending it
+                ValidationErrors = new List<string>();
+                var isValid = TryValidatePropertySubset(ValidationErrors, GeneralEnum.Three);
+                if(!isValid) throw new ValidationException("Validation Error", null, ValidationErrors);
+            }
+
+            var result = new Response();
+            return await Task.FromResult(result).ConfigureAwait(false);
+        }
     }
     
     public class TestRequestMethodModel: RequestBase
@@ -88,7 +141,7 @@ namespace PelotonEppSdkTests
 
             try
             {
-                testModel.TryValidatePropertySubset(null, One);
+                testModel.TryValidatePropertySubset(null, GeneralEnum.One);
                 Assert.Fail();
             }
             catch (ArgumentNullException e)
@@ -115,7 +168,7 @@ namespace PelotonEppSdkTests
             };
 
             var errorList = new List<string>();
-            var result = testModel.TryValidatePropertySubset(errorList, One);
+            var result = testModel.TryValidatePropertySubset(errorList, GeneralEnum.One);
             Assert.IsTrue(result);
             Assert.IsTrue(!errorList.Any());
         }
@@ -133,10 +186,35 @@ namespace PelotonEppSdkTests
             };
 
             var errorList = new List<string>();
-            var result = testModel.TryValidatePropertySubset(errorList, One);
+            var result = testModel.TryValidatePropertySubset(errorList, GeneralEnum.One);
             Assert.IsFalse(result);
             Assert.IsTrue(errorList.Single().Any());
             Assert.AreEqual("The TestStringInSubsetsOneTwoThree field is required.", errorList.Single());
+        }
+
+        [Test]
+        public void TestValidationSubsetAttributeModelMultiplePropertiesInvalid()
+        {
+            TestModel testModel = new TestModel()
+            {
+                TestStringInSubsetsOneTwoThree = null,
+                TestStringInZeroSubsets = null,
+                TestStringInSubsetTwo = null,
+                TestInteger = -1,
+                TestStringInSubsetThree = null
+            };
+
+            var errorList = new List<string>();
+            var result = testModel.TryValidatePropertySubset(errorList, GeneralEnum.Three);
+            Assert.IsFalse(result);
+            foreach (var item in errorList)
+            {
+                Debug.WriteLine(item);
+            }
+            Assert.IsTrue(errorList.Count == 2);
+
+            Assert.IsTrue(errorList.Contains("The TestStringInSubsetsOneTwoThree field is required."));
+            Assert.IsTrue(errorList.Contains("The TestStringInSubsetThree field is required."));
         }
 
         [Test]
@@ -152,7 +230,7 @@ namespace PelotonEppSdkTests
             };
 
             var errorList = new List<string>();
-            var result = testModel.TryValidatePropertySubset(errorList, One);
+            var result = testModel.TryValidatePropertySubset(errorList, GeneralEnum.One);
             Assert.IsTrue(result);
             Assert.IsTrue(!errorList.Any());
         }
@@ -170,7 +248,7 @@ namespace PelotonEppSdkTests
             };
 
             var errorList = new List<string>();
-            var result = testModel.TryValidatePropertySubset(errorList, Two);
+            var result = testModel.TryValidatePropertySubset(errorList, GeneralEnum.Two);
             Assert.IsTrue(result);
             Assert.IsTrue(!errorList.Any());
         }
@@ -188,7 +266,7 @@ namespace PelotonEppSdkTests
             };
 
             var errorList = new List<string>();
-            var result = testModel.TryValidatePropertySubset(errorList, Two);
+            var result = testModel.TryValidatePropertySubset(errorList, GeneralEnum.Two);
             Assert.IsTrue(result);
             Assert.IsTrue(!errorList.Any());
         }
@@ -206,10 +284,120 @@ namespace PelotonEppSdkTests
             };
 
             var errorList = new List<string>();
-            var result = testModel.TryValidatePropertySubset(errorList, Three);
+            var result = testModel.TryValidatePropertySubset(errorList, GeneralEnum.Three);
             Assert.IsFalse(result);
             Assert.IsTrue(errorList.Single().Any());
             Assert.AreEqual("The field TestStringInSubsetThree must be a string with a maximum length of 20.", errorList.Single());
+        }
+
+        [Test]
+        public void TestValidationSubsetAttributeSubsetOneMethodWithInvalidModel()
+        {
+            TestModel testModel = new TestModel();
+
+
+            var responseTask = testModel.OneAsync();
+
+            var continuedTask = responseTask.ContinueWith(t =>
+                {
+                    Assert.IsTrue(t.Exception != null);
+                    Assert.IsTrue(t.Exception.InnerException != null);
+                    Assert.IsTrue(t.Exception.InnerException.GetType() == typeof(ValidationException));
+                    Assert.AreEqual("The TestStringInSubsetsOneTwoThree field is required.", testModel.ValidationErrors.Single());
+                }, TaskContinuationOptions.OnlyOnFaulted);
+
+            continuedTask.Wait();
+
+            Assert.IsTrue(responseTask.IsFaulted);
+
+            // no need to get the result from this task. Calling Result will throw an AggregateException with the ValidationException as the InnerException.
+            //var response = responseTask.Result;
+        }
+
+        [Test]
+        public void TestValidationSubsetAttributeSubsetThreeMethodWithInvalidModel()
+        {
+            TestModel testModel = new TestModel()
+            {
+                TestStringInSubsetsOneTwoThree = "dfrgdr",
+                //TestStringInSubsetThree = null,
+                TestStringInSubsetTwo = "test2",
+                TestStringInZeroSubsets = "sytrng",
+                TestInteger = 5
+            };
+
+            var responseTask = testModel.ThreeAsync();
+
+            var continuedTask = responseTask.ContinueWith(t =>
+            {
+                Assert.IsTrue(t.Exception != null);
+                Assert.IsTrue(t.Exception.InnerException != null);
+                Assert.IsTrue(t.Exception.InnerException.GetType() == typeof(ValidationException));
+                Assert.AreEqual("The TestStringInSubsetThree field is required.", testModel.ValidationErrors.Single());
+                Debug.WriteLine("continuation task successful");
+            }, TaskContinuationOptions.OnlyOnFaulted);
+
+            Assert.IsTrue(responseTask.IsFaulted);
+
+            continuedTask.Wait();
+
+            // no need to get the result from this task. Calling Result will throw an AggregateException with the ValidationException as the InnerException.
+            //var response = responseTask.Result;
+        }
+
+        [Test]
+        public void TestValidationSubsetAttributeSubsetOneTwoAndThree()
+        {
+            TestModel testModel = new TestModel();
+
+            var responseTask = testModel.OneAsync();
+
+            var continuedTask = responseTask.ContinueWith(t =>
+            {
+                Assert.IsTrue(t.Exception != null);
+                Assert.IsTrue(t.Exception.InnerException != null);
+                Assert.IsTrue(t.Exception.InnerException.GetType() == typeof(ValidationException));
+                Assert.AreEqual("The TestStringInSubsetsOneTwoThree field is required.", testModel.ValidationErrors.Single());
+            }, TaskContinuationOptions.OnlyOnFaulted);
+
+            continuedTask.Wait();
+
+            Assert.IsTrue(responseTask.IsFaulted);
+
+            // no need to get the result from this task. Calling Result will throw an AggregateException with the ValidationException as the InnerException.
+            //var response = responseTask.Result;
+
+            responseTask = testModel.TwoAsync();
+
+            continuedTask = responseTask.ContinueWith(t =>
+            {
+                Assert.IsTrue(t.Exception != null);
+                Assert.IsTrue(t.Exception.InnerException != null);
+                Assert.IsTrue(t.Exception.InnerException.GetType() == typeof(ValidationException));
+                Assert.AreEqual("The TestStringInSubsetsOneTwoThree field is required.", testModel.ValidationErrors.Single());
+            }, TaskContinuationOptions.OnlyOnFaulted);
+
+            continuedTask.Wait();
+
+            Assert.IsTrue(responseTask.IsFaulted);
+
+
+            responseTask = testModel.ThreeAsync();
+
+            continuedTask = responseTask.ContinueWith(t =>
+            {
+                Assert.IsTrue(t.Exception != null);
+                Assert.IsTrue(t.Exception.InnerException != null);
+                Assert.IsTrue(t.Exception.InnerException.GetType() == typeof(ValidationException));
+                Assert.IsTrue(testModel.ValidationErrors.Count == 2);
+                Assert.IsTrue(testModel.ValidationErrors.Contains("The TestStringInSubsetsOneTwoThree field is required."));
+                Assert.IsTrue(testModel.ValidationErrors.Contains("The TestStringInSubsetThree field is required."));
+            }, TaskContinuationOptions.OnlyOnFaulted);
+
+            continuedTask.Wait();
+
+            Assert.IsTrue(responseTask.IsFaulted);
+
         }
 
         [Test]
@@ -217,8 +405,8 @@ namespace PelotonEppSdkTests
         {
             TestRequestMethodModel testModel = new TestRequestMethodModel()
             {
-                TestStringInPOSTPUTAndDELETE = "testString", // valid,
-                TestStringInZeroSubsets = new string('a', 50), // valid, but not part of the POST subset of properties
+                TestStringInPOSTPUTAndDELETE = "testString", // valid
+                TestStringInZeroSubsets = new string('a', 50), // valid
                 TestStringInPUTSubset = "testString3", // valid, in subset
                 TestIntegerInZeroSubsets = 20, // invalid, not in any subset
                 TestIntegerInSubsetDELETE = -1 // invalid, in sub set
