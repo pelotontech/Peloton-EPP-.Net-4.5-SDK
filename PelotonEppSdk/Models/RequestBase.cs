@@ -91,19 +91,19 @@ namespace PelotonEppSdk.Models
 
             var results = new Collection<ValidationResult>();
 
-            var isValid = propertiesForMethod
-                .All(p =>
-                    Validator.TryValidateProperty(
-                        p.GetValue(objectForValidation),
-                        new ValidationContext(objectForValidation, null, null) {MemberName = p.Name},
-                        results)
-                );
-
-            var errorMessages = results.Select(r => r.ErrorMessage).ToList();
-
-            foreach (var error in errorMessages)
+            bool isValid = true;
+            foreach (var p in propertiesForMethod)
             {
-                errorList.Add(error);
+                var validResult = Validator.TryValidateProperty(
+                    p.GetValue(objectForValidation),
+                    new ValidationContext(objectForValidation, null, null) {MemberName = p.Name},
+                    results);
+                isValid &= validResult;
+            }
+
+            foreach (var error in results)
+            {
+                errorList.Add(error.ErrorMessage);
             }
             return isValid;
         }
