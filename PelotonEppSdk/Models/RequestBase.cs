@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net.Http.Headers;
 using System.Web.Script.Serialization;
 using PelotonEppSdk.Enums;
+using PelotonEppSdk.Interfaces;
 using PelotonEppSdk.Validations;
 using static System.Text.Encoding;
 using Convert = System.Convert;

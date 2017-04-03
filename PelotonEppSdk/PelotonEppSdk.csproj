@@ -55,6 +55,7 @@
     <Compile Include="Interfaces\ICreditCardCreateRequest.cs" />
     <Compile Include="Interfaces\ICreditCardDeleteRequest.cs" />
     <Compile Include="Interfaces\ICreditCardUpdateRequest.cs" />
+    <Compile Include="Interfaces\IValidationSubsetAttribute.cs" />
     <Compile Include="Interfaces\IVerificationResponse.cs" />
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\BankAccount.cs" />
@@ -100,6 +101,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Validations\DollarValueValidationAttribute.cs" />
+    <Compile Include="Validations\RequestMethodAttribute.cs" />
     <Compile Include="Validations\ValidationSubsetAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
