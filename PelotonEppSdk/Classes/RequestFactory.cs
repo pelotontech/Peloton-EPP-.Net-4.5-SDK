@@ -1,6 +1,5 @@
 ﻿using System;
 using PelotonEppSdk.Enums;
-using PelotonEppSdk.Interfaces;
 using PelotonEppSdk.Models;
 
 namespace PelotonEppSdk.Classes
@@ -91,7 +90,7 @@ namespace PelotonEppSdk.Classes
             return transferRequest;
         }
 
-        public IBankAccountCreateRequest GetBankAccountCreateRequest()
+        public BankAccountRequest GetBankAccountRequest()
         {
             var bankAccountRequest = new BankAccountRequest();
             SetBaseHeaders(bankAccountRequest);
@@ -100,34 +99,7 @@ namespace PelotonEppSdk.Classes
             return bankAccountRequest;
         }
 
-        public IBankAccountDeleteRequest GetBankAccountDeleteRequest()
-        {
-            var bankAccountRequest = new BankAccountRequest();
-            SetBaseHeaders(bankAccountRequest);
-            SetBaseFields(bankAccountRequest);
-            SetBaseUri(bankAccountRequest);
-            return bankAccountRequest;
-        }
-
-        public ICreditCardCreateRequest GetCreditCardCreateRequest()
-        {
-            var request = new CreditCardRequest();
-            SetBaseHeaders(request);
-            SetBaseFields(request);
-            SetBaseUri(request);
-            return request;
-        }
-
-        public ICreditCardUpdateRequest GetCreditCardUpdateRequest()
-        {
-            var request = new CreditCardRequest();
-            SetBaseHeaders(request);
-            SetBaseFields(request);
-            SetBaseUri(request);
-            return request;
-        }
-
-        public ICreditCardDeleteRequest GetCreditCardDeleteRequest()
+        public CreditCardRequest GetCreditCardRequest()
         {
             var request = new CreditCardRequest();
             SetBaseHeaders(request);
@@ -164,7 +136,7 @@ namespace PelotonEppSdk.Classes
             return request;
         }
 
-        public ClientAuthTokenRequest GetClientAuthTokenCreateRequest()
+        public ClientAuthTokenRequest GetClientAuthTokenRequest()
         {
             var request = new ClientAuthTokenRequest();
             SetBaseHeaders(request);

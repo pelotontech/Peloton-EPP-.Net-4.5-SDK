@@ -207,7 +207,7 @@ namespace PelotonEppSdkTests
         private static ClientAuthTokenRequest GetBasicRequest(int clientid, string clientkey, string accountToken, string applicationName, LanguageCode languageCode = LanguageCode.en)
         {
             var factory = new RequestFactory(clientid, clientkey, applicationName, baseUri, languageCode);
-            var createRequest = factory.GetClientAuthTokenCreateRequest();
+            var createRequest = factory.GetClientAuthTokenRequest();
 
             createRequest.AccountToken = accountToken;
             createRequest.ReturnUrl = "https://peloton-technologies.com/";
