@@ -19,6 +19,8 @@ using System.Runtime.InteropServices;
 // COM, set the ComVisible attribute to true on that Type.
 [assembly: ComVisible(false)]
 
+[assembly: InternalsVisibleTo("PelotonEppSdkTests")]
+
 // The following GUID is for the ID of the typelib if this project is exposed to COM
 [assembly: Guid("95231128-ccf5-47c8-8f86-d88bdfc2ba7c")]
 
