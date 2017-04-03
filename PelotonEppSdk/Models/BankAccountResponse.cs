@@ -2,16 +2,16 @@
 
 namespace PelotonEppSdk.Models
 {
-    public class BankAccountCreateResponse : Response
+    public class BankAccountResponse : Response
     {
         public string BankAccountToken { get; set; }
 
         // ReSharper disable once UnusedMember.Global
-        public BankAccountCreateResponse()
+        public BankAccountResponse()
         {
         }
 
-        internal BankAccountCreateResponse(response r) : base(r)
+        internal BankAccountResponse(response r) : base(r)
         {
         }
     }
@@ -24,10 +24,10 @@ namespace PelotonEppSdk.Models
     {
         public string bank_account_token { get; set; }
 
-        public static explicit operator BankAccountCreateResponse(bank_account_response bankAccountResponse)
+        public static explicit operator BankAccountResponse(bank_account_response bankAccountResponse)
         {
             if (bankAccountResponse == null) return null;
-            return new BankAccountCreateResponse(bankAccountResponse)
+            return new BankAccountResponse(bankAccountResponse)
             {
                 Success = bankAccountResponse.success,
                 Message = bankAccountResponse.message,
@@ -37,16 +37,16 @@ namespace PelotonEppSdk.Models
             };
         }
 
-        public static explicit operator bank_account_response(BankAccountCreateResponse bankAccountCreateResponse)
+        public static explicit operator bank_account_response(BankAccountResponse bankAccountResponse)
         {
-            if (bankAccountCreateResponse == null) return null;
+            if (bankAccountResponse == null) return null;
             return new bank_account_response
             {
-                errors = bankAccountCreateResponse.Errors,
-                message = bankAccountCreateResponse.Message,
-                message_code = bankAccountCreateResponse.MessageCode,
-                success = bankAccountCreateResponse.Success,
-                bank_account_token = bankAccountCreateResponse.BankAccountToken
+                errors = bankAccountResponse.Errors,
+                message = bankAccountResponse.Message,
+                message_code = bankAccountResponse.MessageCode,
+                success = bankAccountResponse.Success,
+                bank_account_token = bankAccountResponse.BankAccountToken
             };
         }
     }
