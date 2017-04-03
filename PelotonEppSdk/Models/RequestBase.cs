@@ -93,11 +93,10 @@ namespace PelotonEppSdk.Models
             bool isValid = true;
             foreach (var p in propertiesForMethod)
             {
-                var validResult = Validator.TryValidateProperty(
+                isValid &= Validator.TryValidateProperty(
                     p.GetValue(objectForValidation),
                     new ValidationContext(objectForValidation, null, null) {MemberName = p.Name},
                     results);
-                isValid &= validResult;
             }
 
             foreach (var error in results)
