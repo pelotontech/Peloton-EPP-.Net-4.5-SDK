@@ -5,7 +5,7 @@ using PelotonEppSdk.Models;
 using PelotonEppSdk.Validations;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using static PelotonEppSdk.Validations.RequestMethodPartitionAttribute;
+using static PelotonEppSdk.Validations.RequestMethodAttribute;
 using static PelotonEppSdk.Validations.ValidationSubsetAttribute.GeneralEnum;
 
 namespace PelotonEppSdkTests
@@ -35,7 +35,7 @@ namespace PelotonEppSdkTests
     
     public class TestRequestMethodModel: RequestBase
     {
-        [RequestMethodPartition(new [] { RequestMethodEnum.POST, RequestMethodEnum.PUT, RequestMethodEnum.DELETE })]
+        [RequestMethod(new [] { RequestMethodEnum.POST, RequestMethodEnum.PUT, RequestMethodEnum.DELETE })]
         [Required]
         public string TestStringInPOSTPUTAndDELETE { get; set; }
 
@@ -43,14 +43,14 @@ namespace PelotonEppSdkTests
         [StringLength(50)]
         public string TestStringInZeroSubsets { get; set; }
 
-        [RequestMethodPartition(RequestMethodEnum.PUT)]
+        [RequestMethod(RequestMethodEnum.PUT)]
         [StringLength(50)]
         public string TestStringInPUTSubset { get; set; }
 
         [System.ComponentModel.DataAnnotations.Range(0, 10)]
         public int TestIntegerInZeroSubsets { get; set; }
 
-        [RequestMethodPartition(new[] { RequestMethodEnum.DELETE })]
+        [RequestMethod(new[] { RequestMethodEnum.DELETE })]
         [Required]
         [System.ComponentModel.DataAnnotations.Range(0, 10)]
         public int TestIntegerInSubsetDELETE { get; set; }
