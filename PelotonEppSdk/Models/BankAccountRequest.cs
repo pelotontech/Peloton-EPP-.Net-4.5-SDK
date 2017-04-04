@@ -44,8 +44,16 @@ namespace PelotonEppSdk.Models
         public IEnumerable<Reference> References { get; set; }
 
         /// <exception cref="HttpException"><see cref="HttpStatusCode"/> is not <c>2XX Success</c>.</exception>
-        public async Task<BankAccountResponse> PostAsync()
+        public async Task<BankAccountResponse> PostAsync(bool validate = true)
         {
+            if (validate)
+            {
+                // validate the request before sending it
+                ValidationErrors = new List<string>();
+                var isValid = TryValidatePropertySubset(ValidationErrors, RequestMethodEnum.POST);
+                if(!isValid) throw new ValidationException("Validation Error", null, ValidationErrors);
+            }
+
             var client = new PelotonClient();
             var request = (bank_account_request) this;
             var result = await client.PostAsync<bank_account_response>(request, ApiTarget.BankAccounts).ConfigureAwait(false);
