@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using PelotonEppSdk.Classes;
 using PelotonEppSdk.Enums;
 using PelotonEppSdk.Models;
 
 namespace PelotonEppSdkTests
 {
-    [TestClass]
+    [TestFixture]
     public class EventCreateTests : EventTestsBase
     {
         private static string duplicateFriendlyUrlPath = "NEWEVENT";
@@ -63,7 +63,7 @@ namespace PelotonEppSdkTests
             return request;
         }
 
-        [TestMethod]
+        [Test]
         public void TestCreateEventSuccess()
         {
             var createRequest = GetBasicEventRequest();
@@ -96,7 +96,7 @@ namespace PelotonEppSdkTests
             CheckResponseAndResult(createRequest, getResult, EventStateEnum.New);
         }
 
-        [TestMethod]
+        [Test]
         public void TestCreateEventWithMultipleItems()
         {
             var createRequest = GetBasicEventRequest();
@@ -199,7 +199,7 @@ namespace PelotonEppSdkTests
             CheckResponseAndResult(createRequest, getResult, EventStateEnum.New);
         }
 
-        [TestMethod]
+        [Test]
         public void TestCreateEventWithMultipleCustomFields()
         {
             var createRequest = GetBasicEventRequest();
@@ -282,7 +282,7 @@ namespace PelotonEppSdkTests
             CheckResponseAndResult(createRequest, getResult, EventStateEnum.New);
         }
 
-        [TestMethod]
+        [Test]
         public void TestCreateEventDuplicateEvent()
         {
             var createRequest = GetBasicEventRequest();
@@ -320,7 +320,7 @@ namespace PelotonEppSdkTests
             Assert.AreEqual("friendly_url_path: must be unique", result.Errors.Single());
         }
 
-        [TestMethod]
+        [Test]
         public void TestCreateEventValidationErrors()
         {
             var factory = new RequestFactory(24, "Password123", "PelonEppSdkTests", baseUri);
@@ -345,7 +345,7 @@ namespace PelotonEppSdkTests
 
         }
 
-        [TestMethod]
+        [Test]
         public void TestCreateEventValidationErrors2()
         {
             var factory = new RequestFactory(24, "Password123", "PelonEppSdkTests", baseUri);
@@ -379,7 +379,7 @@ namespace PelotonEppSdkTests
 
         }
 
-        [TestMethod]
+        [Test]
         public void TestUpdateEventSuccess()
         {
             var createRequest = GetBasicEventRequest();
@@ -472,7 +472,7 @@ namespace PelotonEppSdkTests
 
         }
 
-        [TestMethod]
+        [Test]
         public void TestUpdateEventToFrench()
         {
             var createRequest = GetBasicEventRequest();

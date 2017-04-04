@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using PelotonEppSdk.Classes;
 using PelotonEppSdk.Enums;
 using PelotonEppSdk.Models;
 
 namespace PelotonEppSdkTests
 {
-    [TestClass]
+    [TestFixture]
     public class CreditCardCreateAndTransactionAndDeleteTests: TestBase
     {
 
@@ -20,7 +20,7 @@ namespace PelotonEppSdkTests
         private string clientkey = "3fe172d4";
         private string applicationName = "PelonEppSdkTests";
 
-        [TestMethod]
+        [Test]
         public void TestCreditCardTokenTransactionAndReturn()
         {
             var cardtoken = GetCreditCardToken(clientid, clientkey, applicationName);
@@ -102,7 +102,7 @@ namespace PelotonEppSdkTests
             Assert.IsTrue(successfulDelete, "Failed to delete credit card token");
         }
 
-        [TestMethod]
+        [Test]
         public void TestCreditCardTokenTransactionWithNullOrderNumber()
         {
             var cardtoken = GetCreditCardToken(clientid, clientkey, applicationName);
@@ -184,7 +184,7 @@ namespace PelotonEppSdkTests
             Assert.IsTrue(successfulDelete, "Failed to delete credit card token");
         }
 
-        [TestMethod]
+        [Test]
         public void TestCreditCardTokenTransactionAndReturnWithNullReturnOrderNumber()
         {
             var cardtoken = GetCreditCardToken(clientid, clientkey, applicationName);
@@ -266,7 +266,7 @@ namespace PelotonEppSdkTests
             Assert.IsTrue(successfulDelete, "Failed to delete credit card token");
         }
 
-        [TestMethod]
+        [Test]
         public void TestCreditCardTokenCreateAndDoubleDelete()
         {
             // create a credit card token

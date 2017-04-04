@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using PelotonEppSdk.Classes;
 using PelotonEppSdk.Models;
 
 namespace PelotonEppSdkTests
 {
-    [TestClass]
+    [TestFixture]
     public class FundsTransferNotificationsTests : TestBase
     {
         private static FundsTransferNotificationsTokenRequest GetBasicTokenRequest()
@@ -49,7 +49,7 @@ namespace PelotonEppSdkTests
         }
 
 
-        [TestMethod]
+        [Test]
         public void TestFailSettingTokenNoDate()
         {
             var tokenRequest = GetBasicTokenRequest();
@@ -60,7 +60,7 @@ namespace PelotonEppSdkTests
             Assert.AreEqual("The FromDateUtc field is required.", errors.FirstOrDefault());
         }
 
-        [TestMethod]
+        [Test]
         public void TestSuccessSettingToken()
         {
             var request = GetBasicTokenRequest();
@@ -78,7 +78,7 @@ namespace PelotonEppSdkTests
             Assert.IsNotNull(result.Token);
         }
 
-        [TestMethod]
+        [Test]
         public void TestSuccessNoStateChange()
         {
             var tokenRequest = GetBasicTokenRequest();
@@ -127,7 +127,7 @@ namespace PelotonEppSdkTests
             Assert.AreEqual(0, result3.Notifications.Count);
         }
 
-        [TestMethod]
+        [Test]
         public void TestSuccessPendingStateChange()
         {
             var tokenRequest = GetBasicTokenRequest();
