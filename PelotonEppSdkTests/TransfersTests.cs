@@ -2,13 +2,13 @@
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using PelotonEppSdk.Classes;
 using PelotonEppSdk.Models;
 
 namespace PelotonEppSdkTests
 {
-    [TestClass]
+    [TestFixture]
     public class TransfersTests: TestBase
     {
         private static TransferRequest GetBasicRequest()
@@ -28,7 +28,7 @@ namespace PelotonEppSdkTests
             return transfer;
         }
 
-        [TestMethod]
+        [Test]
         public void TestSuccessfulWithoutReferences()
         {
             var transfer = GetBasicRequest();
@@ -50,7 +50,7 @@ namespace PelotonEppSdkTests
             Assert.IsNotNull(result.TransactionRefCode);
         }
 
-        [TestMethod]
+        [Test]
         public void TestSuccessfulWithReferences()
         {
             var transfer = GetBasicRequest();
@@ -69,7 +69,7 @@ namespace PelotonEppSdkTests
             Assert.IsNotNull(result.TransactionRefCode);
         }
 
-        [TestMethod]
+        [Test]
         public void TestFailShortSourceAccountToken()
         {
             var transfer = GetBasicRequest();
@@ -80,7 +80,7 @@ namespace PelotonEppSdkTests
             Assert.AreEqual("SourceAccountToken must be 32 characters long.", errors.FirstOrDefault());
         }
 
-        [TestMethod]
+        [Test]
         public void TestFailShortTargetAccountToken()
         {
             var transfer = GetBasicRequest();
@@ -91,7 +91,7 @@ namespace PelotonEppSdkTests
             Assert.AreEqual("TargetAccountToken must be 32 characters long.", errors.FirstOrDefault());
         }
 
-        [TestMethod]
+        [Test]
         public void TestFailLongSourceAccountToken()
         {
             var transfer = GetBasicRequest();
@@ -102,7 +102,7 @@ namespace PelotonEppSdkTests
             Assert.AreEqual("SourceAccountToken must be 32 characters long.", errors.FirstOrDefault());
         }
 
-        [TestMethod]
+        [Test]
         public void TestFailLongTargetAccountToken()
         {
             var transfer = GetBasicRequest();
@@ -113,7 +113,7 @@ namespace PelotonEppSdkTests
             Assert.AreEqual("TargetAccountToken must be 32 characters long.", errors.FirstOrDefault());
         }
 
-        [TestMethod]
+        [Test]
         public void TestFailNoTargetAccountToken()
         {
             var transfer = GetBasicRequest();
@@ -124,7 +124,7 @@ namespace PelotonEppSdkTests
             Assert.AreEqual("The TargetAccountToken field is required.", errors.FirstOrDefault());
         }
 
-        [TestMethod]
+        [Test]
         public void TestFailNoSourceAccountToken()
         {
             var transfer = GetBasicRequest();
@@ -135,7 +135,7 @@ namespace PelotonEppSdkTests
             Assert.AreEqual("The SourceAccountToken field is required.", errors.FirstOrDefault());
         }
 
-        [TestMethod]
+        [Test]
         public void TestFailZeroAmount()
         {
             var transfer = GetBasicRequest();
@@ -146,7 +146,7 @@ namespace PelotonEppSdkTests
             Assert.AreEqual("The field Amount must be between 0.01 and 2147483647.", errors.FirstOrDefault());
         }
 
-        [TestMethod]
+        [Test]
         public void TestFailNegativeAmount()
         {
             var transfer = GetBasicRequest();
@@ -157,7 +157,7 @@ namespace PelotonEppSdkTests
             Assert.AreEqual("The field Amount must be between 0.01 and 2147483647.", errors.FirstOrDefault());
         }
 
-        [TestMethod]
+        [Test]
         public void TestFailBadAmount()
         {
             var transfer = GetBasicRequest();

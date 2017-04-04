@@ -1,12 +1,12 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿
+using NUnit.Framework;
 
 namespace PelotonEppSdkTests
 {
-    [TestClass]
+    [TestFixture]
     public class BankAccountDeleteTests: TestBase
     {
-        [TestMethod]
+        [Test]
         public void TestMethod1()
         {
         }

@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using PelotonEppSdk.Classes;
 using PelotonEppSdk.Models;
 
 namespace PelotonEppSdkTests
 {
-    [TestClass]
+    [TestFixture]
     public class EventCreateTests : TestBase
     {
         //private string duplicateFriendlyUrlPath = "NEWEVENT";
@@ -20,7 +20,7 @@ namespace PelotonEppSdkTests
         //    return request;
         //}
 
-        //[TestMethod]
+        //[Test]
         //public void TestSuccessCreateEvent()
         //{
         //    var createRequest = GetBasicEventRequest();
@@ -48,7 +48,7 @@ namespace PelotonEppSdkTests
         //    Assert.AreEqual(0, result.MessageCode);
         //}
 
-        //[TestMethod]
+        //[Test]
         //public void TestFailureCreateDuplicateEvent()
         //{
         //    var createRequest = GetBasicEventRequest();

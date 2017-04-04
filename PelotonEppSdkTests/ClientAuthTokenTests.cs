@@ -2,14 +2,14 @@
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using PelotonEppSdk.Classes;
 using PelotonEppSdk.Enums;
 using PelotonEppSdk.Models;
 
 namespace PelotonEppSdkTests
 {
-    [TestClass]
+    [TestFixture]
     public class ClientAuthTokenTests: TestBase
     {
         // For testapi, use id 107 and key "9cf9b8f4",
@@ -18,7 +18,7 @@ namespace PelotonEppSdkTests
         private string _accountToken = "1D4E237930EB70FC115E6ACD95E878E6";
 
 
-        [TestMethod]
+        [Test]
         public void TestCreateClientAuthToken()
         {
             var createRequest = GetBasicRequest(_clientId, _clientKey, _accountToken, "PelonEppSdkTests");
@@ -40,7 +40,7 @@ namespace PelotonEppSdkTests
             Assert.AreEqual(32, result.ClientAuthToken.Length);
         }
 
-        [TestMethod]
+        [Test]
         public void TestCreateClientAuthTokenAccountTokenInvalid()
         {
             var createRequest = GetBasicRequest(_clientId, _clientKey, _accountToken, "PelonEppSdkTests");
@@ -59,7 +59,7 @@ namespace PelotonEppSdkTests
             Assert.AreEqual("AccountToken must be 32 characters in length", errors.Single());
         }
 
-        [TestMethod]
+        [Test]
         public void TestCreateClientAuthTokenAccountTokenInvalid2()
         {
             var createRequest = GetBasicRequest(_clientId, _clientKey, _accountToken, "PelonEppSdkTests");
@@ -86,7 +86,7 @@ namespace PelotonEppSdkTests
             Assert.AreEqual("account_token: invalid", result.Errors.Single());
         }
 
-        [TestMethod]
+        [Test]
         public void TestCreateClientAuthTokenAccountTokenNull()
         {
             var createRequest = GetBasicRequest(_clientId, _clientKey, _accountToken, "PelonEppSdkTests");
@@ -105,7 +105,7 @@ namespace PelotonEppSdkTests
             Assert.AreEqual("The AccountToken field is required.", errors.Single());
         }
 
-        [TestMethod]
+        [Test]
         public void TestGetClientAuthToken()
         {
             var createRequest = GetBasicRequest(_clientId, _clientKey, _accountToken, "PelonEppSdkTests");
@@ -148,7 +148,7 @@ namespace PelotonEppSdkTests
             Assert.AreEqual(null, getResult.EventToken);
         }
 
-        [TestMethod]
+        [Test]
         public void TestGetClientAuthTokenExpired()
         {
             // expired: 5a1c7be3998a4205a2b1c8c49a0e4599
@@ -175,7 +175,7 @@ namespace PelotonEppSdkTests
         }
 
 
-        [TestMethod]
+        [Test]
         public void TestGetClientAuthTokenAuthorizedCreditCardToken()
         {
             // authorized: 8c0a15527850422ea505b9bbda076eb4

@@ -1,14 +1,14 @@
 ﻿using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using PelotonEppSdk.Classes;
 using PelotonEppSdk.Enums;
 using PelotonEppSdk.Models;
 
 namespace PelotonEppSdkTests
 {
-    [TestClass]
+    [TestFixture]
     public class EventsTests : TestBase
     {
         private static EventRequest GetBasicEventRequest(string token, LanguageCode languageCode = LanguageCode.en)
@@ -19,7 +19,7 @@ namespace PelotonEppSdkTests
             return request;
         }
 
-        [TestMethod]
+        [Test]
         public void TestSuccessGetEvent()
         {
             var eventRequest = GetBasicEventRequest("667fbd353e8d4e9d9e0611d489d5efb6");
@@ -36,7 +36,7 @@ namespace PelotonEppSdkTests
             Assert.AreEqual(0, result.MessageCode);
         }
 
-        [TestMethod]
+        [Test]
         public void TestFailureGetEvent()
         {
             var eventRequest = GetBasicEventRequest("invalidtoken");
@@ -54,7 +54,7 @@ namespace PelotonEppSdkTests
             Assert.AreEqual("EventToken must be 32 characters long.", errors.Single());
         }
 
-        [TestMethod]
+        [Test]
         public void TestFailureGetEvent2()
         {
             var eventRequest = GetBasicEventRequest("invalidtokenoflength32+tenmorech");
@@ -72,7 +72,7 @@ namespace PelotonEppSdkTests
             Assert.AreEqual("Event Token Cannot Be Found", result.Message);
         }
 
-        [TestMethod]
+        [Test]
         public void TestEventTokenNull()
         {
             var eventRequest = GetBasicEventRequest(null);
@@ -91,7 +91,7 @@ namespace PelotonEppSdkTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void TestEventTokenEmpty()
         {
             var eventRequest = GetBasicEventRequest(string.Empty);
@@ -110,7 +110,7 @@ namespace PelotonEppSdkTests
             }
         }
 
-        [TestMethod]
+        [Test]
         public void TestGetEventEn()
         {
             var eventRequest = GetBasicEventRequest("667fbd353e8d4e9d9e0611d489d5efb6", LanguageCode.en);
@@ -128,7 +128,7 @@ namespace PelotonEppSdkTests
             Assert.AreEqual("Success", result.Message);
         }
 
-        [TestMethod]
+        [Test]
         public void TestGetEventFr()
         {
             var eventRequest = GetBasicEventRequest("667fbd353e8d4e9d9e0611d489d5efb6", LanguageCode.fr);

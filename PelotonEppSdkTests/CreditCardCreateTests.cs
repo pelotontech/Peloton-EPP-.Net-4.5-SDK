@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using PelotonEppSdk.Classes;
 using PelotonEppSdk.Enums;
 using PelotonEppSdk.Models;
 
 namespace PelotonEppSdkTests
 {
-    [TestClass]
+    [TestFixture]
     public class CreditCardCreateTests: TestBase
     {
-        [TestMethod]
+        [Test]
         public void TestCreateCardNoVerify()
         {
             var createRequest = GetBasicRequest(107, "9cf9b8f4", "PelonEppSdkTests");
@@ -34,7 +34,7 @@ namespace PelotonEppSdkTests
             Assert.AreEqual("Success", result.Message);
         }
 
-        [TestMethod]
+        [Test]
         public void TestCreateCardNoVerifyFr()
         {
             var createRequest = GetBasicRequest(107, "9cf9b8f4", "PelonEppSdkTests", LanguageCode.fr);
@@ -56,7 +56,7 @@ namespace PelotonEppSdkTests
             Assert.AreEqual("Réussi", result.Message);
         }
 
-        [TestMethod]
+        [Test]
         public void TestCreateCardVerify()
         {
             var createRequest = GetBasicRequest(107, "9cf9b8f4", "PelonEppSdkTests");

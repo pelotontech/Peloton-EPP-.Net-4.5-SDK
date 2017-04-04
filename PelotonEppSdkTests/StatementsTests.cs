@@ -2,15 +2,15 @@
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using PelotonEppSdk.Classes;
 
 namespace PelotonEppSdkTests
 {
-    [TestClass]
+    [TestFixture]
     public class StatementsTests : TestBase
     {
-        [TestMethod]
+        [Test]
         public void TestStatementsOk()
         {
             var factory = new RequestFactory(24, "Password123", "PelonEppSdkTests", baseUri);
@@ -34,7 +34,7 @@ namespace PelotonEppSdkTests
             Assert.IsTrue(result.Success);
         }
 
-        [TestMethod]
+        [Test]
         public void TestStatementsTokenNull()
         {
             var factory = new RequestFactory(24, "Password123", "PelonEppSdkTests", baseUri);
@@ -71,7 +71,7 @@ namespace PelotonEppSdkTests
             Assert.IsFalse(result.Success);
         }
 
-        [TestMethod]
+        [Test]
         public void TestStatementsTokenEmptyString()
         {
             var factory = new RequestFactory(24, "Password123", "PelonEppSdkTests", baseUri);
@@ -107,7 +107,7 @@ namespace PelotonEppSdkTests
             Assert.IsFalse(result.Success);
         }
 
-        [TestMethod]
+        [Test]
         public void TestStatementsTokenTooLong()
         {
             var factory = new RequestFactory(24, "Password123", "PelonEppSdkTests", baseUri);
@@ -143,7 +143,7 @@ namespace PelotonEppSdkTests
             Assert.IsFalse(result.Success);
         }
 
-        [TestMethod]
+        [Test]
         public void TestStatementsTokenMaxLengthButInvalid()
         {
             var factory = new RequestFactory(24, "Password123", "PelonEppSdkTests", baseUri);
@@ -177,7 +177,7 @@ namespace PelotonEppSdkTests
             Assert.IsFalse(result.Success);
         }
 
-        [TestMethod]
+        [Test]
         public void TestStatementsShortTimePeriod()
         {
             var factory = new RequestFactory(24, "Password123", "PelonEppSdkTests", baseUri);
@@ -201,7 +201,7 @@ namespace PelotonEppSdkTests
             Assert.IsTrue(result.Success);
         }
 
-        [TestMethod]
+        [Test]
         public void TestStatementsTimePeriodInFuture()
         {
             var factory = new RequestFactory(24, "Password123", "PelonEppSdkTests", baseUri);
@@ -225,7 +225,7 @@ namespace PelotonEppSdkTests
             Assert.IsTrue(result.Success);
         }
 
-        [TestMethod]
+        [Test]
         public void TestStatementsTimePeriodVeryLong1Year()
         {
             var factory = new RequestFactory(24, "Password123", "PelonEppSdkTests", baseUri);
@@ -249,7 +249,7 @@ namespace PelotonEppSdkTests
             Assert.IsTrue(result.Success);
         }
 
-        [TestMethod]
+        [Test]
         public void TestStatementsTimePeriodVeryLong10Years()
         {
             var factory = new RequestFactory(24, "Password123", "PelonEppSdkTests", baseUri);

@@ -3,18 +3,18 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using PelotonEppSdk.Classes;
 using PelotonEppSdk.Enums;
 using PelotonEppSdk.Models;
 
 namespace PelotonEppSdkTests
 {
-	[TestClass]
+	[TestFixture]
     public class CreditCardTransactionTokenRequestTests: TestBase
     {
 
-        [TestMethod]
+        [Test]
         public void TestCreditCardTokenTransaction()
         {
             var request = GetBasicRequest();
@@ -50,7 +50,7 @@ namespace PelotonEppSdkTests
             Assert.IsTrue(result.Errors == null);
         }
 
-        [TestMethod]
+        [Test]
         public void TestCreditCardTokenTransactionMaxOrderNumberLength()
         {
             var request = GetBasicRequest();
@@ -86,7 +86,7 @@ namespace PelotonEppSdkTests
             Assert.IsTrue(result.Errors == null);
         }
 
-        [TestMethod]
+        [Test]
         public void TestCreditCardTokenTransactionValidationError()
         {
             var request = GetBasicRequest();
@@ -120,7 +120,7 @@ namespace PelotonEppSdkTests
             Assert.AreEqual("amount: required", result.Errors.Single());
         }
 
-	    [TestMethod]
+	    [Test]
         public void TestCreditCardTokenTransactionInvalidUsernameAndPassword()
         {
 	        var factory = new RequestFactory(106, "wrong password", "PelonEppSdkTests", baseUri);
