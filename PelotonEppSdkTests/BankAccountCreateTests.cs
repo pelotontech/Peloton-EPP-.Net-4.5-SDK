@@ -1,17 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Linq;
+using NUnit.Framework;
 using PelotonEppSdk.Classes;
 using PelotonEppSdk.Models;
 
 namespace PelotonEppSdkTests
 {
-    [TestClass]
+    [TestFixture]
     public class BankAccountCreateTests: TestBase
     {
-        [TestMethod]
+        [Test]
         public void TestCreateAccount()
         {
             var createRequest = GetBasicRequest();
@@ -46,7 +48,29 @@ namespace PelotonEppSdkTests
             Debug.WriteLineIf((result.Errors != null && result.Errors.Count >= 1), string.Join("; ", result.Errors ?? new List<string>()));
             Assert.IsTrue(result.Success);
             Assert.AreEqual(0, result.MessageCode);
+        }
 
+        [Test]
+        public void TestCreateAccountInvalidModel()
+        {
+            var createRequest = GetBasicRequest();
+
+            // invent a new bank account token
+            createRequest.BankAccount = null;
+
+            try
+            {
+                var result = createRequest.PostAsync().Result;
+            }
+            catch (AggregateException e)
+            {
+                // what happened here...
+                Debug.WriteLine(e.Message);
+                Debug.WriteLine(e);
+                Assert.IsTrue(e.InnerException != null);
+                Assert.IsTrue(e.InnerException.GetType() == typeof(ValidationException));
+                Assert.IsTrue(createRequest.ValidationErrors.Single() == "The BankAccount field is required.");
+            }
         }
 
         private static BankAccountRequest GetBasicRequest()
