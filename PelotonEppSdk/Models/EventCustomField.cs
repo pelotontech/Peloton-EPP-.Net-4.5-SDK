@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using PelotonEppSdk.Enums;
@@ -10,18 +11,23 @@ namespace PelotonEppSdk.Models
         /// <summary>
         /// The name of this custom field.
         /// </summary>
+        [StringLength(50, MinimumLength = 0, ErrorMessage = "Name must be 50 or fewer characters long.")]
         public string Name { get; set; }
         /// <summary>
         /// The default value for this custom field.
         /// </summary>
+        [StringLength(128, MinimumLength = 0, ErrorMessage = "DefaultValue must be 128 or fewer characters long.")]
         public string DefaultValue { get; set; }
         /// <summary>
         /// The type for this custom field.
         /// </summary>
+        //[Required]
         public EventCustomFieldTypeEnum Type { get; set; }
         /// <summary>
         /// The display order for this custom field.
         /// </summary>
+        //[Required]
+        [Range(0, 999, ErrorMessage = "DisplayOrder must be between 0 and 999.")]
         public int DisplayOrder { get; set; }
         /// <summary>
         /// Whether this custom field is required.

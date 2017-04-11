@@ -23,20 +23,26 @@ namespace PelotonEppSdk.Models
         [StringLength(32, MinimumLength = 32, ErrorMessage = "AccountToken must be 32 characters long.")]
         public string AccountToken { get; set; }
 
-        //[StringLength(32, MinimumLength = 32, ErrorMessage = "Name must be 32 characters long.")]
+        [StringLength(128, MinimumLength = 0, ErrorMessage = "Name must be 128 or fewer characters long.")]
         public string Name { get; set; }
 
+        //[Required]
+        [StringLength(50, MinimumLength = 0, ErrorMessage = "FriendlyUrlPath must be 50 or fewer characters long.")]
         public string FriendlyUrlPath { get; set; }
 
+        //[Required]
+        [StringLength(500, MinimumLength = 0, ErrorMessage = "Description must be 500 or fewer characters long.")]
         public string Description { get; set; }
 
         //[Required]
         public DateTime? StartDate { get; set; }
 
+        //[Required]
         public DateTime? EndDate { get; set; }
 
         public State State { get; set; }
 
+        //[Required]
         public ICollection<EventItem> Items { get; set; }
 
         public string TermsAndConditionsContent { get; set; }
@@ -77,10 +83,8 @@ namespace PelotonEppSdk.Models
         [SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Global")]
         internal class event_request : request_base
         {
-            [StringLength(32, MinimumLength = 32)]
             public string event_token { get; set; }
 
-            [StringLength(32, MinimumLength = 32)]
             public string account_token { get; set; }
 
             public string name { get; set; }
