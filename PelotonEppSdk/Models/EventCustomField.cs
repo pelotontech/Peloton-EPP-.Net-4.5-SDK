@@ -60,5 +60,21 @@ namespace PelotonEppSdk.Models
                 Required = ei.required
             };
         }
+
+        public static explicit operator event_custom_field(EventCustomField ei)
+        {
+            return new event_custom_field
+            {
+                name = ei.Name,
+                default_value = ei.DefaultValue,
+                type = new type()
+                {
+                    code = ((int)ei.Type).ToString(),
+                    name = ei.Type.ToString()
+                },
+                display_order = ei.DisplayOrder,
+                required = ei.Required
+            };
+        }
     }
 }

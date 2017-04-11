@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using PelotonEppSdk.Enums;
 
 namespace PelotonEppSdk.Models
 {
@@ -17,6 +17,8 @@ namespace PelotonEppSdk.Models
         /// The name for the event.
         /// </summary>
         public string Name { get; set; }
+
+        public string FriendlyUrlPath { get; set; }
         /// <summary>
         /// The description for the event.
         /// </summary>
@@ -24,15 +26,15 @@ namespace PelotonEppSdk.Models
         /// <summary>
         /// The start datetime for the event.
         /// </summary>
-        public DateTime StartDatetime { get; set; }
+        public DateTime StartDate { get; set; }
         /// <summary>
         ///  The end datetime for the event.
         /// </summary>
-        public DateTime EndDatetime { get; set; }
+        public DateTime EndDate { get; set; }
         /// <summary>
         /// The state of the event.
         /// </summary>
-        public State State { get; set; }
+        public EventStateEnum State { get; set; }
         /// <summary>
         /// The list of items associated with an event.
         /// </summary>
@@ -59,9 +61,10 @@ namespace PelotonEppSdk.Models
     {
         public string event_token { get; set; }
         public string name { get; set; }
+        public string friendly_url_path { get; set; }
         public string description { get; set; }
-        public DateTime start_datetime { get; set; }
-        public DateTime end_datetime { get; set; }
+        public DateTime start_date { get; set; }
+        public DateTime end_date { get; set; }
         public state state { get; set; }
         public ICollection<EventItem.event_item> items { get; set; }
         public string terms_and_conditions_content { get; set; }
@@ -75,13 +78,21 @@ namespace PelotonEppSdk.Models
             if (eventResponse.items != null)
                 items = eventResponse.items.Select(ei => (EventItem)ei).ToList();
 
+            var eventState = (State)eventResponse.state;
+            EventStateEnum eventStateEnumValue = EventStateEnum.Unknown;
+            if (eventState != null)
+            {
+                eventStateEnumValue = (EventStateEnum)int.Parse(eventState.Code);
+            }
+
             return new EventResponse(eventResponse)
             {
                 Name = eventResponse.name,
+                FriendlyUrlPath = eventResponse.friendly_url_path,
                 Description = eventResponse.description,
-                StartDatetime = eventResponse.start_datetime,
-                EndDatetime = eventResponse.end_datetime,
-                State = (State)eventResponse.state,
+                StartDate = eventResponse.start_date,
+                EndDate = eventResponse.end_date,
+                State = eventStateEnumValue,
                 Items = items,
                 TermsAndConditionsContent = eventResponse.terms_and_conditions_content,
                 RefundPolicyContent = eventResponse.refund_policy_content,

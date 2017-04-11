@@ -78,6 +78,28 @@ namespace PelotonEppSdk.Models
                     CustomFields = customFields
                 };
             }
+
+            public static explicit operator event_item(EventItem ei)
+            {
+                if (ei == null) return null;
+
+                ICollection<event_custom_field> customFields = null;
+                if (ei.CustomFields != null)
+                    customFields = ei.CustomFields.Select(cf => (event_custom_field)cf).ToList();
+
+                return new event_item
+                {
+                    name = ei.Name,
+                    description = ei.Description,
+                    quantity_selector = ei.QuantitySelector,
+                    default_unit_quantity = ei.DefaultUnitQuantity,
+                    unit_quantity_description = ei.UnitQuantityDescription,
+                    unit_amount = ei.UnitAmount,
+                    amount = ei.Amount,
+                    amount_adjustable = ei.AmountAdjustable,
+                    custom_fields = customFields
+                };
+            }
         }
     }
 }

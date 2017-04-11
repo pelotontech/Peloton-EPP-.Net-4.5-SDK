@@ -34,8 +34,9 @@ namespace PelotonEppSdkTests
             var transfer = GetBasicRequest();
             transfer.References = null;
 
-            var validationResults = transfer.Validate();
-            if (validationResults.Any())
+            var validationResults = new List<string>();
+            var validationSuccess = transfer.TryValidate(validationResults);
+            if (!validationSuccess)
             {
                 foreach (var validationResult in validationResults)
                 {
