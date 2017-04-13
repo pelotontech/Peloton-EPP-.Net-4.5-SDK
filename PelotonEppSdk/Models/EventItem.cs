@@ -65,10 +65,6 @@ namespace PelotonEppSdk.Models
             {
                 if (ei == null) return null;
 
-                ICollection<EventCustomField> customFields = null;
-                if (ei.custom_fields != null)
-                    customFields = ei.custom_fields.Select(cf => (EventCustomField)cf).ToList();
-
                 return new EventItem
                 {
                     Name = ei.name,
@@ -79,17 +75,13 @@ namespace PelotonEppSdk.Models
                     UnitAmount = ei.unit_amount,
                     Amount = ei.amount,
                     AmountAdjustable = ei.amount_adjustable,
-                    CustomFields = customFields
+                    CustomFields = ei.custom_fields?.Select(cf => (EventCustomField)cf).ToList()
                 };
             }
 
             public static explicit operator event_item(EventItem ei)
             {
                 if (ei == null) return null;
-
-                ICollection<event_custom_field> customFields = null;
-                if (ei.CustomFields != null)
-                    customFields = ei.CustomFields.Select(cf => (event_custom_field)cf).ToList();
 
                 return new event_item
                 {
@@ -101,7 +93,7 @@ namespace PelotonEppSdk.Models
                     unit_amount = ei.UnitAmount,
                     amount = ei.Amount,
                     amount_adjustable = ei.AmountAdjustable,
-                    custom_fields = customFields
+                    custom_fields = ei.CustomFields?.Select(cf => (event_custom_field)cf).ToList()
                 };
             }
         }

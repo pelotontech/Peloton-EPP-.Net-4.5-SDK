@@ -74,10 +74,6 @@ namespace PelotonEppSdk.Models
         {
             if (eventResponse == null) return null;
 
-            ICollection<EventItem> items = null;
-            if (eventResponse.items != null)
-                items = eventResponse.items.Select(ei => (EventItem)ei).ToList();
-
             var eventState = (State)eventResponse.state;
             EventStateEnum eventStateEnumValue = EventStateEnum.Unknown;
             if (eventState != null)
@@ -93,7 +89,7 @@ namespace PelotonEppSdk.Models
                 StartDate = eventResponse.start_date,
                 EndDate = eventResponse.end_date,
                 State = eventStateEnumValue,
-                Items = items,
+                Items = eventResponse.items?.Select(ei => (EventItem)ei).ToList(),
                 TermsAndConditionsContent = eventResponse.terms_and_conditions_content,
                 RefundPolicyContent = eventResponse.refund_policy_content,
                 EventToken = eventResponse.event_token,
