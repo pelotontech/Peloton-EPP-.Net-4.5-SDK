@@ -13,25 +13,25 @@ namespace PelotonEppSdk.Models
 {
     public class EventRequest : RequestBase
     {
-        [StringLength(32, MinimumLength = 32, ErrorMessage = nameof(EventToken) + " must be 32 characters long.")]
+        [StringLength(32, MinimumLength = 32, ErrorMessage = nameof(EventToken) + " must be 32 characters in length.")]
         public string EventToken { get; set; }
 
         /// <summary>
         /// ClientToken for the target peloton account
         /// </summary>
         //[Required]
-        [StringLength(32, MinimumLength = 32, ErrorMessage = "AccountToken must be 32 characters long.")]
+        [StringLength(32, MinimumLength = 32, ErrorMessage = "AccountToken must be 32 characters in length.")]
         public string AccountToken { get; set; }
 
-        [StringLength(128, MinimumLength = 0, ErrorMessage = "Name must be 128 or fewer characters long.")]
+        [StringLength(128, MinimumLength = 0, ErrorMessage = "Name must be 128 or fewer characters in length.")]
         public string Name { get; set; }
 
         //[Required]
-        [StringLength(50, MinimumLength = 0, ErrorMessage = "FriendlyUrlPath must be 50 or fewer characters long.")]
+        [StringLength(50, MinimumLength = 0, ErrorMessage = "FriendlyUrlPath must be 50 or fewer characters in length.")]
         public string FriendlyUrlPath { get; set; }
 
         //[Required]
-        [StringLength(500, MinimumLength = 0, ErrorMessage = "Description must be 500 or fewer characters long.")]
+        [StringLength(500, MinimumLength = 0, ErrorMessage = "Description must be 500 or fewer characters in length.")]
         public string Description { get; set; }
 
         //[Required]

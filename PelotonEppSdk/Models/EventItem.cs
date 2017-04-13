@@ -10,12 +10,12 @@ namespace PelotonEppSdk.Models
         /// <summary>
         /// The name for the event item.
         /// </summary>
-        [StringLength(128, MinimumLength = 0, ErrorMessage = "Name must be 128 or fewer characters long.")]
+        [StringLength(128, MinimumLength = 0, ErrorMessage = "Name must be 128 or fewer characters in length.")]
         public string Name { get; set; }
         /// <summary>
         /// The description for the event item.
         /// </summary>
-        [StringLength(500, MinimumLength = 0, ErrorMessage = "Description must be 500 or fewer characters long.")]
+        [StringLength(500, MinimumLength = 0, ErrorMessage = "Description must be 500 or fewer characters in length.")]
         public string Description { get; set; }
         /// <summary>
         /// Whether quantity selection is allowed for an event item.
@@ -28,7 +28,7 @@ namespace PelotonEppSdk.Models
         /// <summary>
         /// The description for the unit quantity.
         /// </summary>
-        [StringLength(128, MinimumLength = 0, ErrorMessage = "UnitQuantityDescription must be 128 or fewer characters long.")]
+        [StringLength(128, MinimumLength = 0, ErrorMessage = "UnitQuantityDescription must be 128 or fewer characters in length.")]
         public string UnitQuantityDescription { get; set; }
         /// <summary>
         /// The unit amount for an event item.

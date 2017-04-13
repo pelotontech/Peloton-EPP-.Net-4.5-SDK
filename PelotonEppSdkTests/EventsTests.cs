@@ -54,7 +54,7 @@ namespace PelotonEppSdkTests
             var result = eventRequest.GetAsync().Result;
             Assert.IsFalse(result.Success);
             Assert.AreEqual(1800, result.MessageCode);
-            Assert.AreEqual("EventToken must be 32 characters long.", errors.Single());
+            Assert.AreEqual("EventToken must be 32 characters in length.", errors.Single());
         }
 
         [TestMethod]
@@ -105,7 +105,7 @@ namespace PelotonEppSdkTests
                 {
                     Debug.WriteLine(error);
                 }
-                Assert.AreEqual("EventToken must be 32 characters long.", errors.Single());
+                Assert.AreEqual("EventToken must be 32 characters in length.", errors.Single());
             }
             else
             {

@@ -16,7 +16,7 @@ namespace PelotonEppSdk.Models
         /// The Account token for the account which the statement is being created for
         /// </summary>
         [Required]
-        [StringLength(32, MinimumLength = 32, ErrorMessage = "AccountToken must be 32 characters in length")]
+        [StringLength(32, MinimumLength = 32, ErrorMessage = "AccountToken must be 32 characters in length.")]
         public string AccountToken { get; set; }
 
         /// <summary>

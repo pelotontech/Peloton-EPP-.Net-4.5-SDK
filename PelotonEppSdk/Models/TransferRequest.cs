@@ -15,11 +15,11 @@ namespace PelotonEppSdk.Models
     public class TransferRequest : RequestBase
     {
         [Required]
-        [StringLength(32, ErrorMessage = "SourceAccountToken must be 32 characters long.", MinimumLength = 32)]
+        [StringLength(32, ErrorMessage = "SourceAccountToken must be 32 characters in length.", MinimumLength = 32)]
         public string SourceAccountToken { get; set; }
 
         [Required]
-        [StringLength(32,ErrorMessage = "TargetAccountToken must be 32 characters long.", MinimumLength = 32)]
+        [StringLength(32,ErrorMessage = "TargetAccountToken must be 32 characters in length.", MinimumLength = 32)]
         public string TargetAccountToken { get; set; }
 
         [Range(0.01,int.MaxValue)]

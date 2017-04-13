@@ -11,12 +11,12 @@ namespace PelotonEppSdk.Models
         /// <summary>
         /// The name of this custom field.
         /// </summary>
-        [StringLength(50, MinimumLength = 0, ErrorMessage = "Name must be 50 or fewer characters long.")]
+        [StringLength(50, MinimumLength = 0, ErrorMessage = "Name must be 50 or fewer characters in length.")]
         public string Name { get; set; }
         /// <summary>
         /// The default value for this custom field.
         /// </summary>
-        [StringLength(128, MinimumLength = 0, ErrorMessage = "DefaultValue must be 128 or fewer characters long.")]
+        [StringLength(128, MinimumLength = 0, ErrorMessage = "DefaultValue must be 128 or fewer characters in length.")]
         public string DefaultValue { get; set; }
         /// <summary>
         /// The type for this custom field.
