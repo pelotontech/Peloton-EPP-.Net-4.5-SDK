@@ -20,6 +20,8 @@ namespace PelotonEppSdk.Models
         }
 
         [RequestMethod(new[] { RequestMethodEnum.GET, RequestMethodEnum.PUT, RequestMethodEnum.DELETE })]
+        [Required]
+        [StringLength(32, MinimumLength = 32)]
         public string CreditCardToken { get; set; }
 
         /// <inheritdoc cref="IOptionalAccountToken.AccountToken"/>
@@ -120,14 +122,22 @@ namespace PelotonEppSdk.Models
         }
 
         /// <exception cref="HttpException"><see cref="HttpStatusCode"/> is not <c>2XX Success</c>.</exception>
-        public async Task<CreditCardResponse> PostAsync()
+        /*public async Task<CreditCardResponse> PostAsync()
         {
             return await PostAsync(false).ConfigureAwait(false);
-        }
+        }*/
 
         /// <exception cref="HttpException"><see cref="HttpStatusCode"/> is not <c>2XX Success</c>.</exception>
-        public async Task<CreditCardResponse> PutAsync()
+        public async Task<CreditCardResponse> PutAsync(bool validate = true)
         {
+            if (validate)
+            {
+                // validate the request before sending it
+                ValidationErrors = new List<string>();
+                var isValid = TryValidatePropertySubset(ValidationErrors, RequestMethodEnum.POST);
+                if(!isValid) throw new ValidationException("Validation Error", null, ValidationErrors);
+            }
+
             var client = new PelotonClient();
             var request = (credit_card_request) this;
             var result = await client.PutAsync<credit_card_response>(request, ApiTarget.CreditCards, CreditCardToken).ConfigureAwait(false);
@@ -135,8 +145,16 @@ namespace PelotonEppSdk.Models
         }
 
         /// <exception cref="HttpException"><see cref="HttpStatusCode"/> is not <c>2XX Success</c>.</exception>
-        public async Task<CreditCardResponse> DeleteAsync()
+        public async Task<CreditCardResponse> DeleteAsync(bool validate = true)
         {
+            if (validate)
+            {
+                // validate the request before sending it
+                ValidationErrors = new List<string>();
+                var isValid = TryValidatePropertySubset(ValidationErrors, RequestMethodEnum.POST);
+                if(!isValid) throw new ValidationException("Validation Error", null, ValidationErrors);
+            }
+
             var client = new PelotonClient();
             var request = (credit_card_request) this;
             var result = await client.DeleteAsync<credit_card_response>(request, ApiTarget.CreditCards, CreditCardToken).ConfigureAwait(false);

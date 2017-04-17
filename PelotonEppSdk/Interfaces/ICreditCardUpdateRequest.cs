@@ -21,7 +21,7 @@ namespace PelotonEppSdk.Interfaces
         string BillingEmail { get; set; }
         Address BillingAddress { get; set; }
 
-        Task<CreditCardResponse> PutAsync();
+        Task<CreditCardResponse> PutAsync(bool validate = true);
 
     }
 }

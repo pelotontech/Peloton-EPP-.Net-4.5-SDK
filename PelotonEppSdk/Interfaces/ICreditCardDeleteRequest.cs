@@ -7,6 +7,6 @@ namespace PelotonEppSdk.Interfaces
     {
         string CreditCardToken { get; set; }
 
-        Task<CreditCardResponse> DeleteAsync();
+        Task<CreditCardResponse> DeleteAsync(bool validate = true);
     }
 }

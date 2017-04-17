@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PelotonEppSdk.Classes;
 using PelotonEppSdk.Interfaces;
@@ -65,7 +61,7 @@ namespace PelotonEppSdkTests
         {
             var factory = new RequestFactory(106, "c57cbd1d", "PelonEppSdkTests", baseUri);
             //var factory = new RequestFactory(80, "e9ab9532", "PelonEppSdkTests");
-            var createRequest = factory.GetCreditCardCreateRequest();
+            var createRequest = factory.GetCreditCardRequest();
 
             createRequest.OrderNumber = "12345678";
             createRequest.BillingName = "P. Tech.";
