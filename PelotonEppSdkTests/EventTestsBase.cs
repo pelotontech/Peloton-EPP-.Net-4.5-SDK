@@ -16,8 +16,8 @@ namespace PelotonEppSdkTests
             Assert.AreEqual(expected.FriendlyUrlPath, actual.FriendlyUrlPath);
             Assert.AreEqual(expected.Description, actual.Description);
             Assert.AreEqual(eventStateCode, actual.State);
-            Assert.AreEqual(expected.StartDate.ToString(), actual.StartDate.ToString());
-            Assert.AreEqual(expected.EndDate.ToString(), actual.EndDate.ToString());
+            Assert.AreEqual(expected.StartDatetime.ToString(), actual.StartDatetime.ToString());
+            Assert.AreEqual(expected.EndDatetime.ToString(), actual.EndDatetime.ToString());
             if (String.IsNullOrWhiteSpace(expected.TermsAndConditionsContent))
             {
                 Assert.AreEqual(@"By making this payment you expressly authorize the service provider, Peloton Technologies Inc., to charge your credit card for the noted dollar amount.

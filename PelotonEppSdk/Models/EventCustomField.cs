@@ -49,12 +49,12 @@ namespace PelotonEppSdk.Models
         public static explicit operator EventCustomField(event_custom_field ei)
         {
 
-            EventCustomFieldTypeEnum type = 0;
+            EventCustomFieldTypeEnum type = EventCustomFieldTypeEnum.Invalid;
 
             if (ei.type?.code != null)
             {
                 var parseResult = Enum.TryParse(ei.type.code, out type);
-                if (!parseResult) Debug.WriteLine("Failed to parse Client Auth Token response type code.");
+                if (!parseResult) Debug.WriteLine("Failed to parse custom field type code.");
             }
 
             return new EventCustomField

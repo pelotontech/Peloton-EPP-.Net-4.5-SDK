@@ -48,8 +48,8 @@ namespace PelotonEppSdkTests
                     UnitQuantityDescription = "description for quantity"
                 }
             };
-            request.StartDate = DateTime.UtcNow;
-            request.EndDate = DateTime.UtcNow.AddDays(1);
+            request.StartDatetime = DateTime.UtcNow;
+            request.EndDatetime = DateTime.UtcNow.AddDays(1);
             request.TermsAndConditionsContent = "";
             request.RefundPolicyContent = "";
             return request;
@@ -297,8 +297,8 @@ namespace PelotonEppSdkTests
                     Name = "event item 1",
                 }
             };
-            createRequest.StartDate = DateTime.UtcNow;
-            createRequest.EndDate = DateTime.UtcNow;
+            createRequest.StartDatetime = DateTime.UtcNow;
+            createRequest.EndDatetime = DateTime.UtcNow;
             createRequest.TermsAndConditionsContent = "";
             createRequest.RefundPolicyContent = "";
 

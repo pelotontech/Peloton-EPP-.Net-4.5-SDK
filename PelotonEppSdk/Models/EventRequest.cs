@@ -35,10 +35,10 @@ namespace PelotonEppSdk.Models
         public string Description { get; set; }
 
         //[Required]
-        public DateTime? StartDate { get; set; }
+        public DateTime? StartDatetime { get; set; }
 
         //[Required]
-        public DateTime? EndDate { get; set; }
+        public DateTime? EndDatetime { get; set; }
 
         public State State { get; set; }
 
@@ -118,8 +118,8 @@ namespace PelotonEppSdk.Models
                     name = eventsRequest.Name,
                     description = eventsRequest.Description,
                     friendly_url_path = eventsRequest.FriendlyUrlPath,
-                    start_date = eventsRequest.StartDate,
-                    end_date = eventsRequest.EndDate,
+                    start_date = eventsRequest.StartDatetime,
+                    end_date = eventsRequest.EndDatetime,
                     state = (state)eventsRequest.State,
                     items = eventsRequest.Items?.Select(ei => (EventItem.event_item)ei).ToList(),
                     terms_and_conditions_content = eventsRequest.TermsAndConditionsContent,

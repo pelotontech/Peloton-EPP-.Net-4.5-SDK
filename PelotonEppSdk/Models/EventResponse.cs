@@ -26,11 +26,11 @@ namespace PelotonEppSdk.Models
         /// <summary>
         /// The start datetime for the event.
         /// </summary>
-        public DateTime StartDate { get; set; }
+        public DateTime StartDatetime { get; set; }
         /// <summary>
         ///  The end datetime for the event.
         /// </summary>
-        public DateTime EndDate { get; set; }
+        public DateTime EndDatetime { get; set; }
         /// <summary>
         /// The state of the event.
         /// </summary>
@@ -86,8 +86,8 @@ namespace PelotonEppSdk.Models
                 Name = eventResponse.name,
                 FriendlyUrlPath = eventResponse.friendly_url_path,
                 Description = eventResponse.description,
-                StartDate = eventResponse.start_date,
-                EndDate = eventResponse.end_date,
+                StartDatetime = eventResponse.start_date,
+                EndDatetime = eventResponse.end_date,
                 State = eventStateEnumValue,
                 Items = eventResponse.items?.Select(ei => (EventItem)ei).ToList(),
                 TermsAndConditionsContent = eventResponse.terms_and_conditions_content,
