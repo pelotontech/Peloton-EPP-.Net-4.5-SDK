@@ -217,8 +217,8 @@ If you wish to dispute a charge please contact Peloton Technologies Inc. at {0} 
                         Assert.AreEqual(null, actualItem.UnitQuantityDescription);
                         Assert.AreEqual(0, actualItem.UnitAmount);
                         Assert.AreEqual(0, actualItem.Amount);
-                        // TODO: seems that the API is not returning the AmountAdjustable field on GET requests
-                        //Assert.AreEqual(expectedItem.AmountAdjustable, actualItem.AmountAdjustable);
+
+                        Assert.AreEqual(true, actualItem.AmountAdjustable);
 
                         Assert.AreEqual(5, actualItem.CustomFields.Count);
 
