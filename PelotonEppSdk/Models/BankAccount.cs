@@ -14,7 +14,7 @@ namespace PelotonEppSdk.Models
         /// characters or leave blank to use a system generated value. If you are modifying a bank account you must reference the existing
         /// bank_account_token associated with the bank account being modified. A bank_account_token cannot be modified once it has been assigned to a bank account.
         /// </summary>
-        [StringLength(32, ErrorMessage = "The " + nameof(Token) + " field must be less than 32 characters in length.")]
+        [StringLength(32, ErrorMessage = "The " + nameof(Token) + " field must be 32 or fewer characters in length.")]
         public string Token { get; set; }
 
         /// <summary>
