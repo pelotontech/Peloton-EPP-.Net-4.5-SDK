@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
@@ -9,10 +10,12 @@ namespace PelotonEppSdk.Models
         /// <summary>
         /// The name for the event item.
         /// </summary>
+        [StringLength(128, MinimumLength = 0, ErrorMessage = "Name must be 128 or fewer characters in length.")]
         public string Name { get; set; }
         /// <summary>
         /// The description for the event item.
         /// </summary>
+        [StringLength(500, MinimumLength = 0, ErrorMessage = "Description must be 500 or fewer characters in length.")]
         public string Description { get; set; }
         /// <summary>
         /// Whether quantity selection is allowed for an event item.
@@ -25,6 +28,7 @@ namespace PelotonEppSdk.Models
         /// <summary>
         /// The description for the unit quantity.
         /// </summary>
+        [StringLength(128, MinimumLength = 0, ErrorMessage = "UnitQuantityDescription must be 128 or fewer characters in length.")]
         public string UnitQuantityDescription { get; set; }
         /// <summary>
         /// The unit amount for an event item.
@@ -61,10 +65,6 @@ namespace PelotonEppSdk.Models
             {
                 if (ei == null) return null;
 
-                ICollection<EventCustomField> customFields = null;
-                if (ei.custom_fields != null)
-                    customFields = ei.custom_fields.Select(cf => (EventCustomField)cf).ToList();
-
                 return new EventItem
                 {
                     Name = ei.name,
@@ -75,7 +75,25 @@ namespace PelotonEppSdk.Models
                     UnitAmount = ei.unit_amount,
                     Amount = ei.amount,
                     AmountAdjustable = ei.amount_adjustable,
-                    CustomFields = customFields
+                    CustomFields = ei.custom_fields?.Select(cf => (EventCustomField)cf).ToList()
+                };
+            }
+
+            public static explicit operator event_item(EventItem ei)
+            {
+                if (ei == null) return null;
+
+                return new event_item
+                {
+                    name = ei.Name,
+                    description = ei.Description,
+                    quantity_selector = ei.QuantitySelector,
+                    default_unit_quantity = ei.DefaultUnitQuantity,
+                    unit_quantity_description = ei.UnitQuantityDescription,
+                    unit_amount = ei.UnitAmount,
+                    amount = ei.Amount,
+                    amount_adjustable = ei.AmountAdjustable,
+                    custom_fields = ei.CustomFields?.Select(cf => (event_custom_field)cf).ToList()
                 };
             }
         }

@@ -56,7 +56,7 @@ namespace PelotonEppSdkTests
                 }
             }
 
-            Assert.AreEqual("AccountToken must be 32 characters in length", errors.Single());
+            Assert.AreEqual("AccountToken must be 32 characters in length.", errors.Single());
         }
 
         [TestMethod]

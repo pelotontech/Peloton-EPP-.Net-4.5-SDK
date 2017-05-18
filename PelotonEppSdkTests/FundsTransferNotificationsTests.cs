@@ -161,10 +161,9 @@ namespace PelotonEppSdkTests
             var transfer = GetBasicFundsTransferRequest();
             transfer.References = null;
 
-            var validationResults = transfer.Validate();
-            if (validationResults.Any())
+            if (!transfer.TryValidate(errors))
             {
-                foreach (var validationResult in validationResults)
+                foreach (var validationResult in errors)
                 {
                     Debug.WriteLine(validationResult);
                 }

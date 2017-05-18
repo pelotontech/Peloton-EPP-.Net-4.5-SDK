@@ -18,13 +18,13 @@ namespace PelotonEppSdk.Models
         /// <summary>
         /// Name that the document has when represented on a file system.
         /// </summary>
-        [Required, StringLength(128, ErrorMessage = "The " + nameof(Filename) + " field must be less than 128 characters long.")]
+        [Required, StringLength(128, ErrorMessage = "The " + nameof(Filename) + " field must be 128 or fewer characters in length.")]
         public string Filename { get; set; }
 
         /// <summary>
         /// Media Type of the Document. Example http://en.wikipedia.org/wiki/Internet_media_type.
         /// </summary>
-        [Required, StringLength(256, ErrorMessage = "The " + nameof(MediaType) + " field must be less than 256 characters long.")]
+        [Required, StringLength(256, ErrorMessage = "The " + nameof(MediaType) + " field must be 256 or fewer characters in length.")]
         public string MediaType { get; set; }
     }
 

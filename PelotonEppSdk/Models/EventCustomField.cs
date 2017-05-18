@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using PelotonEppSdk.Enums;
@@ -10,18 +11,23 @@ namespace PelotonEppSdk.Models
         /// <summary>
         /// The name of this custom field.
         /// </summary>
+        [StringLength(50, MinimumLength = 0, ErrorMessage = "Name must be 50 or fewer characters in length.")]
         public string Name { get; set; }
         /// <summary>
         /// The default value for this custom field.
         /// </summary>
+        [StringLength(128, MinimumLength = 0, ErrorMessage = "DefaultValue must be 128 or fewer characters in length.")]
         public string DefaultValue { get; set; }
         /// <summary>
         /// The type for this custom field.
         /// </summary>
+        //[Required]
         public EventCustomFieldTypeEnum Type { get; set; }
         /// <summary>
         /// The display order for this custom field.
         /// </summary>
+        //[Required]
+        [Range(0, 999, ErrorMessage = "DisplayOrder must be between 0 and 999.")]
         public int DisplayOrder { get; set; }
         /// <summary>
         /// Whether this custom field is required.
@@ -43,12 +49,12 @@ namespace PelotonEppSdk.Models
         public static explicit operator EventCustomField(event_custom_field ei)
         {
 
-            EventCustomFieldTypeEnum type = 0;
+            EventCustomFieldTypeEnum type = EventCustomFieldTypeEnum.Invalid;
 
             if (ei.type?.code != null)
             {
                 var parseResult = Enum.TryParse(ei.type.code, out type);
-                if (!parseResult) Debug.WriteLine("Failed to parse Client Auth Token response type code.");
+                if (!parseResult) Debug.WriteLine("Failed to parse custom field type code.");
             }
 
             return new EventCustomField
@@ -58,6 +64,22 @@ namespace PelotonEppSdk.Models
                 Type = type,
                 DisplayOrder = ei.display_order,
                 Required = ei.required
+            };
+        }
+
+        public static explicit operator event_custom_field(EventCustomField ei)
+        {
+            return new event_custom_field
+            {
+                name = ei.Name,
+                default_value = ei.DefaultValue,
+                type = new type()
+                {
+                    code = ((int)ei.Type).ToString(),
+                    name = ei.Type.ToString()
+                },
+                display_order = ei.DisplayOrder,
+                required = ei.Required
             };
         }
     }

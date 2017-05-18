@@ -59,6 +59,7 @@
     <Compile Include="CreditCardTransactionTokenRequestTests.cs" />
     <Compile Include="EventCreateTests.cs" />
     <Compile Include="EventsTests.cs" />
+    <Compile Include="EventTestsBase.cs" />
     <Compile Include="FundsTransferNotificationsTests.cs" />
     <Compile Include="FundsTransferTests.cs" />
     <Compile Include="StatementsTests.cs" />

@@ -34,8 +34,9 @@ namespace PelotonEppSdkTests
             var transfer = GetBasicRequest();
             transfer.References = null;
 
-            var validationResults = transfer.Validate();
-            if (validationResults.Any())
+            var validationResults = new List<string>();
+            var validationSuccess = transfer.TryValidate(validationResults);
+            if (!validationSuccess)
             {
                 foreach (var validationResult in validationResults)
                 {
@@ -77,7 +78,7 @@ namespace PelotonEppSdkTests
             var errors = new Collection<string>();
             if (transfer.TryValidate(errors)) Assert.Fail();
             Assert.AreEqual(1, errors.Count);
-            Assert.AreEqual("SourceAccountToken must be 32 characters long.", errors.FirstOrDefault());
+            Assert.AreEqual("SourceAccountToken must be 32 characters in length.", errors.FirstOrDefault());
         }
 
         [TestMethod]
@@ -88,7 +89,7 @@ namespace PelotonEppSdkTests
             var errors = new Collection<string>();
             if (transfer.TryValidate(errors)) Assert.Fail();
             Assert.AreEqual(1, errors.Count);
-            Assert.AreEqual("TargetAccountToken must be 32 characters long.", errors.FirstOrDefault());
+            Assert.AreEqual("TargetAccountToken must be 32 characters in length.", errors.FirstOrDefault());
         }
 
         [TestMethod]
@@ -99,7 +100,7 @@ namespace PelotonEppSdkTests
             var errors = new Collection<string>();
             if (transfer.TryValidate(errors)) Assert.Fail();
             Assert.AreEqual(1, errors.Count);
-            Assert.AreEqual("SourceAccountToken must be 32 characters long.", errors.FirstOrDefault());
+            Assert.AreEqual("SourceAccountToken must be 32 characters in length.", errors.FirstOrDefault());
         }
 
         [TestMethod]
@@ -110,7 +111,7 @@ namespace PelotonEppSdkTests
             var errors = new Collection<string>();
             if (transfer.TryValidate(errors)) Assert.Fail();
             Assert.AreEqual(1, errors.Count);
-            Assert.AreEqual("TargetAccountToken must be 32 characters long.", errors.FirstOrDefault());
+            Assert.AreEqual("TargetAccountToken must be 32 characters in length.", errors.FirstOrDefault());
         }
 
         [TestMethod]

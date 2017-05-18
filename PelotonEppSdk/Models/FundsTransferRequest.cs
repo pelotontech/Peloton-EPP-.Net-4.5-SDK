@@ -47,14 +47,14 @@ namespace PelotonEppSdk.Models
         /// The account identifier used to identify a bank account.
         /// </summary>
         [Required]
-        [StringLength(32, MinimumLength = 32, ErrorMessage = "BankAccountToken must be 32 characters long.")]
+        [StringLength(32, MinimumLength = 32, ErrorMessage = "BankAccountToken must be 32 characters in length.")]
         public string BankAccountToken { get; set; }
 
         /// <summary>
         /// ClientToken for the target peloton account
         /// </summary>
         [Required]
-        [StringLength(32, MinimumLength = 32, ErrorMessage = "AccountToken must be 32 characters long.")]
+        [StringLength(32, MinimumLength = 32, ErrorMessage = "AccountToken must be 32 characters in length.")]
         public string AccountToken { get; set; }
 
         /// <summary>

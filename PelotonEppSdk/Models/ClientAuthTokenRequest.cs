@@ -14,14 +14,14 @@ namespace PelotonEppSdk.Models
         /// <summary>
         /// The Client Authorization Token. Required for POST requests.
         /// </summary>
-        [StringLength(32, MinimumLength = 32, ErrorMessage = "ClientAuthToken must be 32 characters in length")]
+        [StringLength(32, MinimumLength = 32, ErrorMessage = "ClientAuthToken must be 32 characters in length.")]
         public string ClientAuthToken { get; set; }
 
         /// <summary>
         /// The token used to identify the Peloton account
         /// </summary>
         [Required]
-        [StringLength(32, MinimumLength = 32, ErrorMessage = "AccountToken must be 32 characters in length")]
+        [StringLength(32, MinimumLength = 32, ErrorMessage = "AccountToken must be 32 characters in length.")]
         public string AccountToken { get; set; }
 
         /// <summary>
