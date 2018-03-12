@@ -76,9 +76,9 @@ namespace PelotonEppSdkTests
         }
 
         [TestMethod]
-        public void TestEventTokenNull()
+        public void TestEventTokenLength33()
         {
-            var eventRequest = GetBasicEventRequest(null);
+            var eventRequest = GetBasicEventRequest(new string('e', 33));
             var errors = new Collection<string>();
             if (!eventRequest.TryValidate(errors))
             {
@@ -86,7 +86,7 @@ namespace PelotonEppSdkTests
                 {
                     Debug.WriteLine(error);
                 }
-                Assert.AreEqual("The EventToken field is required.", errors.Single());
+                Assert.AreEqual("EventToken must be 32 characters in length.", errors.Single());
             }
             else
             {

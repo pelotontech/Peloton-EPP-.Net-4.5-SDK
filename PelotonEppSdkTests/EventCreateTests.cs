@@ -325,7 +325,12 @@ namespace PelotonEppSdkTests
         {
             var factory = new RequestFactory(24, "Password123", "PelonEppSdkTests", baseUri);
             var request = factory.GetEventRequest();
-            //var createRequest = GetBasicEventRequest();
+
+            request.EventToken = new string('e', 33);
+            request.AccountToken = new string('a', 33);
+            request.Name = new string('n', 129);
+            request.FriendlyUrlPath = new string('f', 51);
+            request.Description = new string('d', 501);
 
             var errors = new Collection<string>();
             if (!request.TryValidate(errors))
@@ -336,7 +341,7 @@ namespace PelotonEppSdkTests
                 }
             }
 
-            Assert.AreEqual(7, errors.Count);
+            Assert.AreEqual(5, errors.Count);
 
         }
 
@@ -345,7 +350,7 @@ namespace PelotonEppSdkTests
         {
             var factory = new RequestFactory(24, "Password123", "PelonEppSdkTests", baseUri);
             var request = factory.GetEventRequest();
-            request.Name = new string('a', 40);
+            request.Name = new string('a', 129);
 
 
             var create = request;
