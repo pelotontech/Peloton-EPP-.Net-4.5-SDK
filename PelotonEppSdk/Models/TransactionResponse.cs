@@ -14,7 +14,9 @@ namespace PelotonEppSdk.Models
         [StringLength(36)]
         public string TransactionRefCode { get; set; }
 
-        public TransactionResponse() : base()
+        // ReSharper disable once UnusedMember.Global
+        // ReSharper disable once MemberCanBeProtected.Global
+        public TransactionResponse()
         {
         }
 

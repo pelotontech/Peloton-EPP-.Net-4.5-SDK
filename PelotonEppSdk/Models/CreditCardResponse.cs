@@ -3,7 +3,7 @@ using PelotonEppSdk.Interfaces;
 
 namespace PelotonEppSdk.Models
 {
-    public class CreditCardResponse: Response, IVerificationResponse
+    public class CreditCardResponse : Response, IVerificationResponse
     {
         /// <summary>
         /// The credit card token assigned to the newly created credit card
@@ -20,6 +20,11 @@ namespace PelotonEppSdk.Models
         /// </summary>
         public string CardSecurityCodeVerificationResult { get; set; }
 
+        // ReSharper disable once UnusedMember.Global
+        public CreditCardResponse()
+        {
+        }
+
         internal CreditCardResponse(response r) : base(r)
         {
         }
@@ -29,7 +34,7 @@ namespace PelotonEppSdk.Models
     [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
     [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
     [SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Global")]
-    internal class credit_card_response: response, Iverification_response
+    internal class credit_card_response : response, Iverification_response
     {
         public string credit_card_token { get; set; }
 

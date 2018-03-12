@@ -6,7 +6,7 @@ using PelotonEppSdk.Enums;
 
 namespace PelotonEppSdk.Models
 {
-    public class ClientAuthTokenResponse: Response
+    public class ClientAuthTokenResponse : Response
     {
         /// <summary>
         /// The one-time-use client authorization token (CAT).
@@ -58,6 +58,11 @@ namespace PelotonEppSdk.Models
         /// </summary>
         public DateTime? AuthorizedDatetime { get; set; }
 
+        // ReSharper disable once UnusedMember.Global
+        public ClientAuthTokenResponse()
+        {
+        }
+
         internal ClientAuthTokenResponse(response r) : base(r)
         {
         }
@@ -67,7 +72,7 @@ namespace PelotonEppSdk.Models
     [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
     [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
     [SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Global")]
-    internal class client_auth_token_response: response
+    internal class client_auth_token_response : response
     {
         public string client_auth_token { get; set; }
 
@@ -85,7 +90,7 @@ namespace PelotonEppSdk.Models
     [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
     [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
     [SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Global")]
-    internal class client_auth_token_status_response: response
+    internal class client_auth_token_status_response : response
     {
         public string client_auth_token { get; set; }
 

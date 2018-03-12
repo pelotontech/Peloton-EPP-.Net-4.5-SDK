@@ -6,6 +6,11 @@ namespace PelotonEppSdk.Models
     {
         public string BankAccountToken { get; set; }
 
+        // ReSharper disable once UnusedMember.Global
+        public BankAccountCreateResponse()
+        {
+        }
+
         internal BankAccountCreateResponse(response r) : base(r)
         {
         }
@@ -15,7 +20,7 @@ namespace PelotonEppSdk.Models
     [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
     [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
     [SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Global")]
-    internal class bank_account_response: response
+    internal class bank_account_response : response
     {
         public string bank_account_token { get; set; }
 

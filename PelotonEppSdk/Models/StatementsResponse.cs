@@ -29,6 +29,11 @@ namespace PelotonEppSdk.Models
         /// </summary>
         public DateTime ToDate { get; set; }
 
+        // ReSharper disable once UnusedMember.Global
+        public StatementsResponse()
+        {
+        }
+
         internal StatementsResponse(response sr) : base(sr)
         {
         }
@@ -128,7 +133,7 @@ namespace PelotonEppSdk.Models
             {
                 OpeningBalance = sr.opening_balance,
                 // In some error cases the statement_details will be null, so use the null propagation operator here
-                StatementDetails = sr.statement_details?.Select(sd => (StatementDetail)sd).ToList(),
+                StatementDetails = sr.statement_details?.Select(sd => (StatementDetail) sd).ToList(),
                 FromDate = sr.from_date_utc,
                 ToDate = sr.to_date_utc
             };
@@ -173,9 +178,9 @@ namespace PelotonEppSdk.Models
                 Amount = sd.amount,
                 TransactionDatetime = sd.transaction_datetime_utc,
                 TransactionReferenceCode = sd.transaction_reference_code,
-                TransactionDescription = (TransactionDescription)sd.transaction_description,
-                TransactionType = (StatementTransactionType)sd.transaction_type,
-                References = sd.references.Select(r => (Reference)r).ToList()
+                TransactionDescription = (TransactionDescription) sd.transaction_description,
+                TransactionType = (StatementTransactionType) sd.transaction_type,
+                References = sd.references.Select(r => (Reference) r).ToList()
             };
         }
     }
@@ -207,7 +212,7 @@ namespace PelotonEppSdk.Models
             };
         }
     }
-    
+
     [SuppressMessage("ReSharper", "InconsistentNaming")]
     [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
     [SuppressMessage("ReSharper", "CollectionNeverUpdated.Global")]
@@ -236,5 +241,4 @@ namespace PelotonEppSdk.Models
             };
         }
     }
-    
 }
