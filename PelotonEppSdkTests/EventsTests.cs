@@ -76,9 +76,9 @@ namespace PelotonEppSdkTests
         }
 
         [TestMethod]
-        public void TestEventTokenNull()
+        public void TestEventTokenLength33()
         {
-            var eventRequest = GetBasicEventRequest(null);
+            var eventRequest = GetBasicEventRequest(new string('e', 33));
             var errors = new Collection<string>();
             if (!eventRequest.TryValidate(errors))
             {
@@ -86,7 +86,7 @@ namespace PelotonEppSdkTests
                 {
                     Debug.WriteLine(error);
                 }
-                Assert.AreEqual("The EventToken field is required.", errors.Single());
+                Assert.AreEqual("EventToken must be 32 characters in length.", errors.Single());
             }
             else
             {
@@ -217,8 +217,8 @@ If you wish to dispute a charge please contact Peloton Technologies Inc. at {0} 
                         Assert.AreEqual(null, actualItem.UnitQuantityDescription);
                         Assert.AreEqual(0, actualItem.UnitAmount);
                         Assert.AreEqual(0, actualItem.Amount);
-                        // TODO: seems that the API is not returning the AmountAdjustable field on GET requests
-                        //Assert.AreEqual(expectedItem.AmountAdjustable, actualItem.AmountAdjustable);
+
+                        Assert.AreEqual(true, actualItem.AmountAdjustable);
 
                         Assert.AreEqual(5, actualItem.CustomFields.Count);
 

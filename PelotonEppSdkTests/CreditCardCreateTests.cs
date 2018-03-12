@@ -61,6 +61,7 @@ namespace PelotonEppSdkTests
         {
             var createRequest = GetBasicRequest(107, "9cf9b8f4", "PelonEppSdkTests");
             createRequest.CardNumber = 5499990123456781;
+            createRequest.CardSecurityCode = "999";
             createRequest.Verify = true;
 
             var errors = new Collection<string>();
@@ -100,7 +101,7 @@ namespace PelotonEppSdkTests
             createRequest.CardOwner = "P. Tech.";
             createRequest.CardNumber = 5499990123456781;
             createRequest.ExpiryMonth = "12";
-            createRequest.ExpiryYear = "16";
+            createRequest.ExpiryYear = DateTime.UtcNow.Year.ToString().Substring(2,2);
             createRequest.CardSecurityCode = "123";
             createRequest.Verify = true;
 
