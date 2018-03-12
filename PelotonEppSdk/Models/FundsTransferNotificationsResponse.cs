@@ -16,6 +16,11 @@ namespace PelotonEppSdk.Models
         /// </summary>
         public string Token { get; set; }
 
+        // ReSharper disable once UnusedMember.Global
+        public FundsTransferNotificationsResponse()
+        {
+        }
+
         internal FundsTransferNotificationsResponse(response r) : base(r)
         {
         }
@@ -23,6 +28,7 @@ namespace PelotonEppSdk.Models
 
     [SuppressMessage("ReSharper", "InconsistentNaming")]
     [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
+    [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
     [SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Global")]
     internal class funds_transfer_notifications_response : response
     {

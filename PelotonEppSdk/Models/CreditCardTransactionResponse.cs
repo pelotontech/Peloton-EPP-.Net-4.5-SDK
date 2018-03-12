@@ -3,7 +3,7 @@ using PelotonEppSdk.Interfaces;
 
 namespace PelotonEppSdk.Models
 {
-    public class CreditCardTransactionResponse: TransactionResponse, IVerificationResponse
+    public class CreditCardTransactionResponse : TransactionResponse, IVerificationResponse
     {
         /// <summary>
         /// Result of the address verification process
@@ -14,6 +14,11 @@ namespace PelotonEppSdk.Models
         /// Result of the card security code verification process
         /// </summary>
         public string CardSecurityCodeVerificationResult { get; set; }
+
+        // ReSharper disable once UnusedMember.Global
+        public CreditCardTransactionResponse()
+        {
+        }
 
         internal CreditCardTransactionResponse(response r) : base(r)
         {
