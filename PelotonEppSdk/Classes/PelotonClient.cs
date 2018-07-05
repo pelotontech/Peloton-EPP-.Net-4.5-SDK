@@ -4,7 +4,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
-using System.Web.Script.Serialization;
+using Newtonsoft.Json;
 using PelotonEppSdk.Enums;
 using PelotonEppSdk.Models;
 
@@ -24,9 +24,7 @@ namespace PelotonEppSdk.Classes
         /// <exception cref="NotImplementedException"><see cref="RequestType"/> GET is not yet supported.</exception>
         private async Task<T> MakeBasicHttpRequest<T>(RequestType type, request_base content, ApiTarget target, string parameter)
         {
-            var serializer = new JavaScriptSerializer();
-            serializer.MaxJsonLength = int.MaxValue;
-            var serializedContent = serializer.Serialize(content);
+            var serializedContent = JsonConvert.SerializeObject(content);
             var stringContent = new StringContent(serializedContent, Encoding.UTF8, "application/json");
             using (var client = new HttpClient())
             {
@@ -57,7 +55,7 @@ namespace PelotonEppSdk.Classes
                 string stringResult = await httpResponseMessage.Content.ReadAsStringAsync().ConfigureAwait(false);
                 if (!string.IsNullOrEmpty(stringResult))
                 {
-                    return serializer.Deserialize<T>(stringResult);
+                    return JsonConvert.DeserializeObject<T>(stringResult);
                 }
 
                 // handle server errors
