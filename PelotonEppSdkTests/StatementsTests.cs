@@ -66,7 +66,7 @@ namespace PelotonEppSdkTests
                 Debug.WriteLine(error);
             }
 
-            Assert.AreEqual("account_token: not found", result.Errors.Single());
+            Assert.AreEqual("account_token: required", result.Errors.Single());
 
             Assert.IsFalse(result.Success);
         }
@@ -103,7 +103,7 @@ namespace PelotonEppSdkTests
                 Debug.WriteLine(error);
             }
 
-            Assert.AreEqual("account_token: not found", result.Errors.Single());
+            Assert.AreEqual("account_token: must be 32 characters", result.Errors.Single());
             Assert.IsFalse(result.Success);
         }
 
@@ -139,7 +139,7 @@ namespace PelotonEppSdkTests
                 Debug.WriteLine(error);
             }
 
-            Assert.AreEqual("account_token: not found", result.Errors.Single());
+            Assert.AreEqual("account_token: must be 32 characters", result.Errors.Single());
             Assert.IsFalse(result.Success);
         }
 

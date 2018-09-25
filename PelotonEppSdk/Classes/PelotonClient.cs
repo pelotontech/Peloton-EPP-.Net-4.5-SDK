@@ -34,6 +34,9 @@ namespace PelotonEppSdk.Classes
                 var targetUriPart = factory.GetTargetUriPart(target);
                 var targetPath = targetUriPart + parameter;
 
+                // use TLS1.2
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+
                 HttpResponseMessage httpResponseMessage;
                 switch (type)
                 {

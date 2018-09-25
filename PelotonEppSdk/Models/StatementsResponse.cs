@@ -62,6 +62,11 @@ namespace PelotonEppSdk.Models
         public DateTime TransactionDatetime { get; set; }
 
         /// <summary>
+        /// Date and time which the transaction was posted
+        /// </summary>
+        public DateTime PostDatetime { get; set; }
+
+        /// <summary>
         /// a nullable transaction_reference_code
         /// </summary>
         public string TransactionReferenceCode { get; set; }
@@ -166,6 +171,11 @@ namespace PelotonEppSdk.Models
         public DateTime transaction_datetime_utc { get; set; }
 
         /// <summary>
+        /// Date and time which the transaction was posted
+        /// </summary>
+        public DateTime post_datetime_utc { get; set; }
+
+        /// <summary>
         /// a nullable transaction_reference_code
         /// </summary>
         public string transaction_reference_code { get; set; }
@@ -177,6 +187,7 @@ namespace PelotonEppSdk.Models
                 LedgerType = sd.ledger_type,
                 Amount = sd.amount,
                 TransactionDatetime = sd.transaction_datetime_utc,
+                PostDatetime = sd.post_datetime_utc,
                 TransactionReferenceCode = sd.transaction_reference_code,
                 TransactionDescription = (TransactionDescription) sd.transaction_description,
                 TransactionType = (StatementTransactionType) sd.transaction_type,
