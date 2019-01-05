@@ -8,7 +8,7 @@
     <ProjectGuid>{606EDF20-9A12-4658-B6E5-BBC35DDC4D91}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PelotonEppSdk.Tests</RootNamespace>
+    <RootNamespace>PelotonEppSdkTests</RootNamespace>
     <AssemblyName>PelotonEppSdkTests</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
