@@ -165,8 +165,8 @@ namespace PelotonEppSdkTests
                     Assert.AreEqual("DOG2015", actual.FriendlyUrlPath);
                     Assert.AreEqual(null, actual.Description);
                     Assert.AreEqual(EventStateEnum.Active, actual.State);
-                    Assert.AreEqual("2015-03-01 00:00:00", actual.StartDatetime.ToString());
-                    Assert.AreEqual("2015-03-27 00:00:00", actual.EndDatetime.ToString());
+                    Assert.AreEqual("2015-03-01 00:00:00", actual.StartDatetime.ToString("yyyy-MM-dd HH:mm:ss"));
+                    Assert.AreEqual("2015-03-27 00:00:00", actual.EndDatetime.ToString("yyyy-MM-dd HH:mm:ss"));
                     if (languageCode == LanguageCode.en)
                     {
                         Assert.AreEqual(@"By making this payment you expressly authorize the service provider, Peloton Technologies Inc., to charge your credit card for the noted dollar amount.
