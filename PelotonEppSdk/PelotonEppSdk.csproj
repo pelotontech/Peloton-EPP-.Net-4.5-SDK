@@ -7,7 +7,7 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageVersion>1.2.0.0</PackageVersion>
     <Authors>Peloton Technologies, Inc.</Authors>
-    <Copyright>2018</Copyright>
+    <Copyright>2016</Copyright>
     <PackageProjectUrl>https://peloton-technologies.com/</PackageProjectUrl>
     <RepositoryUrl>https://github.com/pelotontech/Peloton-EPP-.Net-4.5-SDK</RepositoryUrl>
   </PropertyGroup>
