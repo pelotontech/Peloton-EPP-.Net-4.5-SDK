@@ -7,8 +7,7 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using System.Web;
-using System.Web.Script.Serialization;
+using Newtonsoft.Json;
 using PelotonEppSdk.Classes;
 using PelotonEppSdk.Enums;
 using PelotonEppSdk.Interfaces;
@@ -70,7 +69,6 @@ namespace PelotonEppSdk.Models
         private async Task<T> DeleteAsyncBankAccountsV1<T>(bank_account_delete_request content, ApiTarget target)
         {
             var factory = new UriFactory();
-            var serializer = new JavaScriptSerializer();
             var stringContent = new StringContent(content.bank_account_token, Encoding.Default, "application/json");
             string stringResult;
             using (var client = new HttpClient())
@@ -90,11 +88,12 @@ namespace PelotonEppSdk.Models
                 // handle server errors
                 if (!httpResponseMessage.IsSuccessStatusCode)
                 {
-                    throw new HttpException((int)httpResponseMessage.StatusCode, httpResponseMessage.ReasonPhrase);
+                    throw new HttpException(httpResponseMessage.StatusCode, httpResponseMessage.ReasonPhrase);
                 }
                 stringResult = httpResponseMessage.Content.ReadAsStringAsync().Result;
             }
-            return serializer.Deserialize<T>(stringResult);
+
+            return JsonConvert.DeserializeObject<T>(stringResult);
         }
     }
 

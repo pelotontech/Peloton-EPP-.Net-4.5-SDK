@@ -5,18 +5,20 @@ using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Net.Http.Headers;
-using System.Web.Script.Serialization;
+using System.Runtime.CompilerServices;
+using Newtonsoft.Json;
 using PelotonEppSdk.Enums;
 using static System.Text.Encoding;
 using Convert = System.Convert;
+[assembly: InternalsVisibleTo("PelotonEppSdkTests")]
 
 namespace PelotonEppSdk.Models
 {
     public class RequestBase
     {
-        [ScriptIgnore]
+        [JsonIgnore]
         internal Uri BaseUri { get; set; }
-        [ScriptIgnore]
+        [JsonIgnore]
         internal AuthenticationHeaderValue AuthenticationHeader { get; private set; }
         [Required]
         internal string ApplicationName { get; set; }
@@ -74,10 +76,10 @@ namespace PelotonEppSdk.Models
         }
 
 
-        [ScriptIgnore]
+        [JsonIgnore]
         public Uri base_uri { get; set; }
 
-        [ScriptIgnore]
+        [JsonIgnore]
         internal AuthenticationHeaderValue authentication_header { get; set; }
 
         public string application_name { get; set; }

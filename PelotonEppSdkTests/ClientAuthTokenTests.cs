@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
@@ -195,7 +196,7 @@ namespace PelotonEppSdkTests
             Assert.AreEqual("Keep for Testing", getResult.ReturnUrl);
             Assert.IsFalse(getResult.Active);
             Assert.AreEqual(ClientAuthTokenAuthorizationType.Card, getResult.Type);
-            Assert.AreEqual("2017-03-07 02:04:14", getResult.AuthorizedDatetime.ToString());
+            Assert.AreEqual("2017-03-07 02:04:14", ((DateTime)getResult.AuthorizedDatetime).ToString("yyyy-MM-dd HH:mm:ss"));
             Assert.AreEqual("0d1d2933c4104796815bf2ab98f3e6d9", getResult.CardToken);
             Assert.AreEqual(null, getResult.BankAccountToken);
             Assert.AreEqual(null, getResult.TransactionRefCode);

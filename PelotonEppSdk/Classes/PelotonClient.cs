@@ -3,7 +3,6 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using System.Web;
 using Newtonsoft.Json;
 using PelotonEppSdk.Enums;
 using PelotonEppSdk.Models;
@@ -65,11 +64,11 @@ namespace PelotonEppSdk.Classes
                 switch (httpResponseMessage.StatusCode)
                 {
                     case HttpStatusCode.BadRequest:
-                        throw new HttpException((int)httpResponseMessage.StatusCode, httpResponseMessage.ReasonPhrase);
+                        throw new HttpException(httpResponseMessage.StatusCode, httpResponseMessage.ReasonPhrase);
                     case HttpStatusCode.Unauthorized:
-                        throw new HttpException((int)httpResponseMessage.StatusCode, httpResponseMessage.ReasonPhrase);
+                        throw new HttpException(httpResponseMessage.StatusCode, httpResponseMessage.ReasonPhrase);
                     default:
-                        throw new HttpException((int)httpResponseMessage.StatusCode, httpResponseMessage.ReasonPhrase);
+                        throw new HttpException(httpResponseMessage.StatusCode, httpResponseMessage.ReasonPhrase);
                 }
             }
         }
