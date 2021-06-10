@@ -61,6 +61,7 @@
     <Compile Include="ClientAuthTokenTests.cs" />
     <Compile Include="CreditCardCreateAndTransactionAndDeleteTests.cs" />
     <Compile Include="CreditCardCreateTests.cs" />
+    <Compile Include="CreditCardTransactionRequestTests.cs" />
     <Compile Include="CreditCardTransactionTokenRequestTests.cs" />
     <Compile Include="CreditCardUpdateTests.cs" />
     <Compile Include="EventCreateTests.cs" />

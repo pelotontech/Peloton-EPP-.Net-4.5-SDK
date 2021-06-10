@@ -145,6 +145,16 @@ namespace PelotonEppSdk.Classes
             return request;
         }
 
+        // ReSharper disable once IdentifierTypo
+        public CreditCardTransactionRequest GetUntokenizedCreditCardTransactionRequest()
+        {
+            var request = new CreditCardTransactionRequest();
+            SetBaseHeaders(request);
+            SetBaseFields(request);
+            SetBaseUri(request);
+            return request;
+        }
+
         public StatementsRequest GetStatementsRequest()
         {
             var request = new StatementsRequest();
