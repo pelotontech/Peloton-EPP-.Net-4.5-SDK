@@ -7,15 +7,19 @@ using System.Net;
 using System.Threading.Tasks;
 using PelotonEppSdk.Classes;
 using PelotonEppSdk.Enums;
+using PelotonEppSdk.Interfaces;
 
 namespace PelotonEppSdk.Models
 {
-    public class CreditCardTransactionRequest : RequestBase
+    public class CreditCardTransactionRequest : RequestBase, IOptionalAccountToken
     {
   	    public CreditCardTransactionRequest()
   	    {
             References = new List<Reference>();
         }
+
+        /// <inheritdoc cref="IOptionalAccountToken.AccountToken"/>
+        public string AccountToken { get; set; }
 
         /// <summary>
         /// The name of the card owner as it appears on the credit card
@@ -131,8 +135,10 @@ namespace PelotonEppSdk.Models
     [SuppressMessage("ReSharper", "InconsistentNaming")]
     [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
     [SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Global")]
-    internal class credit_card_transaction_request : request_base
+    internal class credit_card_transaction_request : request_base, Ioptional_account_token
     {
+        public string account_token { get; set; }
+
         public string name_on_card { get; set; }
 
         public long? card_number { get; set; }
@@ -175,6 +181,7 @@ namespace PelotonEppSdk.Models
         {
             return new credit_card_transaction_request(creditCardTransactionRequest)
             {
+                account_token = creditCardTransactionRequest.AccountToken,
                 card_number = creditCardTransactionRequest.CardNumber,
                 name_on_card = creditCardTransactionRequest.CardOwner,
                 expiry_month = creditCardTransactionRequest.ExpiryMonth,

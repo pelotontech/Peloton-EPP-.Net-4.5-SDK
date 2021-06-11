@@ -4,14 +4,13 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
-using System.Web;
 using PelotonEppSdk.Classes;
 using PelotonEppSdk.Enums;
 using PelotonEppSdk.Interfaces;
 
 namespace PelotonEppSdk.Models
 {
-    public class CreditCardRequest : RequestBase, ICreditCardCreateRequest, ICreditCardDeleteRequest, ICreditCardUpdateRequest
+    public class CreditCardRequest : RequestBase, ICreditCardCreateRequest, ICreditCardDeleteRequest, ICreditCardUpdateRequest, IOptionalAccountToken
     {
         public CreditCardRequest()
         {
@@ -19,6 +18,9 @@ namespace PelotonEppSdk.Models
         }
 
         public string CreditCardToken { get; set; }
+
+        /// <inheritdoc cref="IOptionalAccountToken.AccountToken"/>
+        public string AccountToken { get; set; }
 
         /// <summary>
         /// Recommended: Order number provided by the source system, otherwise one will be automatically generated
@@ -117,8 +119,10 @@ namespace PelotonEppSdk.Models
     [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
     [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
     [SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Global")]
-    internal class credit_card_request : request_base
+    internal class credit_card_request : request_base, Ioptional_account_token
     {
+        public string account_token { get; set; }
+
         public string order_number { get; set; }
 
         public string name_on_card { get; set; }
@@ -149,6 +153,7 @@ namespace PelotonEppSdk.Models
         {
             return new credit_card_request(creditCardRequest)
             {
+                account_token = creditCardRequest.AccountToken,
                 order_number = creditCardRequest.OrderNumber,
                 name_on_card = creditCardRequest.CardOwner,
                 card_number = creditCardRequest.CardNumber,
