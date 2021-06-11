@@ -5,18 +5,21 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
-using System.Web;
 using PelotonEppSdk.Classes;
 using PelotonEppSdk.Enums;
+using PelotonEppSdk.Interfaces;
 
 namespace PelotonEppSdk.Models
 {
-    public class CreditCardTokenTransactionRequest : RequestBase
+    public class CreditCardTokenTransactionRequest : RequestBase, IOptionalAccountToken
     {
   	    public CreditCardTokenTransactionRequest()
   	    {
             References = new List<Reference>();
         }
+
+        /// <inheritdoc cref="IOptionalAccountToken.AccountToken"/>
+        public string AccountToken { get; set; }
 
 		/// <summary>
         /// Recommended: Order number provided by the source system, otherwise one will be automatically generated
@@ -109,8 +112,10 @@ namespace PelotonEppSdk.Models
     [SuppressMessage("ReSharper", "InconsistentNaming")]
     [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
     [SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Global")]
-    internal class credit_card_token_transaction_request : request_base
+    internal class credit_card_token_transaction_request : request_base, Ioptional_account_token
     {
+        public string account_token { get; set; }
+
         public string order_number { get; set; }
 
         public string credit_card_token { get; set; }
@@ -145,6 +150,7 @@ namespace PelotonEppSdk.Models
         {
             return new credit_card_token_transaction_request(creditCardTokenTransactionRequest)
             {
+                account_token = creditCardTokenTransactionRequest.AccountToken,
                 order_number = creditCardTokenTransactionRequest.OrderNumber,
                 credit_card_token = creditCardTokenTransactionRequest.CreditCardToken,
                 amount = creditCardTokenTransactionRequest.Amount,

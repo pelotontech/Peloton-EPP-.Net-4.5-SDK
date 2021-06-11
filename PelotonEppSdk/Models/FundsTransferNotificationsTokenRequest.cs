@@ -4,11 +4,15 @@ using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using PelotonEppSdk.Classes;
 using PelotonEppSdk.Enums;
+using PelotonEppSdk.Interfaces;
 
 namespace PelotonEppSdk.Models
 {
-    public class FundsTransferNotificationsTokenRequest : RequestBase
+    public class FundsTransferNotificationsTokenRequest : RequestBase, IOptionalAccountToken
     {
+        /// <inheritdoc cref="IOptionalAccountToken.AccountToken"/>
+        public string AccountToken { get; set; }
+
         /// <summary>
         /// Sets the date associated with the token, from which the Funds Transfers Notifications will be returned
         /// </summary>
@@ -26,8 +30,10 @@ namespace PelotonEppSdk.Models
     [SuppressMessage("ReSharper", "InconsistentNaming")]
     [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
     [SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Global")]
-    internal class funds_transfer_token_request : request_base
+    internal class funds_transfer_token_request : request_base, Ioptional_account_token
     {
+        public string account_token { get; set; }
+
         [Required]
         public string from_date_utc { get; set; }
 
@@ -37,6 +43,7 @@ namespace PelotonEppSdk.Models
         {
             return new funds_transfer_token_request(fundsTransferNotificationsRequest)
             {
+                account_token = fundsTransferNotificationsRequest.AccountToken,
                 from_date_utc = fundsTransferNotificationsRequest.FromDateUtc,
                 application_name = fundsTransferNotificationsRequest.ApplicationName,
                 authentication_header = fundsTransferNotificationsRequest.AuthenticationHeader,

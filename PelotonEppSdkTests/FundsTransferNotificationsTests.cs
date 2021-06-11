@@ -16,6 +16,7 @@ namespace PelotonEppSdkTests
         {
             var factory = new RequestFactory(24, "Password123", "PelonEppSdkTests", baseUri);
             var transferNotificationsToken = factory.GetFundsTransferNotificationsTokenRequest();
+            transferNotificationsToken.AccountToken = "0C01957EE5D8B468342E673CC010BE0A";
             transferNotificationsToken.FromDateUtc = DateTime.UtcNow.ToString("yyyy-MM-dd");
             return transferNotificationsToken;
         }
@@ -24,6 +25,7 @@ namespace PelotonEppSdkTests
         {
             var factory = new RequestFactory(24, "Password123", "PelonEppSdkTests", baseUri);
             var transferNotifications = factory.GetFundsTransferNotificationsRequest();
+            transferNotifications.AccountToken = "0C01957EE5D8B468342E673CC010BE0A";
             transferNotifications.Token = token;
             transferNotifications.Items = items;
             return transferNotifications;

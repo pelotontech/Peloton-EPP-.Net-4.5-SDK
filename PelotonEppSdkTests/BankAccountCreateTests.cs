@@ -56,7 +56,7 @@ namespace PelotonEppSdkTests
             var createRequest = factory.GetBankAccountCreateRequest();
             createRequest.BankAccount = new BankAccount
             {
-                AccountNumber = "1",
+                AccountNumber = "1234567890",
                 BranchTransitNumber = 1,
                 CurrencyCode = "CAD",
                 FinancialInstitution = 1,

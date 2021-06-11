@@ -84,7 +84,7 @@ namespace PelotonEppSdkTests
             Assert.AreEqual(1, result.MessageCode);
             Assert.AreEqual("Validation Error", result.Message);
             Assert.IsTrue(string.IsNullOrEmpty(result.ClientAuthToken));
-            Assert.AreEqual("account_token: invalid", result.Errors.Single());
+            Assert.AreEqual("account_token: not found", result.Errors.Single());
         }
 
         [TestMethod]
