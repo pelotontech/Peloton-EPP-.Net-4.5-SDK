@@ -161,6 +161,8 @@ namespace PelotonEppSdkTests
             var factory = new RequestFactory(107, "9cf9b8f4", "PelonEppSdkTests", baseUri);
             var request = factory.GetUntokenizedCreditCardTransactionRequest();
 
+            request.AccountToken = "1D4E237930EB70FC115E6ACD95E878E6";
+
             request.CardOwner        = "P. Tech.";
             request.CardNumber       = 5499990123456781;
             request.ExpiryMonth      = "12";

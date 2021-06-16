@@ -157,17 +157,17 @@ namespace PelotonEppSdk.Models
 
         public string billing_name { get; set; }
 
-        public string billing_email { get; set; }
+        public string billing_email_address { get; set; }
 
-        public string billing_phone { get; set; }
+        public string billing_phone_number { get; set; }
 
         public address billing_address { get; set; }
 
         public string shipping_name { get; set; }
 
-        public string shipping_email { get; set; }
+        public string shipping_email_address { get; set; }
 
-        public string shipping_phone { get; set; }
+        public string shipping_phone_number { get; set; }
 
         public address shipping_address { get; set; }
 
@@ -191,13 +191,13 @@ namespace PelotonEppSdk.Models
                 amount = creditCardTransactionRequest.Amount,
                 type = creditCardTransactionRequest.Type,
                 billing_name = creditCardTransactionRequest.BillingName,
-                billing_email = creditCardTransactionRequest.BillingEmail,
-                billing_phone = creditCardTransactionRequest.BillingPhone,
+                billing_email_address = creditCardTransactionRequest.BillingEmail,
+                billing_phone_number = creditCardTransactionRequest.BillingPhone,
                 billing_address = (address)creditCardTransactionRequest.BillingAddress,
 
                 shipping_name = creditCardTransactionRequest.ShippingName,
-                shipping_email = creditCardTransactionRequest.ShippingEmail,
-                shipping_phone = creditCardTransactionRequest.ShippingPhone,
+                shipping_email_address = creditCardTransactionRequest.ShippingEmail,
+                shipping_phone_number = creditCardTransactionRequest.ShippingPhone,
                 shipping_address = (address)creditCardTransactionRequest.ShippingAddress,
 
                 transaction_ref_code = creditCardTransactionRequest.TransactionRefCode,
