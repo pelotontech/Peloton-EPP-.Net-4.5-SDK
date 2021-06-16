@@ -85,6 +85,8 @@ namespace PelotonEppSdkTests
             //var factory = new RequestFactory(80, "e9ab9532", "PelonEppSdkTests");
             var createRequest = factory.GetCreditCardCreateRequest();
 
+            createRequest.AccountToken = "1D4E237930EB70FC115E6ACD95E878E6";
+
             createRequest.OrderNumber = Guid.NewGuid().ToString().Replace("-","").Substring(0,9);
             createRequest.BillingName = "P. Tech.";
             createRequest.BillingEmail = "p.tech@peloton-technologies.com";
